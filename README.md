@@ -4,6 +4,23 @@ Kit del proyecto transversal del curso AI Project Management. Un **POS** es una 
 el plan y el pulso de un proyecto. La **torre de control** es la página que se genera a partir de esa
 carpeta: compara lo que está pasando contra lo que se firmó, levanta alertas y arma el brief para quien decide.
 
+## Para la sesión 5: el acta en el POS
+
+La primera capa del POS es el acta del proyecto, y para verla no se instala nada.
+
+- **`pos/index.html`** es la página. Tiene tres pestañas: *Cómo funciona*, *Ejemplo* (Aseguradora Faro, con un
+  recorrido guiado) y *Mi equipo*.
+- **`kit/kit-s5.md`** es el texto para el kit de la sesión: el prompt que agrega el modo charter a la skill
+  `framing-brief` y los pasos de la actividad.
+- El modo charter termina entregando un **bloque POS**: el Framing Brief v2 en un formato que la página lee.
+  El equipo lo copia del chat, lo pega en *Mi equipo* y ve su acta, con lo que falta marcado.
+
+El formato del bloque es el mismo en tres lugares, y `tests/test_pos.py` lo comprueba: la plantilla dentro
+de `kit/kit-s5.md`, el ejemplo `pos/ejemplo-faro.json` y lo que lee `pos/pagina.html`. Si cambias uno,
+cambia los tres y corre `python3 pos/_armar.py` para volver a armar `pos/index.html`.
+
+Lo que sigue en este documento (la carpeta POS y la torre) es el trabajo en curso para el módulo 4.
+
 ## Verlo funcionando
 
 Abre `ejemplos/faro/torre.html` con doble clic. Es el caso Aseguradora Faro («Estatus sin llamar») con

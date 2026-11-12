@@ -8,6 +8,8 @@ de esa carpeta. Todo el contenido para estudiantes está en español.
 
 | Ruta | Qué es |
 |---|---|
+| `pos/` | La página del acta (capa 1). `pagina.html` es la fuente, `ejemplo-faro.json` el ejemplo y `_armar.py` genera `index.html`. |
+| `kit/` | Textos para los kits de sesión. `kit-s5.md` trae el modo charter de la skill `framing-brief` y el formato del bloque POS. |
 | `plantilla/` | POS vacío. Se copia a `equipos/<nombre>/`. El formato de cada archivo está en `plantilla/LEEME.md`. |
 | `ejemplos/faro/` | Caso resuelto: Aseguradora Faro, proyecto «Estatus sin llamar». La ejecución (semanas 1 a 12) es simulada. |
 | `equipos/` | Un POS por equipo. |
@@ -28,6 +30,7 @@ Un POS tiene cuatro capas, una por módulo:
 python3 torre/construir.py ejemplos/faro            # genera la torre
 python3 torre/construir.py ejemplos/faro --revisar  # revisa los registros
 python3 torre/construir.py ejemplos/faro --brief    # brief de la última semana
+python3 pos/_armar.py                               # vuelve a armar pos/index.html
 python3 -m unittest discover -s tests               # pruebas
 python3 ejemplos/faro/_escenario.py                 # regenera los registros de Faro
 ```
