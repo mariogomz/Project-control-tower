@@ -1,0 +1,7 @@
+id,supuesto,si_falla,prueba,dueno,semana_prueba,estado
+S1,"Si el cliente recibe el aviso de estatus, deja de llamar.",La causa de fondo es el despacho y conviene la opción más ambiciosa.,Reactivar avisos para un tipo de siniestro durante 2 semanas y comparar.,PM del proyecto,5,sin_probar
+S2,46% de los contactos preguntan por el estatus.,El beneficio en llamadas evitadas es menor al del caso.,Reclasificar una muestra de 400 contactos.,Dirección de Siniestros,2,sin_probar
+S3,Los avisos automáticos se pueden reactivar sobre el sistema migrado sin desarrollo nuevo.,El costo y la fecha del caso dejan de ser válidos.,TI enciende los avisos en ambiente de prueba.,TI,2,sin_probar
+S4,Legal aprueba avisos por SMS si el cliente se autentica.,No hay canal para avisar antes de diciembre.,Legal revisa las plantillas de aviso.,Legal,3,sin_probar
+S5,GIB espera a ver resultados antes de decidir su renovación.,Se pierden ~US$480 mil al año en primas aunque el proyecto salga bien.,El ejecutivo de la cuenta lo confirma con GIB.,Director de Experiencia del Cliente,6,sin_probar
+S6,El costo cabe en el techo de 400 mil MXN (estimado de TI).,Hay que volver con el patrocinador y con TI por presupuesto.,Comparar gasto real contra estimado en la semana 4.,PM del proyecto,4,sin_probar

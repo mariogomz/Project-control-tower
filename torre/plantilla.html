@@ -1,0 +1,805 @@
+<title>__TITULO__</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Concepto: una torre de noche. Arriba, la pantalla de vuelo (3D) con el plan y la ruta real;
+   debajo, el tablero de tiras: alertas, indicadores y registros. */
+:root {
+  color-scheme: dark;
+  --fondo: #020633; --fondo-2: #050c46; --panel: #091158; --panel-2: #0d1767;
+  --linea: rgba(190, 200, 255, .16); --linea-2: rgba(190, 200, 255, .30);
+  --tinta: #f3f5ff; --tinta-2: #bcc3ee; --tinta-3: #8a93cc;
+  --plan: #7d97ff; --gasto: #ff9a62; --acento: #7d97ff;
+  --ok: #00dc8e; --aviso: #ffc800; --critico: #ff5a57;
+  --ok-f: rgba(0, 220, 142, .14); --aviso-f: rgba(255, 200, 0, .14); --critico-f: rgba(255, 90, 87, .16);
+  --cielo-1: #030a4a; --cielo-2: #01031f;
+  --f-titulo: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-texto: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-dato: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+    --fondo: #f3f5fc; --fondo-2: #e9ecf8; --panel: #ffffff; --panel-2: #f3f5fc;
+    --linea: rgba(0, 0, 91, .13); --linea-2: rgba(0, 0, 91, .28);
+    --tinta: #00005b; --tinta-2: #3b4088; --tinta-3: #6a70a6;
+    --plan: #0a34ff; --gasto: #d2551f; --acento: #0a34ff;
+    --ok: #00a56b; --aviso: #c99400; --critico: #e01b18;
+    --ok-f: rgba(0, 165, 107, .12); --aviso-f: rgba(255, 200, 0, .20); --critico-f: rgba(224, 27, 24, .10);
+    --cielo-1: #eef1fd; --cielo-2: #dfe5fa;
+  }
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --fondo: #f3f5fc; --fondo-2: #e9ecf8; --panel: #ffffff; --panel-2: #f3f5fc;
+  --linea: rgba(0, 0, 91, .13); --linea-2: rgba(0, 0, 91, .28);
+  --tinta: #00005b; --tinta-2: #3b4088; --tinta-3: #6a70a6;
+  --plan: #0a34ff; --gasto: #d2551f; --acento: #0a34ff;
+  --ok: #00a56b; --aviso: #c99400; --critico: #e01b18;
+  --ok-f: rgba(0, 165, 107, .12); --aviso-f: rgba(255, 200, 0, .20); --critico-f: rgba(224, 27, 24, .10);
+  --cielo-1: #eef1fd; --cielo-2: #dfe5fa;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--fondo); color: var(--tinta); font-family: var(--f-texto);
+  font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+.ancho { max-width: 1280px; margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3, p { margin: 0; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
+.dato { font-family: var(--f-dato); font-variant-numeric: tabular-nums; }
+.eti { font-size: 11px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--tinta-3); }
+
+/* ---------- barra */
+.barra { padding-block: 18px 14px; display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: flex-end; justify-content: space-between; }
+.barra h1 { font-family: var(--f-titulo); font-size: clamp(22px, 3.2vw, 30px); font-weight: 600; letter-spacing: -.01em; line-height: 1.15; text-wrap: balance; }
+.barra .sub { color: var(--tinta-2); font-size: 13px; margin-top: 2px; }
+.capas { display: flex; flex-wrap: wrap; gap: 6px; }
+.capas button { border: 1px solid var(--linea-2); background: transparent; border-radius: 999px; padding: 6px 13px;
+  font-size: 12.5px; font-weight: 500; color: var(--tinta-2); cursor: pointer; display: flex; gap: 7px; align-items: center; }
+.capas button b { font-family: var(--f-dato); font-weight: 500; font-size: 11px; color: var(--tinta-3); }
+.capas button:hover:not(:disabled):not([aria-pressed="true"]) { border-color: var(--acento); color: var(--tinta); }
+.capas button[aria-pressed="true"] { background: var(--tinta); color: var(--fondo); border-color: var(--tinta); }
+.capas button[aria-pressed="true"] b { color: var(--fondo); opacity: .7; }
+.capas button:disabled { opacity: .4; cursor: not-allowed; }
+.capa-nota { color: var(--tinta-2); font-size: 13px; padding-bottom: 12px; max-width: 78ch; }
+
+/* ---------- pantalla de vuelo */
+.vuelo { position: relative; background: linear-gradient(180deg, var(--cielo-1), var(--cielo-2)); border-block: 1px solid var(--linea); overflow: hidden; }
+.vuelo .lienzo { position: relative; height: clamp(340px, 56vh, 600px); touch-action: pan-y; cursor: grab; }
+.vuelo .lienzo:active { cursor: grabbing; }
+.vuelo canvas { display: block; width: 100%; height: 100%; }
+.rotulos { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.rotulo { position: absolute; transform: translate(-50%, -50%); font-family: var(--f-dato); font-size: 10.5px; color: var(--tinta-2);
+  white-space: nowrap; text-shadow: 0 0 6px var(--cielo-2), 0 0 2px var(--cielo-2); }
+.rotulo.fuerte { color: var(--tinta); font-weight: 500; font-size: 12px; }
+.rotulo.tenue { color: var(--tinta-3); }
+.hud { position: absolute; left: 0; right: 0; top: 0; pointer-events: none; }
+.hud .ancho { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding-block: 14px 0; }
+.hud-caja { pointer-events: auto; background: color-mix(in srgb, var(--fondo) 72%, transparent); border: 1px solid var(--linea);
+  border-radius: 10px; padding: 10px 14px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.estado { display: flex; align-items: center; gap: 10px; }
+.estado .luz { width: 12px; height: 12px; border-radius: 50%; background: var(--tinta-3); box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 12%, transparent); }
+.estado[data-s="verde"] .luz { background: var(--ok); box-shadow: 0 0 14px var(--ok); }
+.estado[data-s="ambar"] .luz { background: var(--aviso); box-shadow: 0 0 14px var(--aviso); }
+.estado[data-s="rojo"] .luz { background: var(--critico); box-shadow: 0 0 14px var(--critico); }
+.estado strong { font-family: var(--f-titulo); font-size: 17px; font-weight: 600; letter-spacing: .02em; }
+.estado small { display: block; color: var(--tinta-2); font-size: 12px; }
+.kpis { display: flex; gap: 18px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--linea); }
+.kpi .v { font-family: var(--f-titulo); font-size: 20px; font-weight: 600; line-height: 1.1; }
+.kpi .v small { font-size: 12px; font-weight: 400; color: var(--tinta-2); }
+.kpi .eti { font-size: 10px; }
+.leyenda { display: grid; gap: 5px; font-size: 11.5px; color: var(--tinta-2); }
+.leyenda span { display: flex; align-items: center; gap: 8px; }
+.leyenda i { width: 18px; height: 0; border-top: 2px solid var(--tinta); flex: none; }
+.leyenda i.plan { border-color: var(--plan); }
+.leyenda i.pron { border-top-style: dashed; border-color: var(--tinta-2); }
+.leyenda i.punto { width: 9px; height: 9px; border: 0; border-radius: 50%; background: var(--tinta-3); margin-inline: 4.5px; }
+.leyenda i.senal { background: var(--aviso); }
+.leyenda i.rombo { width: 8px; height: 8px; border: 0; background: var(--tinta); transform: rotate(45deg); margin-inline: 5px; }
+.sin-3d { position: absolute; inset: auto 0 12px 0; text-align: center; color: var(--tinta-3); font-size: 12px; }
+
+/* ---------- línea de tiempo */
+.tiempo { border-top: 1px solid var(--linea); background: color-mix(in srgb, var(--fondo) 80%, transparent); }
+.tiempo .ancho { display: flex; align-items: stretch; gap: 10px; padding-block: 10px; }
+.tiempo .ctl { display: flex; gap: 6px; align-items: center; }
+.tiempo .ctl button { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--linea-2); background: transparent; cursor: pointer; display: grid; place-items: center; }
+.tiempo .ctl button:hover:not(:disabled) { border-color: var(--acento); }
+.tiempo .ctl button:disabled { opacity: .35; cursor: not-allowed; }
+.tiempo .ctl svg { width: 14px; height: 14px; fill: currentColor; }
+.semanas { flex: 1; min-width: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 3px; }
+.sem { position: relative; border: 0; background: transparent; padding: 4px 0 9px; cursor: pointer; border-radius: 6px; min-width: 0;
+  font-family: var(--f-dato); font-size: 11px; color: var(--tinta-3); display: grid; justify-items: center; gap: 3px; }
+.sem::after { content: ""; position: absolute; left: 2px; right: 2px; bottom: 2px; height: 4px; border-radius: 2px; background: var(--linea); }
+.sem[data-s="verde"]::after { background: var(--ok); } .sem[data-s="ambar"]::after { background: var(--aviso); } .sem[data-s="rojo"]::after { background: var(--critico); }
+.sem:hover:not(:disabled) { background: var(--linea); color: var(--tinta); }
+.sem[aria-pressed="true"] { background: var(--tinta); color: var(--fondo); }
+.sem:disabled { cursor: default; opacity: .45; }
+.sem .marcas { display: flex; gap: 2px; height: 7px; align-items: center; }
+.sem .marcas i { width: 5px; height: 5px; border-radius: 50%; background: var(--aviso); }
+.sem .marcas i.d { border-radius: 0; background: currentColor; transform: rotate(45deg); }
+.tiempo .clave { display: flex; gap: 14px; align-items: center; font-size: 11px; color: var(--tinta-3); white-space: nowrap; }
+.tiempo .clave i { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--aviso); margin-right: 5px; }
+.tiempo .clave i.d { border-radius: 0; background: var(--tinta-2); transform: rotate(45deg); }
+
+/* ---------- tablero */
+.tablero { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; padding-block: 20px 40px; }
+.panel { grid-column: span 12; background: var(--panel); border: 1px solid var(--linea); border-radius: 12px; padding: 16px 18px 18px; min-width: 0; }
+.panel > header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+.panel h2 { font-family: var(--f-titulo); font-size: 15px; font-weight: 600; letter-spacing: .005em; }
+.panel header .nota { font-size: 12px; color: var(--tinta-3); text-align: right; }
+.panel.plano { background: transparent; border: 0; padding: 0; }
+@media (min-width: 900px) { .c5 { grid-column: span 5; } .c6 { grid-column: span 6; } .c7 { grid-column: span 7; } }
+.vacio { color: var(--tinta-3); font-size: 13px; padding: 6px 0; }
+
+/* chips de estado: forma + texto, nunca solo color */
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 500; padding: 2px 9px 2px 7px; border-radius: 999px;
+  background: var(--linea); color: var(--tinta); white-space: nowrap; }
+.chip i { width: 8px; height: 8px; flex: none; background: var(--tinta-3); border-radius: 50%; }
+.chip.ok { background: var(--ok-f); } .chip.ok i { background: var(--ok); }
+.chip.aviso { background: var(--aviso-f); } .chip.aviso i { background: var(--aviso); border-radius: 0; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.chip.critico { background: var(--critico-f); } .chip.critico i { background: var(--critico); border-radius: 1px; }
+.chip.mudo i { background: transparent; border: 1.5px solid var(--tinta-3); }
+.ref { font-family: var(--f-dato); font-size: 11.5px; font-weight: 500; color: var(--tinta-2); }
+
+/* tiras de alerta */
+.tiras { display: grid; gap: 8px; }
+.tira { display: grid; grid-template-columns: 6px minmax(0, 1fr) auto; gap: 0 12px; background: var(--panel-2); border: 1px solid var(--linea); border-radius: 8px; overflow: hidden; }
+.tira::before { content: ""; background: var(--aviso); }
+.tira.critica::before { background: var(--critico); }
+.tira .txt { padding: 9px 0 10px; min-width: 0; }
+.tira .regla { font-size: 10.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-3); }
+.tira .tit { font-weight: 500; font-size: 13.5px; line-height: 1.35; }
+.tira .det { font-size: 12.5px; color: var(--tinta-2); margin-top: 2px; }
+.tira .desde { padding: 9px 12px 0 0; font-family: var(--f-dato); font-size: 11px; color: var(--tinta-3); text-align: right; white-space: nowrap; }
+.tira .desde b { display: block; font-size: 15px; font-weight: 500; color: var(--tinta); }
+.mas { margin-top: 10px; border: 1px solid var(--linea-2); background: transparent; border-radius: 8px; padding: 6px 12px; font-size: 12.5px; cursor: pointer; }
+
+.brief { white-space: pre-wrap; font-size: 13px; line-height: 1.6; color: var(--tinta); max-width: 72ch; margin: 0; font-family: var(--f-texto); }
+.btn { border: 1px solid var(--linea-2); background: transparent; border-radius: 8px; padding: 5px 11px; font-size: 12px; cursor: pointer; }
+.btn:hover { border-color: var(--acento); }
+
+/* indicadores */
+.indis { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 12px; }
+.indi { background: var(--panel); border: 1px solid var(--linea); border-radius: 12px; padding: 14px 14px 12px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.indi .cab { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+.indi .nom { font-size: 13px; font-weight: 500; line-height: 1.35; min-height: 2.7em; }
+.indi .val { font-family: var(--f-titulo); font-size: 30px; font-weight: 600; line-height: 1; letter-spacing: -.01em; }
+.indi .val small { font-size: 12px; font-weight: 400; color: var(--tinta-2); letter-spacing: 0; margin-left: 6px; }
+.indi .pie { font-size: 11.5px; color: var(--tinta-3); line-height: 1.45; }
+.indi svg { width: 100%; height: 54px; display: block; overflow: visible; }
+
+/* gráficas */
+.graf svg { width: 100%; height: auto; display: block; overflow: visible; }
+.graf text { font-family: var(--f-dato); font-size: 10.5px; fill: var(--tinta-3); }
+.graf text.serie { font-family: var(--f-texto); font-size: 11.5px; fill: var(--tinta-2); font-weight: 500; }
+.leg { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--tinta-2); margin-bottom: 6px; }
+.leg span { display: flex; align-items: center; gap: 7px; }
+.leg i { width: 16px; border-top: 2px solid var(--tinta); }
+.duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--linea); }
+.duo .v { font-family: var(--f-titulo); font-size: 22px; font-weight: 600; }
+.duo p { font-size: 12px; color: var(--tinta-2); }
+
+/* filas con pista de semanas */
+.pistas { display: grid; gap: 2px; }
+.pista { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 46%) auto; gap: 12px; align-items: center; padding: 7px 0; border-top: 1px solid var(--linea); }
+.pista:first-child { border-top: 0; }
+.pista .nom { font-size: 12.5px; line-height: 1.35; min-width: 0; }
+.pista .nom .ref { margin-right: 6px; }
+.pista .fin { font-size: 11.5px; color: var(--tinta-2); white-space: nowrap; text-align: right; min-width: 74px; }
+.carril { position: relative; height: 22px; }
+.carril::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid var(--linea); }
+.carril .hoy { position: absolute; top: 0; bottom: 0; width: 0; border-left: 1px dashed var(--linea-2); }
+.carril .tramo { position: absolute; top: 50%; height: 2px; margin-top: -1px; background: var(--tinta-3); }
+.carril .tramo.aviso { background: var(--aviso); } .carril .tramo.critico { background: var(--critico); } .carril .tramo.abierto { background: none; border-top: 2px dashed var(--critico); }
+.carril .m { position: absolute; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--tinta-3); box-shadow: 0 0 0 2px var(--panel); }
+.carril .m.plan { background: var(--panel); border: 2px solid var(--plan); border-radius: 0; transform: rotate(45deg); width: 9px; height: 9px; }
+.carril .m.ok { background: var(--ok); } .carril .m.aviso { background: var(--aviso); } .carril .m.critico { background: var(--critico); }
+.carril .m.senal { background: var(--aviso); width: 8px; height: 8px; margin: -4px 0 0 -4px; }
+.carril .m.dec { background: var(--tinta); border-radius: 0; transform: rotate(45deg); width: 9px; height: 9px; }
+.escala { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 46%) auto; gap: 12px; font-family: var(--f-dato); font-size: 10px; color: var(--tinta-3); }
+.escala div { position: relative; height: 14px; }
+.escala div span { position: absolute; transform: translateX(-50%); }
+.escala span.fin { min-width: 74px; }
+
+/* listas de registros */
+.lista { display: grid; gap: 0; }
+.fila { padding: 10px 0; border-top: 1px solid var(--linea); display: grid; gap: 4px; }
+.fila:first-child { border-top: 0; padding-top: 0; }
+.fila .cab { display: flex; gap: 8px 10px; align-items: center; flex-wrap: wrap; }
+.fila .t { font-size: 13px; font-weight: 500; line-height: 1.4; }
+.fila .d { font-size: 12.5px; color: var(--tinta-2); }
+.fila .d b { font-weight: 500; color: var(--tinta); }
+.barrita { height: 4px; border-radius: 2px; background: var(--linea); width: 70px; position: relative; flex: none; }
+.barrita i { position: absolute; inset: 0 auto 0 0; border-radius: 2px; background: var(--tinta-2); }
+.cita { border-left: 2px solid var(--aviso); padding-left: 10px; }
+.cita .t { font-weight: 400; }
+.perm { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; }
+.perm h3 { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; display: flex; gap: 7px; align-items: center; margin-bottom: 6px; }
+.perm ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 12.5px; color: var(--tinta-2); }
+.perm li { padding-left: 10px; border-left: 2px solid var(--linea-2); }
+.acta { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px 28px; }
+.acta p { font-size: 13.5px; line-height: 1.55; }
+.acta .ab { font-size: 15px; font-weight: 500; line-height: 1.45; }
+.acta ul { margin: 4px 0 0; padding-left: 16px; font-size: 13px; color: var(--tinta-2); }
+
+.tip { position: fixed; z-index: 30; pointer-events: none; max-width: 300px; background: var(--tinta); color: var(--fondo); border-radius: 8px;
+  padding: 8px 11px; font-size: 12px; line-height: 1.45; box-shadow: 0 8px 28px rgba(0, 0, 0, .35); }
+.tip b { font-weight: 600; } .tip .dato { font-size: 11px; opacity: .8; }
+footer.pie { color: var(--tinta-3); font-size: 12px; padding-block: 0 36px; max-width: 80ch; }
+
+@media (max-width: 720px) {
+  .vuelo { display: flex; flex-direction: column; }
+  .hud { position: static; order: -1; } .hud .ancho { padding-block: 12px; } .hud-caja { flex: 1; }
+  .hud .leyenda-caja { display: none; }
+  .kpis { gap: 14px; } .kpi .v { font-size: 17px; }
+  .tiempo .clave { display: none; }
+  .pista { grid-template-columns: minmax(0, 1fr) minmax(0, 42%); } .pista .fin { display: none; }
+  .escala { grid-template-columns: minmax(0, 1fr) minmax(0, 42%); } .escala span.fin { display: none; }
+  .sem { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+<!--CUERPO-->
+<header class="ancho barra">
+  <div>
+    <p class="eti" id="org"></p>
+    <h1 id="proyecto"></h1>
+    <p class="sub" id="sub"></p>
+  </div>
+  <nav class="capas" id="capas" aria-label="Capas del POS"></nav>
+</header>
+<div class="ancho"><p class="capa-nota" id="capa-nota"></p></div>
+
+<section class="vuelo" aria-label="Pantalla de vuelo del proyecto">
+  <div class="lienzo" id="lienzo">
+    <canvas id="escena" aria-hidden="true"></canvas>
+    <div class="rotulos" id="rotulos"></div>
+    <p class="sin-3d" id="sin-3d" hidden>La vista 3D no está disponible en este navegador. El tablero de abajo tiene toda la información.</p>
+  </div>
+  <div class="hud"><div class="ancho">
+    <div class="hud-caja">
+      <div class="estado" id="estado"><span class="luz"></span><div><strong></strong><small></small></div></div>
+      <div class="kpis" id="kpis"></div>
+    </div>
+    <div class="hud-caja leyenda-caja"><div class="leyenda" id="leyenda"></div></div>
+  </div></div>
+  <div class="tiempo"><div class="ancho">
+    <div class="ctl">
+      <button id="jugar" type="button" aria-label="Reproducir las semanas" data-tip="Reproducir semana a semana"><svg viewBox="0 0 14 14"><path d="M3 1.5v11l9-5.5z"/></svg></button>
+    </div>
+    <div class="semanas" id="semanas" role="group" aria-label="Semana"></div>
+    <div class="clave"><span><i></i>señal</span><span><i class="d"></i>decisión</span></div>
+  </div></div>
+</section>
+
+<main class="ancho tablero" id="tablero"></main>
+<footer class="ancho pie" id="pie"></footer>
+<div class="tip" id="tip" hidden></div>
+
+<!--THREE-->
+<script>
+"use strict";
+const D = /*__DATOS__*/null;
+const N = D.semanas, E = D.estados, MAXW = E.length - 1, M = D.meta;
+let etapa = D.etapa_inicial, semana = MAXW, verTodas = false;
+const $ = (s, r = document) => r.querySelector(s);
+const h = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const nf = new Intl.NumberFormat("es-MX", { maximumFractionDigits: 1 });
+const num = v => v == null ? "—" : nf.format(v);
+const val = (v, u) => v == null ? "sin dato" : u === "%" ? num(v) + "%" : num(v);
+const miles = v => v == null ? "—" : "$" + nf.format(Math.round(v / 1000)) + " mil";
+const pct = v => v == null ? "—" : Math.round(v * 100) + "%";
+const MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+const fecha = iso => { const [a, m, d] = iso.split("-").map(Number); return `${d} ${MESES[m - 1]} ${a}`; };
+const NOM = {}; [...D.indicadores, ...D.supuestos, ...D.riesgos, ...D.hitos].forEach(o => NOM[o.id] = o.nombre || o.supuesto || o.riesgo || o.hito);
+const SALUD = { verde: "En ruta", ambar: "Atención", rojo: "Fuera de ruta", sin_datos: "Sin pulso todavía" };
+const chip = (clase, txt) => `<span class="chip ${clase}"><i></i>${h(txt)}</span>`;
+const CH_IND = { verde: ["ok", "En rango"], ambar: ["aviso", "Atención"], rojo: ["critico", "Fuera de rango"], sin_dato: ["mudo", "Sin dato"], no_aplica: ["mudo", "Aún no se evalúa"] };
+const CH_SUP = { sin_probar: ["mudo", "Sin probar"], validado: ["ok", "Validado"], en_duda: ["aviso", "En duda"], roto: ["critico", "Roto"] };
+const CH_RIE = { abierto: ["mudo", "Abierto"], materializado: ["critico", "Ocurrió"], mitigado: ["ok", "Mitigado"], cerrado: ["ok", "Cerrado"] };
+const CH_HIT = { pendiente: ["mudo", "Pendiente"], en_curso: ["mudo", "En curso"], hecho: ["ok", "Hecho"] };
+const est = () => E[etapa >= 3 ? semana : 0];
+const px = w => (100 * w / (N + 1)).toFixed(2) + "%";
+
+/* ------------------------------------------------------------ cabecera y capas */
+const CAPAS = [
+  ["Contexto", "M1", "Lo que el equipo definió en el módulo 1: el acta, qué es éxito, los supuestos, los riesgos y lo que la IA puede hacer sola. Con esto la torre ya sabe qué vigilar."],
+  ["Plan", "M2", "La línea base: hitos, fechas y presupuesto. Aparece la ruta planeada."],
+  ["Pulso", "M3", "Lo que pasa cada semana: mediciones, avance, gasto y señales de reuniones y correos. Aparece la ruta real."],
+  ["Torre", "M4", "La torre compara el pulso contra el acta y el plan, levanta alertas y arma el brief para quien decide."],
+];
+function pintarCabecera() {
+  $("#org").textContent = [M.organizacion, M.nota].filter(Boolean).join(" · ");
+  $("#proyecto").textContent = M.proyecto || "Proyecto";
+  $("#sub").textContent = [M.equipo, M.decide ? "Decide: " + M.decide : "", M.pm ? "PM: " + M.pm : ""].filter(Boolean).join(" · ");
+  $("#capas").innerHTML = CAPAS.map(([n, m], i) => {
+    const sin = i + 1 > D.etapa_maxima;
+    return `<button type="button" data-etapa="${i + 1}" aria-pressed="${etapa === i + 1}" ${sin ? "disabled" : ""}
+      ${sin ? 'data-tip="Esta capa todavía no tiene datos"' : ""}><b>${i + 1}</b>${n}<b>${m}</b></button>`;
+  }).join("");
+  $("#capa-nota").textContent = `Capa ${etapa} · ${CAPAS[etapa - 1][0]}. ${CAPAS[etapa - 1][2]}`;
+  $("#pie").textContent = `Generada el ${fecha(D.generado)} a partir de los registros de la carpeta POS. Los números y las alertas salen de reglas fijas; el juicio y la firma son de una persona.`;
+}
+$("#capas").addEventListener("click", e => {
+  const b = e.target.closest("button[data-etapa]"); if (!b || b.disabled) return;
+  etapa = +b.dataset.etapa; if (etapa < 3) parar(); todo();
+});
+
+/* ------------------------------------------------------------ línea de tiempo */
+function pintarTiempo() {
+  const activo = etapa >= 3;
+  $("#semanas").innerHTML = Array.from({ length: N + 1 }, (_, w) => {
+    const e = E[w], hay = activo && w <= MAXW;
+    const sen = hay ? e.senales.filter(s => s.semana === w).length : 0;
+    const dec = hay ? e.decisiones.filter(d => d.semana === w).length : 0;
+    const s = hay && etapa === 4 ? e.salud : "";
+    const tip = !hay ? (activo ? "Sin datos todavía" : "El pulso llega en la capa 3")
+      : `<b>Semana ${w}</b> · ${fecha(e.fecha)}<br>${etapa === 4 ? SALUD[e.salud] + " · " + e.alertas.length + " alertas<br>" : ""}${sen} señal(es) · ${dec} decisión(es)`;
+    return `<button type="button" class="sem" data-w="${w}" data-s="${s}" aria-pressed="${activo && w === semana}" ${hay ? "" : "disabled"}
+      aria-label="Semana ${w}" data-tip="${h(tip)}"><span class="marcas">${"<i></i>".repeat(Math.min(sen, 3))}${dec ? '<i class="d"></i>' : ""}</span>${w}</button>`;
+  }).join("");
+  $("#jugar").disabled = !activo || MAXW < 1;
+}
+$("#semanas").addEventListener("click", e => { const b = e.target.closest(".sem"); if (b && !b.disabled) { parar(); irA(+b.dataset.w); } });
+document.addEventListener("keydown", e => {
+  if (etapa < 3 || e.target.closest("input,textarea")) return;
+  if (e.key === "ArrowRight" && semana < MAXW) { parar(); irA(semana + 1); }
+  if (e.key === "ArrowLeft" && semana > 0) { parar(); irA(semana - 1); }
+});
+let reloj = null;
+function parar() { if (reloj) { clearInterval(reloj); reloj = null; $("#jugar").innerHTML = '<svg viewBox="0 0 14 14"><path d="M3 1.5v11l9-5.5z"/></svg>'; } }
+$("#jugar").addEventListener("click", () => {
+  if (reloj) return parar();
+  if (semana >= MAXW) irA(0);
+  $("#jugar").innerHTML = '<svg viewBox="0 0 14 14"><path d="M3 2h3v10H3zM8 2h3v10H8z"/></svg>';
+  reloj = setInterval(() => { if (semana >= MAXW) return parar(); irA(semana + 1); }, 1400);
+});
+function irA(w) { semana = w; pintarTiempo(); pintarHud(); pintarTablero(); escena.semana(w); }
+
+/* ------------------------------------------------------------ HUD */
+function pintarHud() {
+  const e = est(), ev = e.evm, caja = $("#estado");
+  if (etapa === 4) { caja.dataset.s = e.salud; $("strong", caja).textContent = SALUD[e.salud]; }
+  else { caja.dataset.s = ""; $("strong", caja).textContent = CAPAS[etapa - 1][0]; }
+  $("small", caja).textContent = etapa >= 3 ? `Semana ${e.semana} de ${N} · ${fecha(e.fecha)}` : `Arranque · ${fecha(D.fechas[0])}`;
+  const k = [];
+  if (etapa >= 3 && ev.pct_real != null) {
+    k.push(["Avance", `${pct(ev.pct_real)} <small>plan ${pct(ev.pct_plan)}</small>`]);
+    if (ev.ac != null) k.push(["Gasto", `${miles(ev.ac)} <small>plan ${miles(ev.pv)}</small>`]);
+    if (etapa === 4) k.push(["Alertas", `${e.alertas.filter(a => a.severidad === "critica").length} <small>críticas de ${e.alertas.length}</small>`]);
+  } else if (etapa === 2) {
+    k.push(["Hitos", D.hitos.length], ["Semanas", N], ["Presupuesto", miles(ev.bac)]);
+  } else {
+    k.push(["Indicadores", D.indicadores.length], ["Supuestos", D.supuestos.length], ["Riesgos", D.riesgos.length]);
+  }
+  $("#kpis").innerHTML = k.map(([t, v]) => `<div class="kpi"><div class="v">${v}</div><div class="eti">${t}</div></div>`).join("");
+  const L = [];
+  if (etapa >= 2) L.push('<span><i class="plan"></i>Ruta planeada</span>');
+  if (etapa >= 3) L.push("<span><i></i>Ruta real</span>", '<span><i class="pron"></i>Pronóstico</span>');
+  L.push('<span><i class="punto"></i>Supuesto (baliza) · riesgo (celda)</span>');
+  if (etapa >= 3) L.push('<span><i class="punto senal"></i>Señal</span>', '<span><i class="rombo"></i>Decisión</span>');
+  L.push(`<span style="color:var(--tinta-3)">${etapa >= 3 ? "Altura: avance · deriva: sobrecosto" : "Arrastra para girar"}</span>`);
+  $("#leyenda").innerHTML = L.join("");
+}
+
+/* ------------------------------------------------------------ gráficas */
+function chispa(ind, e) {
+  const W = 220, H = 54, pad = 4;
+  const pts = e.serie;
+  if (!pts.length) return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Sin mediciones"><line x1="0" x2="${W}" y1="${H / 2}" y2="${H / 2}" stroke="var(--linea-2)" stroke-dasharray="3 4"/></svg>`;
+  const vs = pts.map(p => p[1]).concat([ind.meta, ind.ambar, ind.rojo].filter(v => v != null));
+  let lo = Math.min(...vs), hi = Math.max(...vs); if (hi === lo) hi = lo + 1;
+  const x = w => pad + (W - 2 * pad) * w / N, y = v => H - pad - (H - 2 * pad) * (v - lo) / (hi - lo);
+  const linea = pts.map((p, i) => (i ? "L" : "M") + x(p[0]).toFixed(1) + " " + y(p[1]).toFixed(1)).join("");
+  const sube = ind.sentido !== "baja", r = ind.rojo;
+  const zona = r == null ? "" : `<rect x="0" width="${W}" y="${sube ? y(r) : 0}" height="${Math.max(0, sube ? H - y(r) : y(r))}" fill="var(--critico-f)"/>`;
+  const meta = ind.meta == null ? "" : `<line x1="0" x2="${W}" y1="${y(ind.meta)}" y2="${y(ind.meta)}" stroke="var(--tinta-3)" stroke-dasharray="2 3"/>`;
+  const ult = pts[pts.length - 1], col = { verde: "var(--ok)", ambar: "var(--aviso)", rojo: "var(--critico)" }[e.estado] || "var(--tinta-3)";
+  const zonas = pts.map(p => `<rect x="${x(p[0]) - 8}" y="0" width="16" height="${H}" fill="transparent" data-tip="${h(`<b>Semana ${p[0]}</b> · ${val(p[1], ind.unidad)}`)}"/>`).join("");
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Serie de ${h(ind.nombre)}">${zona}${meta}
+    <path d="${linea}" fill="none" stroke="var(--tinta)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="${x(ult[0])}" cy="${y(ult[1])}" r="4.5" fill="${col}" stroke="var(--panel)" stroke-width="2"/>${zonas}</svg>`;
+}
+function curvaS() {
+  const W = 640, H = 250, ml = 44, mr = 92, mt = 10, mb = 26, e = est(), bac = e.evm.bac || 1;
+  const serie = k => E.slice(0, (etapa >= 3 ? semana : 0) + 1).map(s => [s.semana, s.evm[k]]).filter(p => p[1] != null);
+  const plan = D.plan.map((p, w) => [w, p == null ? null : p * bac]).filter(p => p[1] != null);
+  const ev = etapa >= 3 ? serie("ev") : [], ac = etapa >= 3 ? serie("ac") : [];
+  const hi = Math.max(bac, ...ac.map(p => p[1]), ...plan.map(p => p[1])) * 1.06;
+  const x = w => ml + (W - ml - mr) * w / N, y = v => H - mb - (H - mt - mb) * v / hi;
+  const d = pts => pts.map((p, i) => (i ? "L" : "M") + x(p[0]).toFixed(1) + " " + y(p[1]).toFixed(1)).join("");
+  const paso = hi > 400000 ? 100000 : hi > 120000 ? 50000 : hi > 40000 ? 20000 : Math.max(1, Math.round(hi / 4));
+  let g = ""; for (let v = 0; v <= hi; v += paso) g += `<line x1="${ml}" x2="${W - mr}" y1="${y(v)}" y2="${y(v)}" stroke="var(--linea)"/><text x="${ml - 8}" y="${y(v) + 3.5}" text-anchor="end">${Math.round(v / 1000)}</text>`;
+  let ejes = ""; for (let w = 0; w <= N; w += N > 16 ? 4 : 2) ejes += `<text x="${x(w)}" y="${H - 8}" text-anchor="middle">${w}</text>`;
+  const punto = (pts, c) => pts.length ? `<circle cx="${x(pts[pts.length - 1][0])}" cy="${y(pts[pts.length - 1][1])}" r="4" fill="${c}" stroke="var(--panel)" stroke-width="2"/>` : "";
+  const fines = [[plan, "Plan"], [ac, "Gasto real"], [ev, "Avance"]].filter(f => f[0].length)
+    .map(([pts, txt]) => ({ txt, x: x(pts[pts.length - 1][0]) + 9, y: y(pts[pts.length - 1][1]) + 4 })).sort((a, b) => a.y - b.y);
+  for (let i = 1; i < fines.length; i++) if (fines[i].y - fines[i - 1].y < 14) fines[i].y = fines[i - 1].y + 14;
+  const rot = fines.map(f => `<text class="serie" x="${f.x}" y="${f.y}">${f.txt}</text>`).join("");
+  const zonas = Array.from({ length: N + 1 }, (_, w) => {
+    const s = etapa >= 3 && w <= semana ? E[w] : null, p = D.plan[w];
+    const t = `<b>Semana ${w}</b><br>Plan: ${p == null ? "—" : miles(p * bac)}` + (s && s.evm.ev != null ? `<br>Avance ganado: ${miles(s.evm.ev)}<br>Gasto real: ${miles(s.evm.ac)}` : "");
+    return `<rect x="${x(w) - (W - ml - mr) / N / 2}" y="${mt}" width="${(W - ml - mr) / N}" height="${H - mt - mb}" fill="transparent" data-tip="${h(t)}"/>`;
+  }).join("");
+  const hoy = etapa >= 3 ? `<line x1="${x(semana)}" x2="${x(semana)}" y1="${mt}" y2="${H - mb}" stroke="var(--linea-2)" stroke-dasharray="3 3"/>` : "";
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Plan, avance ganado y gasto real acumulados">${g}${ejes}${hoy}
+    <text x="${ml - 8}" y="${mt + 2}" text-anchor="end">miles</text><text x="${ml - 8}" y="${H - 8}" text-anchor="end">sem</text>
+    <path d="${d(plan)}" fill="none" stroke="var(--plan)" stroke-width="2" stroke-linejoin="round"/>
+    <path d="${d(ac)}" fill="none" stroke="var(--gasto)" stroke-width="2" stroke-linejoin="round"/>
+    <path d="${d(ev)}" fill="none" stroke="var(--tinta)" stroke-width="2.5" stroke-linejoin="round"/>
+    ${punto(ac, "var(--gasto)")}${punto(ev, "var(--tinta)")}
+    ${rot}${zonas}</svg>`;
+}
+
+/* ------------------------------------------------------------ paneles */
+const panel = (cls, titulo, nota, cuerpo) => `<section class="panel ${cls}"><header><h2>${titulo}</h2>${nota ? `<span class="nota">${nota}</span>` : ""}</header>${cuerpo}</section>`;
+
+function pAlertas(e) {
+  const a = e.alertas, lim = verTodas ? a.length : 6;
+  const tiras = a.slice(0, lim).map(x => `<article class="tira ${x.severidad}"><div class="txt"><div class="regla">${h(x.regla)}</div>
+    <div class="tit">${h(x.titulo)}</div><div class="det">${h(x.detalle)}</div></div>
+    <div class="desde">desde<b>S${x.desde}</b></div></article>`).join("");
+  const cuerpo = a.length ? `<div class="tiras">${tiras}</div>${a.length > 6 ? `<button class="mas" type="button" id="mas">${verTodas ? "Ver menos" : `Ver las ${a.length} alertas`}</button>` : ""}`
+    : `<p class="vacio">${e.salud === "sin_datos" ? "La torre todavía no tiene pulso que comparar." : "Sin alertas abiertas esta semana."}</p>`;
+  const crit = a.filter(x => x.severidad === "critica").length;
+  return panel("c7", "Alertas", a.length ? `${crit} críticas · ${a.length - crit} de atención` : "", cuerpo);
+}
+function pBrief(e) {
+  return panel("c5", "Brief de la semana", '<button class="btn" type="button" id="copiar">Copiar</button>', `<pre class="brief" id="brief">${h(e.brief)}</pre>`);
+}
+function pIndicadores(e) {
+  const tarjetas = D.indicadores.map(ind => {
+    const s = e.indicadores.find(x => x.id === ind.id) || { estado: "sin_dato", serie: [] };
+    const medido = etapa >= 3, st = medido ? s.estado : "sin_dato", [c, t] = CH_IND[st];
+    const pie = medido && s.apagado ? `Sin medir ${s.semana_dato == null ? "todavía" : "desde la semana " + s.semana_dato}. ` : "";
+    return `<article class="indi"><div class="cab"><span class="ref">${h(ind.id)} · ${ind.tipo}</span>${chip(c, medido ? t : "Sin dato")}</div>
+      <div class="nom">${h(ind.nombre)}</div>
+      <div class="val">${medido && s.valor != null ? val(s.valor, ind.unidad) : "—"}<small>meta ${val(ind.meta, ind.unidad)}${ind.unidad && ind.unidad !== "%" ? " " + h(ind.unidad) : ""}</small></div>
+      ${chispa(ind, medido ? s : { serie: [] })}
+      <div class="pie">${h(pie)}${h(ind.fuente)} · ${h(ind.dueno)}${ind.linea_base != null ? ` · línea base ${val(ind.linea_base, ind.unidad)}` : ""}</div></article>`;
+  }).join("");
+  return `<section class="panel plano"><header><h2>Qué es éxito: indicadores</h2><span class="nota">${etapa >= 3 ? "línea punteada: meta · zona roja: fuera de rango" : "se encienden cuando llegue la primera medición"}</span></header><div class="indis">${tarjetas || '<p class="vacio">El acta todavía no define indicadores.</p>'}</div></section>`;
+}
+function pCurva(e) {
+  const ev = e.evm;
+  const duo = etapa >= 3 && ev.spi != null ? `<div class="duo">
+    <div><div class="v">$${ev.spi.toFixed(2)}</div><p>de avance por cada $1 de trabajo planeado a la fecha <span class="dato">(SPI)</span></p></div>
+    <div><div class="v">$${ev.cpi == null ? "—" : ev.cpi.toFixed(2)}</div><p>de avance por cada $1 gastado <span class="dato">(CPI)</span></p></div>
+    <div><div class="v">${miles(ev.eac)}</div><p>costo al cierre si sigue este ritmo, contra ${miles(ev.bac)} aprobados</p></div></div>` : "";
+  return panel("c7", "Avance y costo", `acumulado, ${h(M.moneda || "")}`, `<div class="graf">${curvaS()}</div>${duo}`);
+}
+function escala() { return `<div class="escala"><span></span><div>${Array.from({ length: Math.floor(N / 2) + 1 }, (_, i) => `<span style="left:${px(i * 2)}">${i * 2}</span>`).join("")}</div><span class="fin"></span></div>`; }
+function pHitos(e) {
+  const filas = D.hitos.map(ht => {
+    const s = e.hitos.find(x => x.id === ht.id) || { estado: "pendiente", pronostico: ht.semana_plan, atraso: 0 };
+    const vivo = etapa >= 3, hecho = vivo && s.estado === "hecho", tarde = vivo && s.atraso > 0;
+    const cls = hecho ? "ok" : s.atraso >= 3 ? "critico" : tarde ? "aviso" : "";
+    const real = vivo && (hecho || tarde || s.estado === "en_curso") ? `<span class="m ${cls}" style="left:${px(Math.min(s.pronostico, N + 1))}"></span>` : "";
+    const tramo = vivo && s.pronostico !== ht.semana_plan ? `<span class="tramo ${cls === "ok" ? "" : cls}" style="left:${px(Math.min(ht.semana_plan, s.pronostico))};width:${px(Math.abs(s.pronostico - ht.semana_plan))}"></span>` : "";
+    const fin = !vivo ? "semana " + ht.semana_plan : hecho ? (s.atraso > 0 ? `hecho, +${s.atraso} sem` : "hecho a tiempo") : tarde ? `+${s.atraso} sem` : s.estado === "en_curso" ? Math.round(s.avance) + "%" : "pendiente";
+    const tip = `<b>${h(ht.id)} ${h(ht.hito)}</b><br>Plan: semana ${ht.semana_plan}` + (vivo ? `<br>${hecho ? "Hecho" : "Pronóstico"}: semana ${s.pronostico}` : "") + `<br>Dueño: ${h(ht.dueno)}`;
+    return `<div class="pista" data-tip="${h(tip)}"><div class="nom"><span class="ref">${h(ht.id)}</span>${h(ht.hito)}</div>
+      <div class="carril">${vivo ? `<span class="hoy" style="left:${px(semana)}"></span>` : ""}${tramo}<span class="m plan" style="left:${px(ht.semana_plan)}"></span>${real}</div><div class="fin">${fin}</div></div>`;
+  }).join("");
+  return panel("c5", "Hitos", "rombo: plan · círculo: real o pronóstico", `${escala()}<div class="pistas">${filas}</div>`);
+}
+function pRastros(e) {
+  const r = e.rastros.filter(x => x.senales.length >= 2 || x.decision != null).sort((a, b) => b.espera - a.espera || a.senales[0] - b.senales[0]);
+  if (!r.length) return panel("c7", "De la señal a la decisión", "", '<p class="vacio">Todavía no hay señales repetidas sobre un mismo tema.</p>');
+  const filas = r.map(x => {
+    const ini = x.senales[0], fin = x.decision ?? e.semana, abierto = x.decision == null;
+    const tramo = fin > ini ? `<span class="tramo ${abierto ? "abierto" : ""}" style="left:${px(ini)};width:${px(fin - ini)}"></span>` : "";
+    const pts = x.senales.map(w => `<span class="m senal" style="left:${px(w)}"></span>`).join("");
+    const dec = abierto ? "" : `<span class="m dec" style="left:${px(x.decision)}"></span>`;
+    const txt = abierto ? `<b style="color:var(--critico)">${x.espera} sem sin decisión</b>` : x.espera === 0 ? "misma semana" : `${x.espera} sem`;
+    return `<div class="pista" data-tip="${h(`<b>${x.ref}</b> ${NOM[x.ref] || ""}<br>Señales en semana ${x.senales.join(", ")}<br>${abierto ? "Sin decisión todavía" : "Decisión en la semana " + x.decision}`)}">
+      <div class="nom"><span class="ref">${h(x.ref)}</span>${h(NOM[x.ref] || "")}</div><div class="carril">${tramo}${pts}${dec}</div><div class="fin">${txt}</div></div>`;
+  }).join("");
+  const peor = r.filter(x => x.decision != null).sort((a, b) => b.espera - a.espera)[0];
+  const nota = peor ? `la más lenta: ${peor.espera} semanas` : "";
+  return panel("c7", "De la señal a la decisión", nota, `${escala()}<div class="pistas">${filas}</div>`);
+}
+function pSenales(e) {
+  const s = e.senales.filter(x => x.semana === e.semana), ant = e.senales.filter(x => x.semana < e.semana).slice(-3).reverse();
+  const una = x => `<div class="fila cita"><div class="t">«${h(x.texto)}»</div><div class="d">${h(x.fuente)} · semana ${x.semana} · ${x.refs.map(r => `<span class="ref">${h(r)}</span>`).join(" ")}</div></div>`;
+  const cuerpo = (s.length ? s.map(una).join("") : '<p class="vacio">Sin señales nuevas esta semana.</p>') + (ant.length ? `<p class="eti" style="margin:12px 0 8px">Anteriores</p>${ant.map(una).join("")}` : "");
+  return panel("c5", "Señales", `${s.length} esta semana · ${e.senales.length} en total`, `<div class="lista">${cuerpo}</div>`);
+}
+function pSupuestos(e) {
+  const filas = D.supuestos.map(s => {
+    const x = etapa >= 3 ? (e.supuestos.find(v => v.id === s.id) || {}) : {}, st = x.estado || s.estado, [c, t] = CH_SUP[st] || CH_SUP.sin_probar;
+    const ev = x.evidencia ? `<div class="d"><b>Evidencia (semana ${x.desde}).</b> ${h(x.evidencia)}${x.decidido != null ? ` <b>Decidido en la semana ${x.decidido}.</b>` : ""}</div>` : `<div class="d"><b>Prueba (semana ${s.semana_prueba ?? "—"}).</b> ${h(s.prueba)}${x.vencida ? ' <b style="color:var(--critico)">Vencida.</b>' : ""}</div>`;
+    return `<div class="fila"><div class="cab"><span class="ref">${h(s.id)}</span>${chip(c, t)}<span class="d">${h(s.dueno)}</span></div><div class="t">${h(s.supuesto)}</div>${ev}<div class="d"><b>Si falla.</b> ${h(s.si_falla)}</div></div>`;
+  }).join("");
+  return panel("c6", "Supuestos", "lo que tiene que ser cierto", `<div class="lista">${filas || '<p class="vacio">Sin supuestos registrados.</p>'}</div>`);
+}
+function pRiesgos(e) {
+  const filas = [...D.riesgos].sort((a, b) => b.probabilidad * b.impacto - a.probabilidad * a.impacto).map(r => {
+    const x = etapa >= 3 ? (e.riesgos.find(v => v.id === r.id) || {}) : {}, [c, t] = CH_RIE[x.estado || r.estado] || CH_RIE.abierto, exp = r.probabilidad * r.impacto;
+    return `<div class="fila"><div class="cab"><span class="ref">${h(r.id)}</span>${chip(c, t)}<span class="barrita" data-tip="Exposición ${exp} de 25 (probabilidad ${r.probabilidad} × impacto ${r.impacto})"><i style="width:${exp * 4}%"></i></span><span class="d dato">${exp}/25</span><span class="d">${h(r.dueno)}</span></div>
+      <div class="t">${h(r.riesgo)}</div><div class="d"><b>Señal temprana.</b> ${h(r.senal_temprana)}</div><div class="d"><b>Respuesta.</b> ${h(r.respuesta)}</div>${x.nota ? `<div class="d"><b>Última nota.</b> ${h(x.nota)}</div>` : ""}</div>`;
+  }).join("");
+  return panel("c6", "Riesgos", "del pre-mortem", `<div class="lista">${filas || '<p class="vacio">Sin riesgos registrados.</p>'}</div>`);
+}
+function pDecisiones(e) {
+  const d = [...e.decisiones].sort((a, b) => b.semana - a.semana);
+  const filas = d.map(x => `<div class="fila"><div class="cab"><span class="ref">Semana ${x.semana}</span>${x.refs.map(r => `<span class="ref">${h(r)}</span>`).join("")}</div>
+    <div class="t">${h(x.decision)}</div><div class="d"><b>Decide.</b> ${h(x.decide)}${x.por_que ? ` · <b>Por qué.</b> ${h(x.por_que)}` : ""}</div></div>`).join("");
+  return panel("c7", "Decisiones", `${d.length} registradas`, `<div class="lista">${filas || '<p class="vacio">Sin decisiones registradas.</p>'}</div>`);
+}
+function pPermisos() {
+  const col = (nivel, titulo, c) => `<div><h3>${chip(c, titulo)}</h3><ul>${D.permisos.filter(p => p.nivel === nivel).map(p => `<li>${h(p.accion)}</li>`).join("") || "<li>Sin definir</li>"}</ul></div>`;
+  return panel("c5", "Qué puede hacer la IA sola", "del acta", `<div class="perm">${col("puede", "Puede", "ok")}${col("pregunta", "Pregunta antes", "aviso")}${col("nunca", "Nunca", "critico")}</div>`);
+}
+function pActa() {
+  const li = a => (a || []).map(x => `<li>${h(x)}</li>`).join("");
+  const corte = (M.condiciones_corte || []).map(c => `<li>Si ${h(c.texto)}, se decide si el proyecto sigue.</li>`).join("");
+  return panel("", "El acta en una pantalla", "", `<div class="acta">
+    <div><p class="eti">De dónde venimos</p><p>${h(M.a || "Sin definir")}</p></div>
+    <div><p class="eti">A dónde vamos</p><p class="ab">${h(M.b || "Sin definir")}</p></div>
+    <div><p class="eti">Dentro</p><ul>${li(M.dentro)}</ul><p class="eti" style="margin-top:10px">Fuera</p><ul>${li(M.fuera)}</ul></div>
+    <div><p class="eti">Decide</p><p>${h(M.decide || "Sin definir")}</p><p class="eti" style="margin-top:10px">Vetos y restricciones</p><ul>${li(M.vetos)}${li(M.restricciones)}</ul>${corte ? `<p class="eti" style="margin-top:10px">Condición de corte</p><ul>${corte}</ul>` : ""}</div></div>`);
+}
+function pintarTablero() {
+  const e = est(), p = [];
+  if (etapa <= 2) p.push(pActa());
+  if (etapa === 4) p.push(pAlertas(e), pBrief(e));
+  p.push(pIndicadores(e));
+  if (etapa >= 2 && D.hitos.length) p.push(pCurva(e), pHitos(e));
+  if (etapa === 4) p.push(pRastros(e));
+  if (etapa >= 3) p.push(pSenales(e).replace('"panel c5"', etapa === 4 ? '"panel c5"' : '"panel"'));
+  p.push(pSupuestos(e), pRiesgos(e), pDecisiones(e), pPermisos());
+  if (etapa >= 3) p.push(pActa());
+  $("#tablero").innerHTML = p.join("");
+}
+$("#tablero").addEventListener("click", e => {
+  if (e.target.id === "mas") { verTodas = !verTodas; pintarTablero(); }
+  if (e.target.id === "copiar") {
+    const b = e.target, t = $("#brief");
+    const listo = () => { b.textContent = "Copiado"; setTimeout(() => b.textContent = "Copiar", 1600); };
+    const elegir = () => { const r = document.createRange(); r.selectNodeContents(t); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Seleccionado"; };
+    try { navigator.clipboard.writeText(t.textContent).then(listo, elegir); } catch (_) { elegir(); }
+  }
+});
+
+/* ------------------------------------------------------------ tooltip */
+const tip = $("#tip");
+function verTip(html, x, y) {
+  tip.innerHTML = html; tip.hidden = false;
+  const r = tip.getBoundingClientRect(), vw = innerWidth, vh = innerHeight;
+  tip.style.left = Math.max(8, Math.min(vw - r.width - 8, x + 14)) + "px";
+  tip.style.top = (y + r.height + 22 > vh ? y - r.height - 12 : y + 16) + "px";
+}
+document.addEventListener("pointermove", e => {
+  const el = e.target.closest && e.target.closest("[data-tip]");
+  if (el) verTip(el.dataset.tip, e.clientX, e.clientY); else if (!escena.sobre) tip.hidden = true;
+});
+document.addEventListener("pointerleave", () => tip.hidden = true);
+document.addEventListener("pointerup", e => { if (e.pointerType === "touch") setTimeout(() => tip.hidden = true, 1800); });
+addEventListener("scroll", () => tip.hidden = true, { passive: true });
+
+/* ------------------------------------------------------------ escena 3D */
+const escena = (() => {
+  const api = { semana() {}, etapa() {}, sobre: false };
+  const lienzo = $("#lienzo"), canvas = $("#escena"), capaRot = $("#rotulos");
+  if (!window.THREE) { $("#sin-3d").hidden = false; return api; }
+  const T = THREE, quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let renderer;
+  try { renderer = new T.WebGLRenderer({ canvas, antialias: true, alpha: true }); }
+  catch (_) { $("#sin-3d").hidden = false; return api; }
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+  const scene = new T.Scene(), cam = new T.PerspectiveCamera(36, 2, 0.1, 400);
+  const LX = 26, LY = 8.5, CARRIL = 5.2, XN = N + 1.6;
+  const X = w => (w / N - 0.5) * LX, Y = p => (p || 0) * LY;
+  const bac = E[0].evm.bac || 1;
+  const deriva = e => { const ev = e.evm; return ev.ac != null && ev.ev != null ? Math.max(-0.1, Math.min(0.5, (ev.ac - ev.ev) / bac)) * 15 : 0; };
+  let C = {}, oscuro = true;
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  function colores() {
+    const c = n => new T.Color(css(n));
+    C = { tinta: c("--tinta"), tinta2: c("--tinta-2"), tinta3: c("--tinta-3"), plan: c("--plan"), ok: c("--ok"), aviso: c("--aviso"), critico: c("--critico"), cielo: c("--cielo-2") };
+    oscuro = C.cielo.getHSL({}).l < 0.5;
+  }
+  const brillo = (() => { const k = document.createElement("canvas"); k.width = k.height = 64; const g = k.getContext("2d"), r = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    r.addColorStop(0, "rgba(255,255,255,1)"); r.addColorStop(.25, "rgba(255,255,255,.55)"); r.addColorStop(1, "rgba(255,255,255,0)"); g.fillStyle = r; g.fillRect(0, 0, 64, 64); return new T.CanvasTexture(k); })();
+  const halo = (color, s) => { const m = new T.SpriteMaterial({ map: brillo, color, transparent: true, depthWrite: false, opacity: oscuro ? .9 : .35, blending: oscuro ? T.AdditiveBlending : T.NormalBlending }); const sp = new T.Sprite(m); sp.scale.set(s, s, 1); return sp; };
+  const basico = (color, o = 1, extra = {}) => new T.MeshBasicMaterial({ color, transparent: o < 1, opacity: o, depthWrite: o >= 1, ...extra });
+  const linea = (pts, color, o = 1, dash) => { const g = new T.BufferGeometry().setFromPoints(pts);
+    const m = dash ? new T.LineDashedMaterial({ color, transparent: true, opacity: o, dashSize: dash, gapSize: dash * .8 }) : new T.LineBasicMaterial({ color, transparent: o < 1, opacity: o });
+    const l = new T.Line(g, m); if (dash) l.computeLineDistances(); return l; };
+  const V = (x, y, z) => new T.Vector3(x, y, z);
+
+  let gCtx, gPlan, gPulso, rot = [], picks = [], segs = [], cintas = [], porSemana = [], balizas = {}, celdas = {}, rombos = {}, avion, sombra, fantasma, pron, huella, curvaReal, curvaPlan, barrido, wf = 0, wObj = 0;
+  const rotulo = (txt, pos, cls = "", grupo) => { const el = document.createElement("span"); el.className = "rotulo " + cls; el.textContent = txt; capaRot.appendChild(el); rot.push({ el, pos, grupo }); return el; };
+
+  function construir() {
+    colores();
+    while (scene.children.length) scene.remove(scene.children[0]);
+    capaRot.innerHTML = ""; rot = []; picks = []; segs = []; cintas = []; porSemana = []; balizas = {}; celdas = {}; rombos = {};
+    scene.fog = new T.Fog(C.cielo, 46, 120);
+    gCtx = new T.Group(); gPlan = new T.Group(); gPulso = new T.Group(); scene.add(gCtx, gPlan, gPulso);
+    const compacto = lienzo.clientWidth < 640;
+
+    // mesa de radar
+    const R = LX * 0.78;
+    for (let i = 1; i <= 5; i++) { const pts = []; for (let a = 0; a <= 96; a++) pts.push(V(Math.cos(a / 96 * 2 * Math.PI) * R * i / 5, 0, Math.sin(a / 96 * 2 * Math.PI) * R * i / 5)); gCtx.add(linea(pts, C.tinta3, i === 5 ? .5 : .16)); }
+    for (let a = 0; a < 12; a++) gCtx.add(linea([V(0, 0, 0), V(Math.cos(a / 12 * 2 * Math.PI) * R, 0, Math.sin(a / 12 * 2 * Math.PI) * R)], C.tinta3, .1));
+    const disco = new T.Mesh(new T.CircleGeometry(R, 96), basico(C.plan, oscuro ? .05 : .04, { side: T.DoubleSide })); disco.rotation.x = -Math.PI / 2; disco.position.y = -.02; gCtx.add(disco);
+    barrido = new T.Mesh(new T.CircleGeometry(R, 24, 0, .55), basico(C.plan, oscuro ? .09 : .06, { side: T.DoubleSide })); barrido.rotation.x = -Math.PI / 2; barrido.position.y = .01; gCtx.add(barrido);
+    const polvo = new Float32Array(600); for (let i = 0; i < 200; i++) { polvo[i * 3] = (Math.random() - .5) * 90; polvo[i * 3 + 1] = Math.random() * 26 + 1; polvo[i * 3 + 2] = -Math.random() * 60 - 9; }
+    const pg = new T.BufferGeometry(); pg.setAttribute("position", new T.BufferAttribute(polvo, 3)); gCtx.add(new T.Points(pg, new T.PointsMaterial({ color: C.tinta2, size: .3, map: brillo, transparent: true, depthWrite: false, opacity: oscuro ? .8 : .3 })));
+
+    // eje de semanas
+    gCtx.add(linea([V(X(0), 0, 0), V(X(XN), 0, 0)], C.tinta3, .5));
+    for (let w = 0; w <= N; w++) { gCtx.add(linea([V(X(w), 0, -.35), V(X(w), 0, .35)], C.tinta3, .6)); if (w > 0 && (!compacto || w % 3 === 0)) rotulo("S" + w, V(X(w), 0, -1.3), "tenue"); }
+    // A y B
+    const aro = new T.Mesh(new T.TorusGeometry(.55, .04, 8, 40), basico(C.tinta2)); aro.rotation.x = Math.PI / 2; aro.position.set(X(0), .02, 0); gCtx.add(aro);
+    rotulo("A", V(X(0), .9, 0), "fuerte");
+    const meta = new T.Mesh(new T.TorusGeometry(1.05, .05, 10, 56), basico(C.ok)); meta.rotation.y = Math.PI / 2; meta.position.set(X(N), LY, 0); gCtx.add(meta, linea([V(X(N), 0, 0), V(X(N), LY - 1.05, 0)], C.ok, .35, .25));
+    const hb = halo(C.ok, 3.4); hb.position.copy(meta.position); gCtx.add(hb);
+    meta.userData.tip = `<b>B · a dónde vamos</b><br>${h(M.b || "")}`; picks.push(meta);
+    rotulo("B", V(X(N), LY + 1.7, 0), "fuerte");
+    gCtx.userData.directa = linea([V(X(0), 0, 0), V(X(N), LY, 0)], C.tinta2, .7, .35); gCtx.add(gCtx.userData.directa);
+
+    // supuestos: balizas en el carril cercano
+    D.supuestos.forEach((s, i) => {
+      const x = X(s.semana_prueba ?? 1) + (i % 2 ? .35 : -.35), z = CARRIL + (i % 2) * 1.1, alto = 1.5;
+      gCtx.add(linea([V(x, 0, z), V(x, alto, z)], C.tinta3, .7));
+      const luz = new T.Mesh(new T.SphereGeometry(.2, 16, 12), basico(C.tinta3)); luz.position.set(x, alto, z);
+      const hl = halo(C.tinta3, 1.5); hl.position.copy(luz.position); gCtx.add(luz, hl);
+      balizas[s.id] = { luz, hl, pos: luz.position, n: 0 }; luz.userData.id = s.id; picks.push(luz);
+      if (!compacto) rotulo(s.id, V(x, -.45, z));
+    });
+    // riesgos: celdas al fondo
+    D.riesgos.forEach((r, i) => {
+      const exp = r.probabilidad * r.impacto, rad = .38 + exp / 25 * .62, x = X(r.semana_impacto ?? N / 2), z = -CARRIL - 4.5 - (i % 2) * 2.4, y = LY * .62 + (i % 3) * 1.0;
+      const jaula = new T.Mesh(new T.IcosahedronGeometry(rad, 1), basico(C.tinta3, .8, { wireframe: true }));
+      const nucleo = new T.Mesh(new T.IcosahedronGeometry(rad * .55, 1), basico(C.tinta3, .25));
+      jaula.position.set(x, y, z); nucleo.position.copy(jaula.position); gCtx.add(jaula, nucleo, linea([V(x, 0, z), V(x, y - rad, z)], C.tinta3, .25, .2));
+      celdas[r.id] = { jaula, nucleo, pos: jaula.position, n: 0, rad }; jaula.userData.id = r.id; picks.push(jaula);
+      if (!compacto) rotulo(r.id, V(x, y + rad + .55, z));
+    });
+
+    // plan
+    const pp = D.plan.map((p, w) => p == null ? null : V(X(w), Y(p), 0)).filter(Boolean);
+    curvaPlan = pp.length > 1 ? new T.CatmullRomCurve3(pp) : null;
+    if (curvaPlan) {
+      gPlan.add(new T.Mesh(new T.TubeGeometry(curvaPlan, 160, .05, 8), basico(C.plan, .95)));
+      const pts = curvaPlan.getPoints(48), tela = [];
+      for (let i = 0; i < pts.length - 1; i++) { const a = pts[i], b = pts[i + 1]; tela.push(a.x, a.y, 0, a.x, 0, 0, b.x, b.y, 0, b.x, b.y, 0, a.x, 0, 0, b.x, 0, 0); }
+      const tg = new T.BufferGeometry(); tg.setAttribute("position", new T.Float32BufferAttribute(tela, 3));
+      gPlan.add(new T.Mesh(tg, basico(C.plan, oscuro ? .07 : .05, { side: T.DoubleSide })));
+      D.hitos.forEach(ht => {
+        const p = V(X(ht.semana_plan), Y(D.plan[Math.min(N, ht.semana_plan)]), 0);
+        const m = new T.Mesh(new T.OctahedronGeometry(.27), basico(C.plan)); m.position.copy(p); m.userData.id = ht.id; gPlan.add(m); picks.push(m);
+        rombos[ht.id] = { m, pos: m.position, n: 0 };
+        if (!compacto) rotulo(ht.id, p.clone().add(V(0, .7, 0)), "", gPlan);
+      });
+    }
+
+    // pulso
+    if (MAXW >= 1) {
+      const rp = E.map(e => V(X(e.semana), Y(e.evm.pct_real), deriva(e)));
+      curvaReal = new T.CatmullRomCurve3(rp);
+      for (let i = 0; i < MAXW; i++) {
+        const sub = []; for (let k = 0; k <= 8; k++) sub.push(curvaReal.getPoint((i + k / 8) / MAXW));
+        const col = { verde: C.ok, ambar: C.aviso, rojo: C.critico }[E[i + 1].salud] || C.tinta;
+        const t = new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(sub), 10, .085, 8), basico(col)); gPulso.add(t); segs.push(t);
+        if (curvaPlan) {
+          const q = [];
+          for (let k = 0; k < 8; k++) { const a = sub[k], b = sub[k + 1], pa = curvaPlan.getPoint(Math.min(1, (i + k / 8) / N)), pb = curvaPlan.getPoint(Math.min(1, (i + (k + 1) / 8) / N));
+            q.push(a.x, a.y, a.z, pa.x, pa.y, pa.z, b.x, b.y, b.z, b.x, b.y, b.z, pa.x, pa.y, pa.z, pb.x, pb.y, pb.z); }
+          const cg = new T.BufferGeometry(); cg.setAttribute("position", new T.Float32BufferAttribute(q, 3));
+          const c = new T.Mesh(cg, basico(col, .16, { side: T.DoubleSide })); gPulso.add(c); cintas.push(c);
+        }
+      }
+      huella = linea(curvaReal.getPoints(MAXW * 8).map(p => V(p.x, .03, p.z)), C.tinta2, .55); gPulso.add(huella);
+      avion = new T.Group();
+      const cono = new T.Mesh(new T.ConeGeometry(.2, .7, 14), basico(C.tinta)); cono.rotation.z = -Math.PI / 2; avion.add(cono, halo(C.tinta, 2.6)); gPulso.add(avion);
+      sombra = new T.Mesh(new T.RingGeometry(.22, .3, 24), basico(C.tinta2, .8, { side: T.DoubleSide })); sombra.rotation.x = -Math.PI / 2; gPulso.add(sombra);
+      if (curvaPlan) { fantasma = new T.Mesh(new T.TorusGeometry(.26, .03, 8, 24), basico(C.plan)); fantasma.rotation.y = Math.PI / 2; gPulso.add(fantasma); }
+      // señales apiladas sobre su baliza, celda o hito; decisiones como puertas
+      const ult = E[MAXW];
+      ult.senales.forEach(s => {
+        const ref = s.refs.find(r => balizas[r] || celdas[r] || rombos[r]); if (!ref) return;
+        const o = balizas[ref] || celdas[ref] || rombos[ref], base = celdas[ref] ? -(o.rad + .3) : .42, paso = celdas[ref] ? -.3 : .3;
+        const m = new T.Mesh(new T.SphereGeometry(.105, 10, 8), basico(C.aviso)); m.position.copy(o.pos).add(V(0, base + paso * o.n, 0)); o.n++;
+        m.userData = { w: s.semana, tip: `<b>Señal · semana ${s.semana}</b> · ${s.refs.join(", ")}<br>«${h(s.texto)}»<br><span class="dato">${h(s.fuente)}</span>` };
+        const hl = halo(C.aviso, .9); hl.position.copy(m.position); hl.userData.w = s.semana;
+        gPulso.add(m, hl); porSemana.push(m, hl); picks.push(m);
+      });
+      const vistos = {};
+      ult.decisiones.filter(d => d.semana > 0).forEach(d => {
+        const n = vistos[d.semana] = (vistos[d.semana] || 0) + 1, base = curvaReal.getPoint(Math.min(1, d.semana / MAXW));
+        if (n === 1) { const p = linea([V(base.x, 0, base.z), base.clone()], C.tinta, .5); p.userData.w = d.semana; gPulso.add(p); porSemana.push(p); }
+        const m = new T.Mesh(new T.OctahedronGeometry(.25), basico(C.tinta)); m.position.copy(base).add(V(0, .62 * n, 0));
+        m.userData = { w: d.semana, tip: `<b>Decisión · semana ${d.semana}</b> · ${d.refs.join(", ")}<br>${h(d.decision)}<br><span class="dato">${h(d.decide)}</span>` };
+        gPulso.add(m); porSemana.push(m); picks.push(m);
+      });
+    }
+    aplicarEtapa(); aplicarSemana(Math.round(wObj)); encuadrar();
+  }
+
+  function aplicarEtapa() {
+    gPlan.visible = etapa >= 2 && !!curvaPlan; gPulso.visible = etapa >= 3 && MAXW >= 1;
+    gCtx.userData.directa.visible = !gPlan.visible;
+  }
+  function aplicarSemana(w) {
+    const e = E[etapa >= 3 ? w : 0], vivo = etapa >= 3;
+    const pinta = (o, col, tip) => { o.luz ? (o.luz.material.color.copy(col), o.hl.material.color.copy(col)) : (o.jaula.material.color.copy(col), o.nucleo.material.color.copy(col)); (o.luz || o.jaula).userData.tip = tip; };
+    D.supuestos.forEach(s => { const x = vivo ? e.supuestos.find(v => v.id === s.id) : null, st = x ? x.estado : s.estado;
+      pinta(balizas[s.id], { validado: C.ok, en_duda: C.aviso, roto: C.critico }[st] || C.tinta3, `<b>${s.id} · supuesto · ${CH_SUP[st][1]}</b><br>${h(s.supuesto)}<br><span class="dato">prueba: semana ${s.semana_prueba ?? "—"}</span>`); });
+    D.riesgos.forEach(r => { const x = vivo ? e.riesgos.find(v => v.id === r.id) : null, st = x ? x.estado : r.estado, o = celdas[r.id];
+      pinta(o, { materializado: C.critico, mitigado: C.ok, cerrado: C.ok }[st] || C.tinta3, `<b>${r.id} · riesgo · ${CH_RIE[st][1]}</b><br>${h(r.riesgo)}<br><span class="dato">exposición ${r.probabilidad * r.impacto}/25</span>`); o.vivo = st === "materializado"; });
+    D.hitos.forEach(ht => { const o = rombos[ht.id]; if (!o) return; const x = vivo ? e.hitos.find(v => v.id === ht.id) : null;
+      const col = !x ? C.plan : x.estado === "hecho" ? C.ok : x.atraso >= 3 ? C.critico : x.atraso > 0 ? C.aviso : C.plan; o.m.material.color.copy(col);
+      o.m.userData.tip = `<b>${ht.id} · hito${x ? " · " + (x.estado === "hecho" ? "hecho" : x.atraso > 0 ? "+" + x.atraso + " sem" : CH_HIT[x.estado][1].toLowerCase()) : ""}</b><br>${h(ht.hito)}<br><span class="dato">plan: semana ${ht.semana_plan}</span>`; });
+    porSemana.forEach(o => o.visible = o.userData.w <= w);
+    if (pron) { gPulso.remove(pron); pron.geometry.dispose(); pron = null; }
+    if (vivo && curvaReal && w < N + 2 && e.evm.pct_real != null && e.evm.pct_real < 1) {
+      const a = curvaReal.getPoint(w / MAXW), fin = Math.max(e.evm.fin_pronostico, w + 1), eac = e.evm.eac || bac;
+      pron = linea([a, V(X(Math.min(fin, XN)), LY, Math.max(-.1, Math.min(.5, (eac - bac) / bac)) * 15)], C.tinta2, .9, .28); gPulso.add(pron);
+    }
+  }
+  function alFrame(t) {
+    wf += (wObj - wf) * (quieto ? 1 : .12); if (Math.abs(wObj - wf) < .002) wf = wObj;
+    if (gPulso.visible && curvaReal) {
+      segs.forEach((s, i) => s.visible = i < Math.ceil(wf - .001)); cintas.forEach((s, i) => s.visible = i < Math.ceil(wf - .001));
+      huella.geometry.setDrawRange(0, Math.max(2, Math.round(wf * 8) + 1));
+      const u = Math.min(1, wf / MAXW), p = curvaReal.getPoint(u), tg = curvaReal.getTangent(Math.min(.999, u));
+      avion.position.copy(p); avion.quaternion.setFromUnitVectors(V(1, 0, 0), tg.normalize()); sombra.position.set(p.x, .03, p.z);
+      if (fantasma) fantasma.position.copy(curvaPlan.getPoint(Math.min(1, wf / N)));
+    }
+    if (!quieto) { barrido.rotation.z = -t * .00035; Object.values(celdas).forEach(o => { const s = o.vivo ? 1 + Math.sin(t * .006) * .14 : 1; o.jaula.scale.setScalar(s); o.jaula.rotation.y = t * .0002; }); }
+  }
+
+  // cámara
+  let az = -.5, pol = 1.12, radio = 34, azObj = az, polObj = pol, manual = 0;
+  function encuadrar() {
+    const w = lienzo.clientWidth, hh = lienzo.clientHeight; renderer.setSize(w, hh, false); cam.aspect = w / hh; cam.updateProjectionMatrix();
+    const hf = Math.atan(Math.tan(cam.fov * Math.PI / 360) * cam.aspect); radio = Math.max(30, Math.min(80, LX * .68 / Math.tan(hf)));
+  }
+  function camara(t) {
+    const idle = quieto || performance.now() - manual < 5000 ? 0 : Math.sin(t * .00016) * .16;
+    az += (azObj + idle - az) * .08; pol += (polObj - pol) * .08;
+    const c = V(X(N / 2) + .6, LY * .34, .8);
+    cam.position.set(c.x + radio * Math.sin(pol) * Math.sin(az), c.y + radio * Math.cos(pol), c.z + radio * Math.sin(pol) * Math.cos(az)); cam.lookAt(c);
+  }
+  let arr = null;
+  lienzo.addEventListener("pointerdown", e => { arr = { x: e.clientX, y: e.clientY, az: azObj, pol: polObj, tactil: e.pointerType === "touch" }; });
+  addEventListener("pointerup", () => arr = null); addEventListener("pointercancel", () => arr = null);
+  const rayo = new T.Raycaster(), raton = new T.Vector2(); rayo.params.Line = { threshold: .1 };
+  lienzo.addEventListener("pointermove", e => {
+    if (arr) { manual = performance.now(); azObj = arr.az - (e.clientX - arr.x) * .006; if (!arr.tactil) polObj = Math.max(.55, Math.min(1.45, arr.pol - (e.clientY - arr.y) * .004)); return; }
+    const r = canvas.getBoundingClientRect(); raton.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); rayo.setFromCamera(raton, cam);
+    const hit = rayo.intersectObjects(picks.filter(p => p.visible && p.parent.visible), false)[0];
+    if (hit && hit.object.userData.tip) { api.sobre = true; verTip(hit.object.userData.tip, e.clientX, e.clientY); lienzo.style.cursor = "pointer"; }
+    else if (api.sobre) { api.sobre = false; tip.hidden = true; lienzo.style.cursor = ""; }
+  });
+  lienzo.addEventListener("pointerleave", () => { api.sobre = false; });
+
+  const proy = new T.Vector3();
+  function rotular() {
+    const w = lienzo.clientWidth, hh = lienzo.clientHeight;
+    for (const r of rot) {
+      if (r.grupo && !r.grupo.visible) { r.el.hidden = true; continue; }
+      proy.copy(r.pos).project(cam); const fuera = proy.z > 1 || Math.abs(proy.x) > 1.05 || Math.abs(proy.y) > 1.05; r.el.hidden = fuera;
+      if (!fuera) r.el.style.transform = `translate(-50%,-50%) translate(${((proy.x + 1) / 2 * w).toFixed(1)}px,${((1 - proy.y) / 2 * hh).toFixed(1)}px)`;
+    }
+  }
+  let visible = true; new IntersectionObserver(en => visible = en[0].isIntersecting).observe(lienzo);
+  function ciclo(t) { requestAnimationFrame(ciclo); if (!visible) return; alFrame(t); camara(t); renderer.render(scene, cam); rotular(); }
+  new ResizeObserver(() => { const c = lienzo.clientWidth < 640; if (c !== construir.c) { construir.c = c; construir(); } else encuadrar(); }).observe(lienzo);
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", construir);
+  new MutationObserver(construir).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  api.semana = w => { wObj = w; aplicarSemana(w); };
+  api.etapa = () => { wObj = etapa >= 3 ? semana : 0; aplicarEtapa(); aplicarSemana(etapa >= 3 ? semana : 0); };
+  construir.c = lienzo.clientWidth < 640; wObj = wf = etapa >= 3 ? semana : 0; construir(); requestAnimationFrame(ciclo);
+  return api;
+})();
+
+function todo() { pintarCabecera(); pintarTiempo(); pintarHud(); pintarTablero(); escena.etapa(); }
+todo();
+</script>

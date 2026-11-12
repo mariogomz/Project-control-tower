@@ -1,0 +1,5 @@
+id,riesgo,senal_temprana,probabilidad,impacto,dueno,respuesta,semana_impacto,estado
+R1,Los avisos dicen «sigue en revisión» y las llamadas no bajan.,Los contactos de estatus no bajan dos semanas después de encender avisos.,4,4,PM del proyecto,"Aviso con fecha estimada y siguiente paso, no solo el estatus.",7,abierto
+R2,El despacho sigue tardando 23 días.,Menos de 45% de los siniestros dentro del SLA de 10 días.,4,5,Dirección de Siniestros,Escalar a Compras y abrir la renegociación del contrato como proyecto aparte.,8,abierto
+R3,Legal frena los SMS por datos personales.,Legal pide revisar plantillas o no responde en 5 días hábiles.,3,4,PM del proyecto,"Aviso sin datos del siniestro, con enlace que exige autenticación.",4,abierto
+R4,GIB se va antes de ver resultados.,"GIB pide reunión con dirección, cotiza con otra aseguradora o deja de contestar.",3,5,Director de Experiencia del Cliente,Ejecutivo dedicado y reporte quincenal a GIB con sus siniestros.,9,abierto

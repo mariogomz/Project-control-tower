@@ -1,0 +1,8 @@
+semana,decision,decide,refs,por_que
+0,"GO: pasa a planeación con un techo de 400 mil MXN. El chatbot: todavía no, cuando existan datos de los avisos.",Director de Experiencia del Cliente,,El chatbot no pasa el filtro: US$150 mil contra US$64 mil disponibles y sin autenticación fuerte.
+5,El aviso no lleva datos del siniestro; lleva un enlace que exige autenticación.,"Director de Experiencia del Cliente, con visto bueno de Legal",S4;R3,Cumple la restricción de autenticación sin frenar el envío.
+7,"Cambiar el aviso: fecha estimada y siguiente paso, alimentado por un archivo diario del despacho. Primero autos y los siniestros de GIB.",Director de Experiencia del Cliente,S3;S1;R1;I1,"La prueba mostró que el aviso «sigue en revisión» baja las llamadas 9%; con fecha estimada, 31%."
+7,Subir el techo de 400 a 520 mil MXN y mover los avisos completos de la semana 8 a la 11.,"Director de Experiencia del Cliente, con visto bueno de TI",S6;H7,La integración con el despacho no estaba en el estimado.
+7,"Reporte quincenal a GIB con el estado de sus siniestros, a cargo del nuevo ejecutivo.",Director de Experiencia del Cliente,R4;S5;H2,GIB avisó que no renovará en enero si no ve cambios.
+7,Compras exige al despacho el reporte semanal de SLA que marca el contrato.,Director de Experiencia del Cliente,R2;I4,Dos semanas sin reporte: no se puede gobernar lo que no se mide.
+12,"La renegociación del contrato del despacho se abre como proyecto aparte, antes de marzo de 2027.",Director de Experiencia del Cliente,R2;I4,"Los avisos ya funcionan, pero el trámite sigue lejos del SLA de 10 días."

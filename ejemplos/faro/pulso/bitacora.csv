@@ -1,0 +1,34 @@
+semana,tipo,ref,estado,texto,fuente
+1,senal,S3,,"La documentación de avisos que tenemos es el manual de 2023, anterior a la migración de febrero.",Reunión semanal con TI
+2,senal,S3;R2,,El evento de cambio de estatus no llega desde el portal del despacho; solo lo vemos en los siniestros que ajustamos en casa.,Reunión semanal con TI
+2,senal,H2;R4,,La vacante del ejecutivo de GIB entra a la fila con las otras seis.,Correo de Recursos Humanos
+2,senal,S4;R3,,Antes de cualquier envío queremos ver las plantillas. No podemos dar fecha.,Correo de Legal
+2,supuesto,S2,validado,Muestra de 400 contactos reclasificada: 44% preguntan por el estatus.,Dirección de Siniestros
+2,supuesto,S3,en_duda,En ambiente de prueba los avisos solo salen para siniestros ajustados en casa.,TI
+3,senal,S3;R2,,"El despacho actualiza el estatus en su portal una vez por semana, en lote.",Llamada con el despacho
+3,senal,R2;I4,,Primera medición: 38% de los siniestros dentro del SLA de 10 días. El despacho cuestiona cómo se midió.,Tablero de SLA
+3,senal,S4;R3,,Legal no ha respondido en 6 días hábiles.,Seguimiento del PM
+3,supuesto,S4,en_duda,Legal no confirma; pide revisar las plantillas.,Legal
+4,senal,R4;S5,,GIB pidió reunión con dirección y preguntó por tres siniestros abiertos.,Correo del ejecutivo de GIB
+4,senal,S6;H7,,Integrar el archivo diario del despacho no estaba en el estimado. Serían unos 180 mil MXN más.,Reunión semanal con TI
+4,supuesto,S3,roto,"TI confirma que 70% de los siniestros, los del despacho, no generan evento de estatus. Reactivar no alcanza: hace falta integrar un archivo diario.",TI
+4,supuesto,S6,en_duda,La integración suma unos 180 mil MXN al estimado.,TI
+5,senal,S6;H7,,TI mueve la fecha de avisos completos por segunda vez.,Reunión semanal con TI
+5,supuesto,S4,validado,"Legal aprueba el aviso sin datos del siniestro, con enlace que exige autenticación.",Legal
+5,riesgo,R3,mitigado,Plantillas aprobadas con el formato de enlace autenticado.,Legal
+6,senal,R1;S1,,"En la prueba, 4 de cada 10 clientes que reciben «sigue en revisión» llaman ese mismo día.",Supervisoras del call center
+6,senal,R4;S5,,GIB pidió cotización a otra aseguradora.,Corredor de GIB
+6,senal,I4;R2,,El despacho no envió el reporte semanal.,Compras
+6,supuesto,S5,en_duda,GIB pidió cotización a otra aseguradora.,Corredor de GIB
+7,senal,R4;S5,,GIB avisa que no renovará en enero si no ve cambios.,Reunión con GIB
+7,supuesto,S1,en_duda,Con el aviso actual las llamadas de estatus bajan 9%. Con fecha estimada y siguiente paso bajan 31%.,Resultado de la prueba de 2 semanas
+7,riesgo,R1,materializado,Los avisos «sigue en revisión» no bajan las llamadas y suben las quejas.,Resultado de la prueba de 2 semanas
+7,supuesto,S5,roto,GIB avisa que no renovará en enero si no ve cambios.,Reunión con GIB
+7,supuesto,S6,roto,El costo proyectado supera el techo de 400 mil MXN.,PM del proyecto
+7,cambio,,,"Alcance: avisos con fecha estimada y siguiente paso, alimentados por archivo diario del despacho; primero autos y GIB. El techo sube de 400 a 520 mil MXN. Los avisos completos pasan de la semana 8 a la 11.",Revisión con el patrocinador
+9,senal,R4,,GIB recibió el primer reporte quincenal de sus siniestros y acepta esperar a marzo.,Ejecutivo de GIB
+9,supuesto,S1,validado,"Con fecha estimada, la baja de 31% en llamadas de estatus se sostiene tres semanas.",Clasificación de contactos
+9,riesgo,R1,mitigado,El aviso nuevo ya está en autos y en los siniestros de GIB.,PM del proyecto
+9,riesgo,R4,mitigado,GIB acepta esperar a marzo tras el primer reporte quincenal.,Ejecutivo de GIB
+9,supuesto,S5,validado,"Con el reporte quincenal, GIB acepta esperar a marzo.",Ejecutivo de GIB
+10,senal,R2;I4,,El despacho pide revisar el SLA de 10 días; dice que con el volumen actual no es alcanzable.,Compras

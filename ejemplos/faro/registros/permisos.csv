@@ -1,0 +1,14 @@
+accion,nivel,nota
+Analizar datos agregados de contactos,puede,Del acta
+"Redactar borradores internos: brief, minuta, reporte",puede,Del acta
+Registrar en el pulso una medición que viene de un reporte oficial,puede,Regla de la torre
+Avisar al PM cuando un indicador sale de rango,puede,Del acta
+Cualquier texto para clientes,pregunta,Del acta
+Cualquier compromiso de gasto,pregunta,Del acta
+Cualquier cosa que toque la autenticación,pregunta,Del acta
+Cambiar el estado de un supuesto o de un riesgo,pregunta,Regla de la torre
+Enviar el brief al patrocinador,pregunta,Regla de la torre
+Proponer un canal de siniestros sin autenticación,nunca,Del acta
+Citar el «−70%» del proveedor o el 6% de abandono como evidencia,nunca,Del acta
+"Cambiar metas, umbrales o la línea base",nunca,Regla de la torre
+Escribirle a un cliente,nunca,Del acta: ninguna IA sola

@@ -1,0 +1,43 @@
+{
+  "proyecto": "Estatus sin llamar",
+  "organizacion": "Aseguradora Faro",
+  "nota": "Caso ficticio del curso. La ejecución de las semanas 1 a 12 es simulada.",
+  "equipo": "Equipo de ejemplo",
+  "sponsor": "Director de Experiencia del Cliente",
+  "decide": "Director de Experiencia del Cliente",
+  "vetos": [
+    "Legal (autenticación)",
+    "TI (presupuesto)"
+  ],
+  "pm": "PM del proyecto",
+  "a": "Los clientes con siniestro activo no saben en qué estado está su trámite: 46% de los contactos preguntan por el estatus y los avisos automáticos están apagados desde febrero.",
+  "b": "El cliente con siniestro activo sabe cómo va su trámite sin llamar, y Grupo Industrial del Bajío se queda.",
+  "dentro": [
+    "Reactivar avisos",
+    "Medir el SLA del despacho",
+    "Ejecutivo para GIB"
+  ],
+  "fuera": [
+    "Chatbot en la app",
+    "Canales nuevos",
+    "Renegociar el contrato del despacho"
+  ],
+  "restricciones": [
+    "Cualquier canal de siniestros autentica al cliente (Legal)",
+    "≤1.2 M MXN en Q4 (TI)",
+    "Antes de diciembre"
+  ],
+  "inicio": "2026-09-07",
+  "semanas": 12,
+  "moneda": "MXN",
+  "presupuesto": 400000,
+  "condiciones_corte": [
+    {
+      "texto": "en la semana 6 los avisos llegan a menos de 60% de los siniestros abiertos",
+      "indicador": "I1",
+      "si": "<",
+      "valor": 60,
+      "semana": 6
+    }
+  ]
+}

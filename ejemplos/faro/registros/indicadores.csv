@@ -1,0 +1,6 @@
+id,nombre,tipo,unidad,linea_base,meta,ambar,rojo,sentido,fuente,dueno,cadencia_semanas,desde_semana
+I1,Siniestros abiertos que reciben aviso,adelantado,%,0,90,80,60,sube,Bitácora de envíos de la plataforma de avisos,PM del proyecto,1,4
+I2,Contactos que preguntan por estatus,rezagado,%,46,30,34,40,baja,Clasificación de contactos del call center,Dirección de Siniestros,1,6
+I3,Abandono de llamadas,rezagado,%,18,10,14,17,baja,"Reporte telefónico, todas las llamadas",Dirección de Siniestros,1,6
+I4,Siniestros dentro del SLA de 10 días del despacho,adelantado,%,,80,65,45,sube,Reporte semanal del despacho de ajustadores,Compras,1,3
+I5,Quejas formales por semana,rezagado,quejas,34,34,38,45,baja,Registro de quejas de Atención a Clientes,PM del proyecto,1,4

@@ -1,0 +1,54 @@
+semana,indicador,valor,fuente
+1,I2,46,Clasificación de contactos del call center
+1,I3,18,"Reporte telefónico, todas las llamadas"
+1,I5,34,Registro de quejas de Atención a Clientes
+2,I2,44,Clasificación de contactos del call center
+2,I3,18.2,"Reporte telefónico, todas las llamadas"
+2,I5,33,Registro de quejas de Atención a Clientes
+3,I2,45,Clasificación de contactos del call center
+3,I3,17.9,"Reporte telefónico, todas las llamadas"
+3,I4,38,Reporte semanal del despacho de ajustadores
+3,I5,35,Registro de quejas de Atención a Clientes
+4,I1,27,Bitácora de envíos de la plataforma de avisos
+4,I2,46,Clasificación de contactos del call center
+4,I3,18.4,"Reporte telefónico, todas las llamadas"
+4,I4,40,Reporte semanal del despacho de ajustadores
+4,I5,36,Registro de quejas de Atención a Clientes
+5,I1,29,Bitácora de envíos de la plataforma de avisos
+5,I2,45,Clasificación de contactos del call center
+5,I3,18.6,"Reporte telefónico, todas las llamadas"
+5,I4,41,Reporte semanal del despacho de ajustadores
+5,I5,36,Registro de quejas de Atención a Clientes
+6,I1,31,Bitácora de envíos de la plataforma de avisos
+6,I2,45,Clasificación de contactos del call center
+6,I3,18.5,"Reporte telefónico, todas las llamadas"
+6,I5,41,Registro de quejas de Atención a Clientes
+7,I1,34,Bitácora de envíos de la plataforma de avisos
+7,I2,44,Clasificación de contactos del call center
+7,I3,19,"Reporte telefónico, todas las llamadas"
+7,I5,47,Registro de quejas de Atención a Clientes
+8,I1,48,Bitácora de envíos de la plataforma de avisos
+8,I2,41,Clasificación de contactos del call center
+8,I3,17.5,"Reporte telefónico, todas las llamadas"
+8,I4,44,Reporte semanal del despacho de ajustadores
+8,I5,43,Registro de quejas de Atención a Clientes
+9,I1,66,Bitácora de envíos de la plataforma de avisos
+9,I2,38,Clasificación de contactos del call center
+9,I3,16,"Reporte telefónico, todas las llamadas"
+9,I4,52,Reporte semanal del despacho de ajustadores
+9,I5,37,Registro de quejas de Atención a Clientes
+10,I1,81,Bitácora de envíos de la plataforma de avisos
+10,I2,35,Clasificación de contactos del call center
+10,I3,14.5,"Reporte telefónico, todas las llamadas"
+10,I4,58,Reporte semanal del despacho de ajustadores
+10,I5,33,Registro de quejas de Atención a Clientes
+11,I1,92,Bitácora de envíos de la plataforma de avisos
+11,I2,32,Clasificación de contactos del call center
+11,I3,13,"Reporte telefónico, todas las llamadas"
+11,I4,61,Reporte semanal del despacho de ajustadores
+11,I5,32,Registro de quejas de Atención a Clientes
+12,I1,94,Bitácora de envíos de la plataforma de avisos
+12,I2,30,Clasificación de contactos del call center
+12,I3,12,"Reporte telefónico, todas las llamadas"
+12,I4,63,Reporte semanal del despacho de ajustadores
+12,I5,31,Registro de quejas de Atención a Clientes
