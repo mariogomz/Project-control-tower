@@ -69,7 +69,7 @@ Reglas del bloque:
 - "etiqueta" y "tipo" de una línea de valor o costo solo pueden ser: dato, supuesto o esperanza. Los semáforos: verde, amarillo o rojo. "resultado": go, investigar, todavía no o no-go.
 - En "opciones" van las seis casillas en su orden; "es_la_solicitud" es true solo en la del sponsor.
 - En "exito.indicadores", "fuente" es el instrumento que mide el indicador. En "exito.duenos": "beneficio" es quién recibe el beneficio, "medicion" quién lo mide y "desviaciones" quién decide si hay desviación.
-- En "supuestos" van todos los supuestos abiertos, incluidos los tres del pre-mortem, con "fuente": "Pre-mortem".
+- En "supuestos" van solo los del registro de supuestos del v1 y los tres del pre-mortem (estos con "fuente": "Pre-mortem"). No repitas ahí el supuesto que cambia la decisión, las líneas de valor o costo ni los hallazgos de los ángulos: ya están en su sección.
 - Dentro de los textos usa comillas angulares « » en lugar de comillas dobles.
 - No escribas nada después del bloque.
 
