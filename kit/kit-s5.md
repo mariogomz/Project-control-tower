@@ -22,42 +22,43 @@ Agrega a mi skill framing-brief el archivo references/charter.md con exactamente
 # Modo charter (Framing Brief v1 → v2 y bloque POS)
 
 ## Entradas
-1. El Framing Brief v1 (obligatorio). Si no trae proyecto recomendado ni supuesto que cambia la decisión, detente y pídelos.
-2. El Framing Brief v0, si el v1 no repite sus secciones (solicitud, afectados, A → B, ángulos, encuadres, evidencia).
-3. Lo que el equipo ya escribió en su tablero sobre éxito, pre-mortem, límites, quién decide y permisos de la IA (si existe).
+1. El Framing Brief v1 (obligatorio). Si no trae opción recomendada ni supuesto que cambia la decisión, detente y pídelos.
+2. Lo que el equipo llenó hoy en su tablero: las razones del pre-mortem, el bloque de éxito (seis campos) y el acta (patrocinio, stakeholders, límites, permisos de la IA).
+3. El Framing Brief v0, si el v1 no repite sus secciones (solicitud, afectados, A → B, ángulos, encuadres, evidencia).
 Si falta algo, escribe [POR CONFIRMAR: qué falta y quién lo sabe]. No lo inventes.
 
 ## Reglas de este modo
-- Siguen valiendo las reglas del SKILL.md: una pregunta por mensaje; dato, supuesto o esperanza en cada afirmación; nada inventado.
-- El acta se queda a nivel de encuadre: qué es éxito, hasta dónde llega el proyecto y quién decide. No es un plan.
-- La decisión la toma el equipo o quien el equipo diga que decide. Tú la registras; no la recomiendas ni la cambias.
-- Si el equipo pega todo de una vez, no repitas preguntas que ya están respondidas: muestra lo que encontraste en cada paso y pide que lo confirmen.
-- Muestra al inicio de cada mensaje en qué paso van, así: "Paso 2 de 8 · Éxito".
+- Siguen valiendo las reglas del SKILL.md: dato, supuesto o esperanza en cada afirmación; nada inventado.
+- Cuando el equipo pega su material y pide "Pasa el contexto a acta", arma el acta con lo que pegó. No lo entrevistes: haz como máximo tres preguntas, una por mensaje, y solo por lo más grave que falte. Lo demás va como [POR CONFIRMAR] y a la lista de huecos.
+- El acta se queda a nivel de encuadre: qué es éxito, quién decide, hasta dónde llega el proyecto y cuál es el siguiente paso. No es un plan.
+- La decisión la toma el equipo en su panel. Tú la registras si ya existe; no la recomiendas ni la cambias. Si todavía no la tomaron, déjala como [POR CONFIRMAR: la decide el panel].
 
 ## Pasos
-1. Repite textual, del v1: el A → B, el proyecto recomendado y el supuesto que cambia la decisión, con su prueba. Pregunta si algo cambió desde la sesión 4.
-2. Éxito. Completa la tarjeta, un campo a la vez: beneficio (qué cambia y para quién) y un efecto negativo a vigilar; indicador y de dónde sale el dato; línea base; meta con plazo; examen intermedio (qué deberíamos ver a mitad de camino) y lo que no debe empeorar; dueños: quién responde por el beneficio, quién lo mide y a quién se avisa si se desvía.
-3. Pre-mortem. Pregunta: "Imaginen que el proyecto terminó y fracasó. ¿Qué pasó?" Pide de 3 a 5 causas con sus palabras. No agregues las tuyas.
-4. Límites. Qué queda dentro, qué queda fuera y qué restricciones hay. Parte de lo obligatorio del v1 y de las opciones descartadas.
-5. Quién decide. Una persona o un rol, no un comité. Luego, quién puede frenar y sobre qué.
-6. Permisos de la IA. Tres listas: puede hacerlo sola, pregunta antes, nunca. Para cada tarea que propongan, pregunta: ¿la IA es capaz?, ¿tiene el contexto?, ¿tiene la autoridad?, ¿alguien puede revisar el resultado?
-7. La decisión. Pregunta cuál fue: go, investigar, todavía no o no-go; quién la tomó, con qué límite (dinero o tiempo) y cuándo es la primera revisión. Regístrala con sus palabras.
-8. Entrega, en este orden: el Framing Brief v2, la revisión final con la lista de huecos y el bloque POS.
+1. Repite textual, del v1: el A → B, la opción recomendada y el supuesto que cambia la decisión, con su prueba.
+2. Revisa el bloque de éxito, campo por campo: (1) beneficio y efecto negativo a vigilar, máximo tres beneficios; (2) indicador y el instrumento que lo mide, es decir, el sistema o reporte; (3) línea base con valor, fecha y fuente; (4) meta y fecha; (5) examen intermedio y guardrail: una señal temprana de que vamos bien y algo que no debe empeorar; (6) dueños: quién recibe el beneficio, quién lo mide y quién decide si hay desviación. Cada campo está o no está.
+3. Pasa las tres razones del pre-mortem que eligió el equipo al registro de supuestos, cada una con dueño y fecha de prueba.
+4. Patrocinio: quién decide (una persona o un rol, no un comité) y quién puede vetar, diciendo sobre qué.
+5. Stakeholders: quién gana, quién pierde y quién se ve afectado. Parte de los afectados del v0.
+6. Límites: qué queda dentro, qué queda fuera (al menos tres cosas) y las restricciones que nadie negocia.
+7. Permisos de la IA en tres líneas: puede (lo que hace sola), pregunta antes (lo que necesita un sí de una persona) y nunca (lo que no hace aunque se lo pidan). Revisa que ningún permiso contradiga una restricción.
+8. La decisión: go, investigar, todavía no o no-go; qué autoriza, quién es dueño del siguiente paso y cuándo se vuelve a revisar. Después entrega, en este orden: el Framing Brief v2, la revisión final con la lista de huecos y el bloque POS.
 
 ## Revisión final (entrégala siempre)
 - [ ] El beneficio dice qué cambia para alguien, no qué se entrega
-- [ ] Cada indicador tiene fuente, línea base y meta con plazo
-- [ ] Hay un examen intermedio
+- [ ] Cada indicador tiene instrumento, línea base con fecha y fuente, y meta con fecha
+- [ ] Hay examen intermedio y guardrail
 - [ ] Los tres dueños tienen nombre o rol
-- [ ] Algo quedó escrito como "fuera"
-- [ ] Decide una sola persona o rol
-- [ ] Hay al menos una tarea en "nunca"
-- [ ] La decisión tiene límite y primera revisión
+- [ ] Decide una sola persona o rol, y cada veto dice sobre qué
+- [ ] Hay al menos tres cosas fuera
+- [ ] Los supuestos abiertos tienen dueño y fecha de prueba, incluidos los tres del pre-mortem
+- [ ] Ningún permiso de la IA contradice una restricción, y hay al menos una tarea en "nunca"
+- [ ] La decisión dice qué autoriza, quién sigue y cuándo se revisa
 - [ ] No hay cifras, fuentes ni personas que el equipo no mencionó
+- [ ] No hay plan, hitos ni presupuesto detallado
 Lista los huecos encontrados, del más grave al menos grave.
 
 ## Formato de salida: Framing Brief v2
-Encabezado (versión, fecha, dueño) · Del v1: solicitud, A → B, encuadre, proyecto recomendado, supuesto que cambia la decisión · Éxito (beneficio, efecto negativo, indicador, línea base, meta, examen intermedio, dueños) · Pre-mortem · Límites (dentro, fuera, restricciones) · Quién decide y quién puede frenar · Permisos de la IA · Decisión · Huecos
+Encabezado (versión, fecha, dueño) · Todo lo del v1 (solicitud, A → B, encuadre, opciones, opción recomendada, supuesto que cambia la decisión) · Bloque de éxito (seis campos) · Patrocinio: quién decide y quién veta qué · Stakeholders: quién gana, quién pierde, quién se ve afectado · Límites: dentro, fuera, restricciones · Supuestos abiertos con dueño y fecha · Permisos de la IA en tres líneas · La decisión, lo que autoriza y la siguiente revisión · Huecos
 
 ## Bloque POS
 Después del Brief v2 y de los huecos, entrega el bloque POS: todo el contenido del Brief (lo del v0, lo del v1 y lo del v2) en el formato de abajo, dentro de un solo bloque de código, para que el equipo lo copie y lo pegue en la página del POS.
@@ -67,6 +68,8 @@ Reglas del bloque:
 - Usa exactamente estas claves y no agregues otras. Si un dato no existe, deja "" o []. Si falta y alguien lo sabe, escribe "[POR CONFIRMAR: qué falta y quién lo sabe]".
 - "etiqueta" y "tipo" de una línea de valor o costo solo pueden ser: dato, supuesto o esperanza. Los semáforos: verde, amarillo o rojo. "resultado": go, investigar, todavía no o no-go.
 - En "opciones" van las seis casillas en su orden; "es_la_solicitud" es true solo en la del sponsor.
+- En "exito.indicadores", "fuente" es el instrumento que mide el indicador. En "exito.duenos": "beneficio" es quién recibe el beneficio, "medicion" quién lo mide y "desviaciones" quién decide si hay desviación.
+- En "supuestos" van todos los supuestos abiertos, incluidos los tres del pre-mortem, con "fuente": "Pre-mortem".
 - Dentro de los textos usa comillas angulares « » en lugar de comillas dobles.
 - No escribas nada después del bloque.
 
@@ -119,9 +122,10 @@ Reglas del bloque:
     "duenos": {"beneficio": "", "medicion": "", "desviaciones": ""}
   },
   "premortem": [""],
+  "interesados": {"ganan": "", "pierden": "", "afectados": ""},
   "acta": {"dentro": [""], "fuera": [""], "restricciones": [""], "decide": "", "vetos": [""]},
   "permisos": {"puede": [""], "pregunta": [""], "nunca": [""]},
-  "decision": {"resultado": "", "texto": "", "quien": "", "fecha": "", "limite": "", "primera_revision": ""},
+  "decision": {"resultado": "", "texto": "", "quien": "", "fecha": "", "autoriza": "", "limite": "", "dueno_siguiente_paso": "", "siguiente_revision": ""},
   "huecos": [""]
 }
 ```
@@ -135,12 +139,12 @@ Reglas del bloque:
 
 **Hasta aquí se copia**
 
-## 2. Armar el acta (20 minutos)
+## 2. Ronda 4 · La skill completa el acta y la revisa (5 minutos)
 
 1. Chat nuevo en modo Work. Escriban **@framing brief, modo charter**.
-2. Péguenle su Framing Brief v1. Si su v1 no repite lo del v0, peguen también el v0.
-3. Respondan corto, una pregunta a la vez. Si no saben algo: «no sé».
-4. Al final reciben tres cosas: su Framing Brief v2, la lista de huecos y el bloque POS.
+2. Peguen su Framing Brief v1 y lo que llenaron en las rondas 1 a 3. Pidan: **«Pasa el contexto a acta»**.
+3. Reciben tres cosas: su Framing Brief v2, la revisión final con la lista de huecos y el bloque POS.
+4. Si la skill agregó un plan, hitos o un presupuesto detallado, sale: eso es del módulo 2.
 
 ## 3. Ver el acta en su POS (2 minutos)
 
@@ -148,11 +152,12 @@ Reglas del bloque:
 2. Abran la página del POS → **Mi equipo** → peguen → **Mostrar mi acta**.
 3. Revisen la barra de arriba: cuántas partes están listas y cuántas quedaron por confirmar.
 
-## 4. Cerrar un hueco (5 minutos)
+## 4. Ronda 5 · Panel de decisión, con el acta en pantalla (7 minutos)
 
-1. Abran la tarjeta **Lo que falta**, al final de la página.
-2. Elijan el hueco más grave que puedan resolver hoy.
-3. Vuelvan al chat, díganle a la skill el dato que faltaba y pidan: **«vuelve a darme el bloque POS completo»**.
-4. Péguenlo otra vez en **Mi equipo → Pegar otro bloque**.
+El Sponsor lee el acta en la página del POS, en silencio (2 minutos), y decide. El Escéptico da la mejor razón para no hacerlo o para hacer otra opción. El PM responde y propone qué autoriza la decisión.
 
-**Pregunta para el Escéptico del equipo:** ¿qué parte de esta acta firmamos con nuestro nombre, y qué parte todavía es fluidez sin evidencia?
+Cuando decidan, díganle a la skill qué decidieron, qué autoriza, quién es dueño del siguiente paso y cuándo se vuelve a revisar. Pidan: **«vuelve a darme el bloque POS completo»** y péguenlo otra vez en **Mi equipo → Pegar otro bloque**.
+
+## 5. Si queda tiempo: cerrar un hueco
+
+Abran la tarjeta **Lo que falta**, al final de la página. Elijan el hueco más grave que puedan resolver hoy, denle el dato a la skill y vuelvan a pegar el bloque.

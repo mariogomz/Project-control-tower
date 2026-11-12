@@ -263,7 +263,7 @@ function luz(c) {
 
 /* ------------------------------------------------------------ leer el bloque */
 const ARR = ["angulos", "encuadres", "evidencia", "preguntas_abiertas", "ideas_estacionadas", "objetivos", "obligatorio", "opciones", "supuestos", "premortem", "huecos"];
-const OBJ = ["solicitud", "afectados", "proyecto", "supuesto_clave", "exito", "acta", "permisos", "decision"];
+const OBJ = ["solicitud", "afectados", "proyecto", "supuesto_clave", "exito", "interesados", "acta", "permisos", "decision"];
 const arr = x => Array.isArray(x) ? x : vacio(x) ? [] : [x];
 function normalizar(d) {
   const n = { ...d };
@@ -305,9 +305,10 @@ const CAMPOS = [
   ["El beneficio", d => [d.exito.beneficio]], ["Indicador con fuente, línea base y meta", d => cada(d.exito.indicadores, "indicador", "fuente", "linea_base", "meta")],
   ["El examen intermedio", d => [d.exito.examen_intermedio]], ["Lo que no debe empeorar", d => [d.exito.guardrail]],
   ["Los tres dueños del éxito", d => [d.exito.duenos.beneficio, d.exito.duenos.medicion, d.exito.duenos.desviaciones]],
-  ["El pre-mortem", d => d.premortem.length ? d.premortem : [""]], ["Lo que queda dentro y fuera", d => d.acta.dentro.length && d.acta.fuera.length ? [...d.acta.dentro, ...d.acta.fuera] : [""]],
+  ["El pre-mortem", d => d.premortem.length ? d.premortem : [""]], ["Quién gana, quién pierde y quién se ve afectado", d => [d.interesados.ganan, d.interesados.pierden, d.interesados.afectados]],
+  ["Lo que queda dentro y al menos tres cosas fuera", d => d.acta.dentro.length && d.acta.fuera.length >= 3 ? [...d.acta.dentro, ...d.acta.fuera] : [""]],
   ["Quién decide", d => [d.acta.decide]], ["Qué puede hacer la IA", d => ["puede", "pregunta", "nunca"].every(k => d.permisos[k].length) ? ["ok"] : [""]],
-  ["La decisión, con límite y primera revisión", d => [d.decision.resultado, d.decision.limite, d.decision.primera_revision]],
+  ["La decisión: qué autoriza, quién sigue y cuándo se revisa", d => [d.decision.resultado, d.decision.autoriza, d.decision.dueno_siguiente_paso, d.decision.siguiente_revision]],
 ];
 const PC = /\[POR CONFIRMAR/i;
 function avance(d) {
@@ -383,36 +384,41 @@ const T = [
     despues: "Es lo primero que vigila la torre: si la prueba se vence o falla, avisa a quien decide.",
     cuerpo: d => supuestos(d) },
   { id: "exito", tramo: 5, ancho: "g", titulo: "Qué es éxito", origen: "Sesión 5 · modo charter",
-    que: "El beneficio, cómo se mide, de dónde parte, a dónde llega y quién responde.",
+    que: "El bloque de éxito, con sus seis campos: beneficio y efecto negativo, indicador e instrumento, línea base, meta y fecha, examen intermedio y guardrail, y dueños.",
     porque: "Entregar no es beneficiar. El proyecto puede terminar a tiempo y no cambiar nada para el cliente.",
     despues: "Cada indicador se mide con la cadencia acordada. Si se sale de rango o deja de medirse, hay alerta.",
     cuerpo: d => exito(d) },
   { id: "premortem", tramo: 5, ancho: "c", titulo: "Lo que podría salir mal", origen: "Sesión 5 · modo charter",
-    que: "El pre-mortem: imaginamos que el proyecto fracasó y escribimos por qué.",
+    que: "El pre-mortem: es dentro de un año y el proyecto fracasó. Estas son las razones más probables.",
     porque: "Es más fácil ver los riesgos antes de empezar, cuando todavía nadie está defendiendo el plan.",
-    despues: "Cada punto se convierte en un riesgo con su señal temprana: qué veríamos primero si empieza a ocurrir.",
+    despues: "Las tres más probables ya pasaron al registro de supuestos, con dueño. Más adelante cada una tendrá su señal temprana: qué veríamos primero si empieza a ocurrir.",
     cuerpo: d => lista(d.premortem) },
+  { id: "interesados", tramo: 5, ancho: "", titulo: "Quién gana, quién pierde y quién se ve afectado", origen: "Sesión 5 · modo charter",
+    que: "Las personas y áreas a las que el proyecto les cambia algo, para bien o para mal.",
+    porque: "Quien pierde con el proyecto rara vez lo dice en la reunión. Nombrarlo a tiempo evita un veto silencioso.",
+    despues: "Cuando una alerta toca a alguno de ellos, se sabe a quién hay que avisar además de quien decide.",
+    cuerpo: d => `<div class="campos">${campo("Quién gana", d.interesados.ganan)}${campo("Quién pierde", d.interesados.pierden)}${campo("Quién se ve afectado", d.interesados.afectados)}</div>` },
   { id: "limites", tramo: 5, ancho: "", titulo: "Hasta dónde llega el proyecto", origen: "Sesión 5 · modo charter",
     que: "Lo que queda dentro, lo que queda fuera y las restricciones.",
     porque: "Lo que no se dice que está fuera, alguien lo va a pedir después.",
     despues: "Un cambio que mueve estos límites se registra como cambio y lo aprueba quien decide.",
     cuerpo: d => `<div class="tres"><div><h4><span class="punto ok"></span>Dentro</h4>${lista(d.acta.dentro)}</div><div><h4><span class="punto critico"></span>Fuera</h4>${lista(d.acta.fuera)}</div><div><h4><span class="punto"></span>Restricciones</h4>${lista(d.acta.restricciones)}</div></div>` },
   { id: "decide", tramo: 5, ancho: "c", titulo: "Quién decide", origen: "Sesión 5 · modo charter",
-    que: "Una persona con nombre que decide, y quiénes pueden frenar y sobre qué.",
+    que: "El patrocinio: una persona que decide, y quiénes pueden vetar y sobre qué.",
     porque: "Si deciden todos, no decide nadie. El desacuerdo se escucha antes de la firma.",
     despues: "A esta persona le llega el brief cuando algo necesita decisión.",
-    cuerpo: d => `${campo("Decide", d.acta.decide)}<p class="eti" style="margin-top:12px">Pueden frenar</p>${lista(d.acta.vetos)}` },
+    cuerpo: d => `${campo("Decide", d.acta.decide)}<p class="eti" style="margin-top:12px">Pueden vetar</p>${lista(d.acta.vetos)}` },
   { id: "permisos", tramo: 5, ancho: "g", titulo: "Qué puede hacer la IA", origen: "Sesión 5 · modo charter",
     que: "Lo que la IA puede hacer sola, lo que tiene que preguntar antes y lo que nunca hace.",
     porque: "Cuando los agentes tienen permisos, «quién puede hacer qué» deja de ser una frase y se vuelve configuración.",
     despues: "Son las reglas del agente que actualiza el POS y manda avisos.",
     cuerpo: d => `<div class="tres"><div><h4><span class="punto ok"></span>Puede</h4>${lista(d.permisos.puede)}</div><div><h4><span class="punto aviso"></span>Pregunta antes</h4>${lista(d.permisos.pregunta)}</div><div><h4><span class="punto critico"></span>Nunca</h4>${lista(d.permisos.nunca)}</div></div>` },
   { id: "decision", tramo: 5, ancho: "m", titulo: "La decisión", origen: "Sesión 5 · modo charter",
-    que: "Go, investigar, todavía no o no-go: qué se decidió, quién, con qué límite y cuándo se revisa.",
+    que: "Go, investigar, todavía no o no-go: qué se decidió, qué autoriza, quién es dueño del siguiente paso y cuándo se vuelve a revisar.",
     porque: "El caso dice «conviene apostar». El acta dice «quién puede gastar y hasta cuánto». Son dos firmas distintas.",
     despues: "Es la primera entrada del registro de decisiones. Las siguientes se agregan debajo, nunca la reemplazan.",
     cuerpo: d => { const s = sello(d.decision.resultado); return `<div class="decision"><span class="sello ${s.c}"><i></i>${h(s.t)}</span><p class="grande">${t(d.decision.texto)}</p>
-      <div class="campos">${campo("Quién decidió", d.decision.quien)}${campo("Límite", d.decision.limite)}${campo("Primera revisión", d.decision.primera_revision)}</div></div>`; } },
+      <div class="campos">${campo("Quién decidió", d.decision.quien)}${campo("Qué autoriza", d.decision.autoriza)}${campo("Límite", d.decision.limite)}${campo("Dueño del siguiente paso", d.decision.dueno_siguiente_paso)}${campo("Cuándo se vuelve a revisar", d.decision.siguiente_revision)}</div></div>`; } },
   { id: "huecos", tramo: 5, ancho: "m", titulo: "Lo que falta", origen: "Revisión final de la skill y de esta página",
     que: "Los huecos que encontró la skill al revisar, más los campos que esta página ve vacíos o por confirmar.",
     porque: "Un acta con huecos a la vista es más útil que una que parece completa.",
@@ -467,13 +473,13 @@ function supuestos(d) {
 function exito(d) {
   const e = d.exito;
   return `<div class="campos">${campo("Beneficio", e.beneficio)}${campo("Efecto negativo a vigilar", e.efecto_negativo)}</div>
-    <p class="eti" style="margin-top:14px">Cómo se mide</p>
+    <p class="eti" style="margin-top:14px">Indicador y el instrumento que lo mide</p>
     ${e.indicadores.length ? e.indicadores.map(i => `<div class="indicador"><div>${t(i.indicador)}</div>
       <div class="tramo-i"><span class="sub">hoy</span><b>${t(i.linea_base)}</b><span aria-hidden="true">→</span><span class="sub">meta</span><b>${t(i.meta)}</b><span class="sub">${vacio(i.plazo) ? "" : "en " + h(String(i.plazo).toLowerCase())}</span></div>
-      <div class="sub">Fuente: ${t(i.fuente)}</div></div>`).join("") : `<p>${FALTA}</p>`}
-    <div class="campos" style="margin-top:14px">${campo("Examen intermedio", e.examen_intermedio)}${campo("Lo que no debe empeorar", e.guardrail)}</div>
-    <p class="eti" style="margin-top:14px">Quién responde</p>
-    <div class="campos">${campo("Por el beneficio", e.duenos.beneficio)}${campo("Por medirlo", e.duenos.medicion)}${campo("Por las desviaciones", e.duenos.desviaciones)}</div>`;
+      <div class="sub">Instrumento: ${t(i.fuente)}</div></div>`).join("") : `<p>${FALTA}</p>`}
+    <div class="campos" style="margin-top:14px">${campo("Examen intermedio", e.examen_intermedio)}${campo("Guardrail: lo que no debe empeorar", e.guardrail)}</div>
+    <p class="eti" style="margin-top:14px">Dueños</p>
+    <div class="campos">${campo("Quién recibe el beneficio", e.duenos.beneficio)}${campo("Quién lo mide", e.duenos.medicion)}${campo("Quién decide si hay desviación", e.duenos.desviaciones)}</div>`;
 }
 
 /* ------------------------------------------------------------ la página del acta */
@@ -534,7 +540,7 @@ const caso30 = () => `<div class="caso30"><span class="eti">El caso en 30 segund
 function miEquipo() {
   if (actual) return acta(actual, `<div class="barra-equipo"><span>Este es el acta de tu equipo. Se guarda solo en este navegador.</span><span class="botones"><button type="button" class="btn" id="cambiar">Pegar otro bloque</button><button type="button" class="btn" id="borrar">Borrar</button></span></div>`);
   return `<main class="ancho"><div class="pegar">
-    <div class="intro"><p class="eti">Mi equipo</p><h1>Pega aquí tu bloque POS</h1><p>En ChatGPT, modo Work, escribe <b>@framing brief, modo charter</b> y sigue sus preguntas. Al final te entrega tu Framing Brief v2 y, debajo, el bloque POS. Copia el bloque completo y pégalo aquí.</p></div>
+    <div class="intro"><p class="eti">Mi equipo</p><h1>Pega aquí tu bloque POS</h1><p>En ChatGPT, modo Work, escribe <b>@framing brief, modo charter</b> y pega tu Framing Brief v1 con lo que llenaron en las rondas 1 a 3. Al final te entrega tu Framing Brief v2 y, debajo, el bloque POS. Copia el bloque completo y pégalo aquí.</p></div>
     <textarea id="bloque" spellcheck="false" aria-label="Bloque POS" placeholder='{ "pos": "1", "iniciativa": "…" }'>${h(bloqueEquipo)}</textarea>
     ${errorEquipo ? `<p class="error" role="alert">${h(errorEquipo)}</p>` : ""}
     <div class="botones"><button type="button" class="btn primario" id="mostrar">Mostrar mi acta</button><a class="btn" href="#ejemplo">Ver primero el ejemplo</a></div>
