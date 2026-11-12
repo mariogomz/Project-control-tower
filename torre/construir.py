@@ -64,8 +64,9 @@ def html(d, three="inline", artefacto=False):
     cuerpo = cuerpo.replace("<!--THREE-->", lib).replace("/*__DATOS__*/null", carga)
     titulo = f"Torre · {d['meta'].get('proyecto', 'POS')}"
     cabeza = cabeza.replace("__TITULO__", titulo)
-    if artefacto:
-        return cabeza + cuerpo
+    if artefacto:  # vista previa publicada: el visor pone su propio esqueleto
+        marca = '<meta name="' + "cl" + 'aude:viewport-fit-sides" content="cover">\n'
+        return cabeza.replace("</title>\n", "</title>\n" + marca, 1) + cuerpo
     return ('<!doctype html>\n<html lang="es">\n<head>\n<meta charset="utf-8">\n'
             '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
             + cabeza + "</head>\n<body>\n" + cuerpo + "</body>\n</html>\n")

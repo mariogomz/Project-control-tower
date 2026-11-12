@@ -12,7 +12,7 @@ de esa carpeta. Todo el contenido para estudiantes está en español.
 | `ejemplos/faro/` | Caso resuelto: Aseguradora Faro, proyecto «Estatus sin llamar». La ejecución (semanas 1 a 12) es simulada. |
 | `equipos/` | Un POS por equipo. |
 | `torre/` | `motor.py` calcula estado y alertas; `construir.py` genera `torre.html`; `plantilla.html` es la página. |
-| `.agents/skills/` | Skills del kit. `.claude/skills` apunta a la misma carpeta. |
+| `.agents/skills/` | Skills del kit. |
 | `tests/` | Pruebas del motor. |
 
 Un POS tiene cuatro capas, una por módulo:

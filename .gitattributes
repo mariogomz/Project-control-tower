@@ -1,0 +1,4 @@
+# Archivos de preparación: no entran en la descarga (zip) del kit para estudiantes
+CLAUDE.md export-ignore
+.claude export-ignore
+.gitattributes export-ignore

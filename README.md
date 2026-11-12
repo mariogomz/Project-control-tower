@@ -19,7 +19,7 @@ POS módulo a módulo; abajo de la pantalla de vuelo puedes recorrer las semanas
 
 ## Empezar con tu equipo
 
-Necesitas Python 3.9 o superior y un agente que trabaje sobre carpetas (Codex o Claude Code). No hay
+Necesitas Python 3.9 o superior y un agente que trabaje sobre carpetas, como Codex. No hay
 nada más que instalar.
 
 1. Abre esta carpeta con tu agente.
@@ -68,8 +68,8 @@ plantilla/          POS vacío para copiar
 ejemplos/faro/      caso resuelto; _escenario.py regenera sus registros
 equipos/            un POS por equipo
 torre/              motor.py (reglas), construir.py (genera la página), plantilla.html (la página)
-.agents/skills/     skills para Codex y Claude Code (.claude/skills apunta aquí)
-AGENTS.md           instrucciones para el agente (CLAUDE.md las importa)
+.agents/skills/     skills del kit; Codex las encuentra aquí
+AGENTS.md           instrucciones para el agente
 tests/              python3 -m unittest discover -s tests
 ```
 

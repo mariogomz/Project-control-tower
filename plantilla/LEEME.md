@@ -1,7 +1,7 @@
 # Cómo se llena un POS
 
 Un POS es una carpeta. Cada archivo responde una pregunta. Se abren con Excel, Google Sheets o
-cualquier editor de texto, y tu agente (Codex, Claude Code) también los lee y los escribe.
+cualquier editor de texto, y tu agente (Codex) también los lee y los escribe.
 
 Copia esta carpeta a `equipos/<nombre-de-tu-equipo>/` y trabaja ahí. El caso resuelto está en
 `ejemplos/faro/`.
