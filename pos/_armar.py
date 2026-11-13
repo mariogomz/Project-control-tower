@@ -11,14 +11,16 @@ from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
 MARCA = "/*__EJEMPLO__*/null"
+MARCA_SIM = "/*__SIMULACION__*/null"
 
 
 def armar() -> str:
     fuente = (AQUI / "pagina.html").read_text(encoding="utf-8")
     ejemplo = json.loads((AQUI / "ejemplo-faro.json").read_text(encoding="utf-8"))
-    carga = json.dumps(ejemplo, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
-    assert MARCA in fuente
-    return fuente.replace(MARCA, carga)
+    simulacion = json.loads((AQUI / "simulacion-faro.json").read_text(encoding="utf-8"))
+    compacto = lambda x: json.dumps(x, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    assert MARCA in fuente and MARCA_SIM in fuente
+    return fuente.replace(MARCA, compacto(ejemplo)).replace(MARCA_SIM, compacto(simulacion))
 
 
 def vista_previa(pagina: str) -> str:

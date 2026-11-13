@@ -6,20 +6,30 @@ carpeta: compara lo que está pasando contra lo que se firmó, levanta alertas y
 
 ## Para la sesión 5: el acta en el POS
 
-La primera capa del POS es el acta del proyecto, y para verla no se instala nada.
+La primera capa del POS es el acta de constitución del proyecto, y para verla no se instala nada.
 
-- **`pos/index.html`** es la página. Tiene tres pestañas: *Cómo funciona*, *Ejemplo* (Aseguradora Faro, con un
-  recorrido guiado) y *Mi equipo*.
-- **`kit/kit-s5.md`** es el texto para el kit de la sesión: el prompt que agrega el modo charter a la skill
-  `framing-brief` y los pasos de la actividad.
-- El modo charter termina entregando un **bloque POS**: el Framing Brief v2 en un formato que la página lee.
-  El equipo lo copia del chat, lo pega en *Mi equipo* y ve su acta, con lo que falta marcado.
+- **`pos/index.html`** es la página. Tiene tres pestañas: *Cómo funciona*, *Ejemplo* (Aseguradora Faro)
+  y *Mi equipo*.
+- Arriba va la **ruta del proyecto** en 3D, de hoy a la meta, con los supuestos y los riesgos del acta.
+  Cada punto se puede tocar. Al lado, la **decisión** y el medidor **Lista para firma**.
+- Debajo, el **acta de constitución** en módulos, con los nombres que usa la disciplina: propósito,
+  objetivos y criterios de éxito, alcance, supuestos y restricciones, riesgos, presupuesto, hitos,
+  interesados, patrocinador y autoridad. Cada módulo abre su detalle.
+- Más abajo, **cómo llegamos aquí**: la solicitud, el problema, la evidencia y las opciones. Es el caso
+  de negocio que sostiene el acta, y por eso va en segundo nivel.
+- En el ejemplo, **«Ver lo que viene»** simula doce semanas para mostrar lo que agregan el plan, el
+  pulso y la torre. Los datos de esa simulación están en `pos/simulacion-faro.json`.
+- **`kit/kit-s5.md`** trae el modo charter de la skill `framing-brief`, el guion de la demo guiada y un
+  recurso sobre cómo se hizo la skill.
+
+El modo charter termina entregando un **bloque POS**: el Framing Brief v2 en un formato que la página
+lee. El equipo lo copia del chat, lo pega en *Mi equipo* y ve su acta, con lo que falta marcado.
 
 El formato del bloque es el mismo en tres lugares, y `tests/test_pos.py` lo comprueba: la plantilla dentro
 de `kit/kit-s5.md`, el ejemplo `pos/ejemplo-faro.json` y lo que lee `pos/pagina.html`. Si cambias uno,
 cambia los tres y corre `python3 pos/_armar.py` para volver a armar `pos/index.html`.
 
-Lo que sigue en este documento (la carpeta POS y la torre) es el trabajo en curso para el módulo 4.
+Lo que sigue en este documento (la carpeta POS y la torre) es trabajo anterior que sirve de base para el módulo 4.
 
 ## Verlo funcionando
 

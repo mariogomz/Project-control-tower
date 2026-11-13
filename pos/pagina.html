@@ -4,227 +4,277 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!--CABEZA-->
-<title>POS · Acta del proyecto</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<title>POS · Acta de constitución</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Concepto: el acta como un documento vivo. Una banda azul marino con el reencuadre
-   (lo que nos pidieron -> a dónde vamos) y debajo tres tramos, uno por sesión. */
+/* Concepto: sala de control. Una pantalla de ruta (siempre oscura, como un instrumento) y, alrededor,
+   módulos compactos del acta. Colores de cabina: magenta = lo planeado, cian = la meta, verde/ámbar/rojo = estado. */
 :root {
-  --fondo: #f3f5fc; --panel: #ffffff; --panel-2: #f3f5fc; --banda: #00005b; --banda-2: #0a1380;
-  --linea: rgba(0, 0, 91, .12); --linea-2: rgba(0, 0, 91, .28);
-  --tinta: #00005b; --tinta-2: #3b4088; --tinta-3: #6a70a6; --sobre-banda: #ffffff; --sobre-banda-2: #c5cbf5;
-  --acento: #0a34ff; --acento-f: rgba(10, 52, 255, .07);
-  --ok: #00a56b; --aviso: #c99400; --critico: #e01b18;
-  --ok-f: rgba(0, 165, 107, .12); --aviso-f: rgba(255, 200, 0, .22); --critico-f: rgba(224, 27, 24, .09);
-  --dato: #0a34ff; --supuesto: #a66d00; --esperanza: #b8327f;
-  --f-texto: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --fondo: #f3f2ee; --panel: #ffffff; --panel-2: #f0efea; --linea: rgba(22, 24, 29, .10); --linea-2: rgba(22, 24, 29, .24);
+  --tinta: #16181d; --tinta-2: #4b505b; --tinta-3: #7c818c;
+  --acento: #0e6a72; --acento-f: rgba(14, 106, 114, .08); --plan: #b0257d; --violeta: #6a4fcf;
+  --ok: #14805a; --aviso: #b47800; --critico: #c8372d;
+  --ok-f: rgba(20, 128, 90, .11); --aviso-f: rgba(214, 150, 0, .16); --critico-f: rgba(200, 55, 45, .09);
+  --p-fondo: #0c0f14; --p-fondo-2: #141922; --p-linea: #2b323e; --p-tinta: #eef0f4; --p-tinta-2: #a4acba; --p-tinta-3: #717a8a;
+  --p-plan: #e868bb; --p-meta: #63d2da; --p-ok: #3ddc97; --p-aviso: #f5b83d; --p-critico: #f26d68;
+  --f-texto: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-dato: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --radio: 14px;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --fondo: #020633; --panel: #091158; --panel-2: #0d1767; --banda: #050c46; --banda-2: #0d1a7a;
-    --linea: rgba(190, 200, 255, .16); --linea-2: rgba(190, 200, 255, .32);
-    --tinta: #f3f5ff; --tinta-2: #bcc3ee; --tinta-3: #8a93cc; --sobre-banda: #ffffff; --sobre-banda-2: #bcc3ee;
-    --acento: #8ea4ff; --acento-f: rgba(125, 151, 255, .12);
-    --ok: #00dc8e; --aviso: #ffc800; --critico: #ff6a67;
-    --ok-f: rgba(0, 220, 142, .14); --aviso-f: rgba(255, 200, 0, .14); --critico-f: rgba(255, 90, 87, .16);
-    --dato: #8ea4ff; --supuesto: #ffc800; --esperanza: #ff8ac4;
+    --fondo: #0f1115; --panel: #171a20; --panel-2: #1e222a; --linea: rgba(255, 255, 255, .09); --linea-2: rgba(255, 255, 255, .22);
+    --tinta: #eceef2; --tinta-2: #aab0bc; --tinta-3: #7b8291;
+    --acento: #63d2da; --acento-f: rgba(99, 210, 218, .10); --plan: #e868bb; --violeta: #a996f0;
+    --ok: #3ddc97; --aviso: #f5b83d; --critico: #f26d68;
+    --ok-f: rgba(61, 220, 151, .12); --aviso-f: rgba(245, 184, 61, .13); --critico-f: rgba(242, 109, 104, .13);
   }
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --fondo: #020633; --panel: #091158; --panel-2: #0d1767; --banda: #050c46; --banda-2: #0d1a7a;
-  --linea: rgba(190, 200, 255, .16); --linea-2: rgba(190, 200, 255, .32);
-  --tinta: #f3f5ff; --tinta-2: #bcc3ee; --tinta-3: #8a93cc; --sobre-banda: #ffffff; --sobre-banda-2: #bcc3ee;
-  --acento: #8ea4ff; --acento-f: rgba(125, 151, 255, .12);
-  --ok: #00dc8e; --aviso: #ffc800; --critico: #ff6a67;
-  --ok-f: rgba(0, 220, 142, .14); --aviso-f: rgba(255, 200, 0, .14); --critico-f: rgba(255, 90, 87, .16);
-  --dato: #8ea4ff; --supuesto: #ffc800; --esperanza: #ff8ac4;
+  --fondo: #0f1115; --panel: #171a20; --panel-2: #1e222a; --linea: rgba(255, 255, 255, .09); --linea-2: rgba(255, 255, 255, .22);
+  --tinta: #eceef2; --tinta-2: #aab0bc; --tinta-3: #7b8291;
+  --acento: #63d2da; --acento-f: rgba(99, 210, 218, .10); --plan: #e868bb; --violeta: #a996f0;
+  --ok: #3ddc97; --aviso: #f5b83d; --critico: #f26d68;
+  --ok-f: rgba(61, 220, 151, .12); --aviso-f: rgba(245, 184, 61, .13); --critico-f: rgba(242, 109, 104, .13);
 }
 *, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; background: var(--fondo); color: var(--tinta); font-family: var(--f-texto); font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
-.ancho { max-width: 1080px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-h1, h2, h3, h4, p, ul, ol { margin: 0; }
-ul, ol { padding-left: 1.15em; }
+body { margin: 0; background: var(--fondo); color: var(--tinta); font-family: var(--f-texto); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+.ancho { max-width: 1240px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3, h4, p, ul, ol, dl, dd { margin: 0; }
+ul, ol { padding-left: 1.1em; }
 button, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
 :focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
-.eti { font-family: var(--f-dato); font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-3); }
 [hidden] { display: none !important; }
-
-/* ---------- navegación */
-.nav { background: var(--banda); color: var(--sobre-banda); }
-.nav .ancho { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 20px; padding-block: 12px; }
-.nav .marca { font-weight: 600; font-size: 15px; letter-spacing: .01em; }
-.nav .marca small { font-weight: 400; color: var(--sobre-banda-2); margin-left: 8px; font-size: 12.5px; }
-.pestanas { display: flex; flex-wrap: wrap; gap: 4px; }
-.pestanas a { color: var(--sobre-banda-2); text-decoration: none; font-size: 13.5px; font-weight: 500; padding: 7px 14px; border-radius: 999px; }
-.pestanas a:hover { color: var(--sobre-banda); background: rgba(255, 255, 255, .08); }
-.pestanas a[aria-current="page"] { background: var(--sobre-banda); color: var(--banda); }
-
-/* ---------- banda del acta */
-.banda { background: linear-gradient(180deg, var(--banda), var(--banda-2)); color: var(--sobre-banda); }
-.banda .ancho { padding-block: 26px 30px; display: grid; gap: 20px; }
-.banda .eti { color: var(--sobre-banda-2); }
-.banda h1 { font-size: clamp(26px, 4.4vw, 40px); font-weight: 600; line-height: 1.12; letter-spacing: -.015em; text-wrap: balance; }
-.giro { display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 780px) { .giro { grid-template-columns: minmax(0, 5fr) auto minmax(0, 6fr); align-items: stretch; } }
-.giro .lado { border: 1px solid rgba(255, 255, 255, .22); border-radius: 12px; padding: 14px 16px; min-width: 0; }
-.giro .lado p { font-size: 15px; line-height: 1.5; margin-top: 6px; }
-.giro .pedido p { color: var(--sobre-banda-2); font-style: italic; }
-.giro .destino { background: rgba(255, 255, 255, .1); border-color: rgba(255, 255, 255, .4); }
-.giro .destino p { font-size: 17px; font-weight: 500; }
-.giro .flecha { align-self: center; justify-self: center; font-size: 22px; color: var(--sobre-banda-2); }
-@media (max-width: 779px) { .giro .flecha { transform: rotate(90deg); } }
-.hechos { display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: center; font-size: 13.5px; color: var(--sobre-banda-2); }
-.hechos b { color: var(--sobre-banda); font-weight: 500; }
-.sello { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; padding: 5px 14px 5px 11px; border-radius: 999px; background: rgba(255, 255, 255, .14); color: var(--sobre-banda); }
-.sello i { width: 10px; height: 10px; border-radius: 50%; background: var(--sobre-banda-2); }
-.sello.go i { background: #00dc8e; } .sello.espera i { background: #ffc800; border-radius: 0; clip-path: polygon(50% 0, 100% 100%, 0 100%); } .sello.no i { background: #ff6a67; border-radius: 2px; }
-.medidor { display: flex; align-items: center; gap: 10px; }
-.medidor .barra { width: 120px; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, .2); overflow: hidden; }
-.medidor .barra i { display: block; height: 100%; background: var(--sobre-banda); border-radius: 3px; }
-
-/* ---------- capas */
-.capas { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
-.capa { border: 1px solid var(--linea); border-radius: 10px; padding: 10px 12px; background: var(--panel); min-width: 0; }
-.capa b { display: block; font-size: 14px; font-weight: 600; }
-.capa span { font-size: 12.5px; color: var(--tinta-2); }
-.capa.viva { border-color: var(--acento); background: var(--acento-f); }
-.capa.luego { border-style: dashed; }
-.capa.luego b { color: var(--tinta-2); }
-
-/* ---------- tramos y tarjetas */
-main.ancho { padding-block: 22px 260px; display: grid; gap: 30px; }
-.tramo { display: grid; gap: 14px; }
-.tramo > header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; padding-bottom: 8px; border-bottom: 2px solid var(--tinta); }
-.tramo > header h2 { font-size: 20px; font-weight: 600; letter-spacing: -.005em; }
-.tramo > header p { color: var(--tinta-2); font-size: 13.5px; }
-.rejilla { display: grid; gap: 14px; grid-template-columns: repeat(12, minmax(0, 1fr)); }
-.tarjeta { grid-column: span 12; background: var(--panel); border: 1px solid var(--linea); border-radius: 14px; padding: 16px 18px 18px; min-width: 0; scroll-margin-top: 14px; }
-@media (min-width: 860px) { .tarjeta.m { grid-column: span 6; } .tarjeta.c { grid-column: span 4; } .tarjeta.g { grid-column: span 8; } }
-.tarjeta > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
-.tarjeta h3 { font-size: 16px; font-weight: 600; line-height: 1.3; }
-.tarjeta.enfoque { outline: 3px solid var(--acento); outline-offset: 2px; }
-.que { flex: none; border: 1px solid var(--linea-2); background: transparent; border-radius: 999px; padding: 3px 11px; font-size: 12px; cursor: pointer; color: var(--tinta-2); white-space: nowrap; }
-.que:hover, .que[aria-expanded="true"] { border-color: var(--acento); color: var(--acento); }
-.explica { background: var(--acento-f); border-radius: 10px; padding: 12px 14px; margin-bottom: 12px; display: grid; gap: 8px; font-size: 13.5px; }
-.explica p b { font-weight: 600; }
-.tarjeta p + p, .tarjeta p + ul, .tarjeta ul + p { margin-top: 8px; }
-.tarjeta li { margin-top: 4px; }
+.eti { font-family: var(--f-dato); font-size: 10.5px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--tinta-3); }
+.ico { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .sub { font-size: 13px; color: var(--tinta-2); }
-.grande { font-size: 18px; font-weight: 500; line-height: 1.45; }
-.cita { font-size: 18px; line-height: 1.45; font-style: italic; border-left: 3px solid var(--linea-2); padding-left: 14px; }
-.falta { font-size: 12.5px; font-style: normal; font-weight: 500; color: var(--critico); background: var(--critico-f); border-radius: 6px; padding: 1px 8px; white-space: nowrap; }
-mark.pc { background: var(--aviso-f); color: inherit; border-radius: 6px; padding: 1px 6px; font-size: .92em; font-style: normal; }
-.campo { display: grid; gap: 2px; }
-.campos { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-.duo { display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 700px) { .duo { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; } }
-.duo .caja { background: var(--panel-2); border-radius: 10px; padding: 12px 14px; min-width: 0; }
-.duo .flecha { justify-self: center; color: var(--tinta-3); font-size: 20px; }
-@media (max-width: 699px) { .duo .flecha { transform: rotate(90deg); } }
+.corta { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.corta.c3 { -webkit-line-clamp: 3; }
+.falta { font-size: 12px; font-weight: 500; color: var(--critico); background: var(--critico-f); border-radius: 6px; padding: 1px 7px; white-space: nowrap; }
+mark.pc { background: var(--aviso-f); color: inherit; border-radius: 6px; padding: 1px 6px; font-size: .92em; }
 
-/* etiquetas: forma + palabra */
-.et { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 1px 9px 1px 7px; border-radius: 999px; border: 1px solid var(--linea-2); white-space: nowrap; vertical-align: middle; }
+/* ---------- barra superior */
+.nav { border-bottom: 1px solid var(--linea); background: var(--panel); }
+.nav .ancho { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 20px; padding-block: 10px; }
+.marca { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: .01em; }
+.marca i { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--tinta); position: relative; }
+.marca i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 9px; height: 2px; background: var(--plan); transform-origin: 0 50%; transform: rotate(-40deg); }
+.marca small { font-weight: 400; color: var(--tinta-3); font-size: 12.5px; }
+.pestanas { display: flex; gap: 2px; background: var(--panel-2); border-radius: 999px; padding: 3px; }
+.pestanas a { color: var(--tinta-2); text-decoration: none; font-size: 13.5px; font-weight: 500; padding: 6px 14px; border-radius: 999px; }
+.pestanas a:hover { color: var(--tinta); }
+.pestanas a[aria-current="page"] { background: var(--tinta); color: var(--panel); }
+
+/* ---------- encabezado del proyecto */
+.cab { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; padding-block: 22px 16px; }
+.cab h1 { font-size: clamp(26px, 3.6vw, 36px); font-weight: 600; letter-spacing: -.02em; line-height: 1.1; text-wrap: balance; }
+.cab .hechos { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; padding: 4px 11px; border-radius: 999px; border: 1px solid var(--linea-2); color: var(--tinta-2); background: var(--panel); white-space: nowrap; }
+.chip b { color: var(--tinta); font-weight: 600; }
+
+/* ---------- estado: forma + palabra */
+.est { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.est i { width: 9px; height: 9px; flex: none; background: var(--tinta-3); border-radius: 50%; }
+.est.ok i { background: var(--ok); } .est.aviso i { background: var(--aviso); border-radius: 0; clip-path: polygon(50% 0, 100% 100%, 0 100%); } .est.critico i { background: var(--critico); border-radius: 2px; }
+.est.hueco i { background: transparent; border: 1.5px solid var(--tinta-3); }
+.et { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 500; padding: 1px 9px 1px 7px; border-radius: 999px; border: 1px solid var(--linea-2); white-space: nowrap; vertical-align: middle; }
 .et i { width: 8px; height: 8px; flex: none; }
-.et.dato { border-color: var(--dato); } .et.dato i { background: var(--dato); border-radius: 50%; }
-.et.supuesto { border-color: var(--supuesto); } .et.supuesto i { background: var(--supuesto); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-.et.esperanza { border-color: var(--esperanza); border-style: dashed; } .et.esperanza i { border: 1.5px solid var(--esperanza); border-radius: 50%; }
-.et.otra i { border: 1.5px solid var(--tinta-3); }
+.et.dato { border-color: var(--acento); } .et.dato i { background: var(--acento); border-radius: 50%; }
+.et.supuesto { border-color: var(--aviso); } .et.supuesto i { background: var(--aviso); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.et.esperanza { border-color: var(--violeta); border-style: dashed; } .et.esperanza i { border: 1.5px solid var(--violeta); border-radius: 50%; }
 .luz { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; white-space: nowrap; }
 .luz i { width: 10px; height: 10px; border-radius: 50%; background: var(--tinta-3); flex: none; }
 .luz.verde i { background: var(--ok); } .luz.amarillo i { background: var(--aviso); border-radius: 0; clip-path: polygon(50% 0, 100% 100%, 0 100%); } .luz.rojo i { background: var(--critico); border-radius: 2px; }
 
-/* evidencia */
-.reparto { display: flex; height: 10px; gap: 2px; border-radius: 5px; overflow: hidden; margin: 4px 0 10px; }
-.reparto i { display: block; min-width: 4px; }
-.filtros { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-.filtros button { border: 1px solid var(--linea-2); background: transparent; border-radius: 999px; padding: 3px 12px; font-size: 12.5px; cursor: pointer; }
+/* ---------- fila principal: pantalla + consola */
+.principal { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1000px) { .principal { grid-template-columns: minmax(0, 1fr) 340px; } }
+.pantalla { position: relative; background: linear-gradient(180deg, var(--p-fondo-2), var(--p-fondo)); border-radius: var(--radio); overflow: hidden; color: var(--p-tinta); border: 1px solid var(--p-linea); min-width: 0; display: flex; flex-direction: column; }
+.pantalla.enfoque { outline: 2px solid var(--acento); outline-offset: 2px; }
+.pantalla .lienzo { position: relative; flex: 1; min-height: clamp(320px, 46vh, 470px); touch-action: pan-y; cursor: grab; }
+.pantalla .lienzo:active { cursor: grabbing; }
+.pantalla canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.rotulos { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.rot { position: absolute; left: 0; top: 0; pointer-events: auto; background: rgba(12, 15, 20, .72); border: 1px solid var(--p-linea); color: var(--p-tinta-2); border-radius: 999px; padding: 2px 9px; font-size: 11.5px; white-space: nowrap; max-width: 190px; overflow: hidden; text-overflow: ellipsis; }
+.rot:hover, .rot.sel { color: var(--p-tinta); border-color: var(--p-meta); }
+.rot.menor:not(.sel) { opacity: 0; pointer-events: none; }
+.rot.fijo { background: none; border: 0; font-family: var(--f-dato); font-size: 10px; color: var(--p-tinta-3); pointer-events: none; padding: 0; }
+.p-cab { position: absolute; left: 14px; top: 12px; right: 14px; display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; pointer-events: none; }
+.p-cab .eti { color: var(--p-tinta-3); }
+.p-cab strong { display: block; font-size: 15px; font-weight: 600; }
+.p-cab button { pointer-events: auto; background: rgba(12, 15, 20, .7); border: 1px solid var(--p-linea); color: var(--p-tinta-2); border-radius: 999px; padding: 4px 11px; font-size: 12px; }
+.p-cab button:hover { color: var(--p-tinta); border-color: var(--p-meta); }
+.p-ley { position: absolute; left: 14px; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 11px; color: var(--p-tinta-3); pointer-events: none; }
+.p-ley span { display: flex; align-items: center; gap: 6px; }
+.p-ley i { width: 16px; border-top: 2px solid var(--p-tinta); }
+.p-ley i.plan { border-color: var(--p-plan); } .p-ley i.punt { border-top-style: dashed; border-color: var(--p-tinta-3); }
+.p-ley i.pt { width: 8px; height: 8px; border: 0; border-radius: 50%; background: var(--p-tinta-3); }
+.p-ley i.pt.sen { background: var(--p-aviso); } .p-ley i.pt.dec { background: var(--p-tinta); border-radius: 0; transform: rotate(45deg); }
+.lienzo-caja { position: relative; flex: 1; display: flex; }
+.lienzo-caja .p-ley { bottom: 10px; }
+.sin3d { padding: 60px 20px; text-align: center; color: var(--p-tinta-3); font-size: 13px; }
+.simbar { border-top: 1px solid var(--p-linea); padding: 10px 14px; display: grid; gap: 8px; background: rgba(12, 15, 20, .6); }
+.simbar .fila { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.simbar button.jugar { background: var(--p-tinta); color: var(--p-fondo); border: 0; border-radius: 999px; padding: 7px 16px; font-size: 13.5px; font-weight: 600; display: inline-flex; gap: 8px; align-items: center; }
+.simbar button.jugar svg { width: 11px; height: 11px; fill: currentColor; }
+.simbar button.salir { background: none; border: 0; color: var(--p-tinta-3); font-size: 12.5px; text-decoration: underline; }
+.simbar .txt { font-size: 13px; color: var(--p-tinta-2); flex: 1; min-width: 200px; }
+.semanas { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 3px; flex: 1; min-width: 240px; }
+.sem { border: 0; background: transparent; color: var(--p-tinta-3); font-family: var(--f-dato); font-size: 11px; padding: 3px 0 8px; border-radius: 6px; position: relative; }
+.sem::after { content: ""; position: absolute; left: 2px; right: 2px; bottom: 2px; height: 3px; border-radius: 2px; background: var(--p-linea); }
+.sem[data-s="verde"]::after { background: var(--p-ok); } .sem[data-s="ambar"]::after { background: var(--p-aviso); } .sem[data-s="rojo"]::after { background: var(--p-critico); }
+.sem:hover { color: var(--p-tinta); } .sem[aria-pressed="true"] { background: var(--p-tinta); color: var(--p-fondo); }
+.sem.ev::before { content: ""; position: absolute; top: -1px; left: 50%; width: 4px; height: 4px; margin-left: -2px; border-radius: 50%; background: var(--p-aviso); }
+
+/* ---------- consola lateral */
+.consola { display: grid; gap: 14px; align-content: start; min-width: 0; }
+.caja { background: var(--panel); border: 1px solid var(--linea); border-radius: var(--radio); padding: 16px; min-width: 0; }
+.caja.enfoque { outline: 2px solid var(--acento); outline-offset: 2px; }
+.caja > header { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; }
+.caja h3 { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--tinta-2); display: flex; align-items: center; gap: 8px; }
+.caja h3 .ico { color: var(--acento); }
+.enlace { background: none; border: 0; color: var(--acento); font-size: 12.5px; padding: 0; }
+.sello { display: flex; align-items: center; gap: 12px; }
+.sello .lamp { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--panel-2); color: var(--tinta-3); flex: none; }
+.sello.go .lamp { background: var(--ok-f); color: var(--ok); } .sello.espera .lamp { background: var(--aviso-f); color: var(--aviso); } .sello.no .lamp { background: var(--critico-f); color: var(--critico); }
+.sello .lamp .ico { width: 22px; height: 22px; stroke-width: 2.2; }
+.sello strong { font-size: 24px; font-weight: 700; letter-spacing: .02em; line-height: 1.05; display: block; }
+.puestos { display: grid; gap: 0; margin-top: 12px; }
+.puesto { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; padding: 8px 0; border-top: 1px solid var(--linea); font-size: 13.5px; }
+.dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; font-size: 13.5px; margin-top: 12px; }
+.dl dt { color: var(--tinta-3); font-size: 12.5px; }
+.medidor { display: flex; align-items: center; gap: 14px; }
+.medidor svg { width: 92px; height: 92px; flex: none; }
+.medidor .n { font-size: 26px; font-weight: 700; line-height: 1; }
+.kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+.kpi b { display: block; font-size: 19px; font-weight: 700; line-height: 1.1; } .kpi span { font-size: 11.5px; color: var(--tinta-2); display: block; }
+.evento { border-left: 3px solid var(--linea-2); padding-left: 12px; margin-top: 12px; }
+.evento.senal { border-color: var(--aviso); } .evento.alerta { border-color: var(--critico); } .evento.decision { border-color: var(--tinta); } .evento.logro { border-color: var(--ok); }
+.evento b { display: block; font-weight: 600; } .evento p { font-size: 13.5px; color: var(--tinta-2); margin-top: 2px; }
+.ficha p { font-size: 14px; } .ficha p + p, .ficha .pista { margin-top: 8px; }
+
+/* ---------- módulos */
+.seccion { margin-top: 26px; }
+.seccion > header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-bottom: 12px; }
+.seccion > header h2 { font-size: 18px; font-weight: 600; letter-spacing: -.005em; }
+.seccion > header p { font-size: 13.5px; color: var(--tinta-2); }
+.modulos { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(288px, 1fr)); }
+@media (min-width: 1000px) { .modulos { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.modulos.chicos { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+@media (min-width: 1000px) { .modulos.chicos { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.mod { background: var(--panel); border: 1px solid var(--linea); border-radius: var(--radio); padding: 14px 16px 12px; text-align: left; display: grid; gap: 10px; grid-template-rows: auto 1fr auto; min-width: 0; position: relative; }
+.mod:hover { border-color: var(--linea-2); }
+.mod.enfoque { outline: 2px solid var(--acento); outline-offset: 2px; }
+.mod > header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.mod h3 { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--tinta-2); display: flex; align-items: center; gap: 8px; }
+.mod h3 .ico { color: var(--acento); }
+.mod .cuerpo { display: grid; gap: 10px; align-content: start; min-width: 0; }
+.mod .clave { font-size: 16px; font-weight: 500; line-height: 1.35; }
+.mod .pie { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 12px; color: var(--tinta-3); border-top: 1px solid var(--linea); padding-top: 8px; }
+.mod .pie span:last-child { color: var(--acento); font-weight: 500; display: inline-flex; align-items: center; gap: 4px; }
+.mod .pie .ico { width: 13px; height: 13px; }
+.mod .abrir { position: absolute; inset: 0; border: 0; background: transparent; border-radius: var(--radio); }
+.mod.luego { border-style: dashed; background: transparent; }
+.lista-c { list-style: none; padding: 0; display: grid; gap: 6px; font-size: 13.5px; }
+.lista-c li { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 7px; align-items: start; }
+.lista-c .ico { width: 15px; height: 15px; margin-top: 3px; }
+.lista-c .si { color: var(--ok); } .lista-c .no { color: var(--critico); } .lista-c .neutro { color: var(--tinta-3); } .lista-c .av { color: var(--aviso); }
+.lista-c .eti { display: block; }
+.dos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.grande { font-size: 22px; font-weight: 700; line-height: 1.1; letter-spacing: -.01em; }
+.pista { display: grid; gap: 4px; }
+.pista .nom { font-size: 13px; line-height: 1.35; }
+.riel { position: relative; height: 18px; }
+.riel::before { content: ""; position: absolute; left: 0; right: 0; top: 8px; height: 2px; background: var(--linea-2); border-radius: 1px; }
+.riel .banda { position: absolute; top: 5px; height: 8px; min-width: 6px; border-radius: 4px; background: var(--ok-f); border: 1px solid var(--ok); }
+.riel .pt { position: absolute; top: 4px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--panel); border: 2px solid var(--tinta-3); }
+.riel .pt.ahora { background: var(--tinta); border-color: var(--tinta); width: 12px; height: 12px; top: 3px; margin-left: -6px; box-shadow: 0 0 0 3px var(--panel); }
+.pista .vals { display: flex; justify-content: space-between; font-size: 12px; color: var(--tinta-2); gap: 8px; }
+.pista .vals b { color: var(--tinta); font-weight: 600; }
+.seg { display: flex; gap: 2px; height: 8px; border-radius: 4px; overflow: hidden; margin-top: 4px; }
+.seg i { display: block; min-width: 5px; }
+.barra { height: 8px; border-radius: 4px; background: var(--panel-2); overflow: hidden; }
+.barra i { display: block; height: 100%; border-radius: 4px; background: var(--tinta-2); }
+.barra i.aviso { background: var(--aviso); } .barra i.ok { background: var(--ok); }
+.puntos { display: flex; gap: 5px; flex-wrap: wrap; }
+.puntos i { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--tinta-3); }
+.puntos i.ok { background: var(--ok); border-color: var(--ok); } .puntos i.tarde { background: var(--aviso); border-color: var(--aviso); border-radius: 2px; }
+.anillo { display: flex; align-items: center; gap: 12px; }
+.anillo svg { width: 58px; height: 58px; flex: none; }
+.rail { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); background: var(--panel); border: 1px solid var(--linea); border-radius: var(--radio); overflow: hidden; }
+.rail div { padding: 12px 16px; border-left: 1px solid var(--linea); display: grid; gap: 2px; }
+.rail div:first-child { border-left: 0; }
+.rail b { font-weight: 600; display: flex; align-items: center; gap: 8px; } .rail span { font-size: 12.5px; color: var(--tinta-2); }
+.rail .viva { background: var(--acento-f); } .rail .viva b { color: var(--acento); }
+
+/* ---------- cajón de detalle */
+.velo { position: fixed; inset: 0; background: rgba(8, 10, 14, .45); z-index: 30; }
+.cajon { position: fixed; z-index: 31; background: var(--panel); color: var(--tinta); overflow-y: auto; box-shadow: -18px 0 50px rgba(0, 0, 0, .25);
+  top: 0; right: 0; bottom: 0; width: min(560px, 100%); padding: 20px max(20px, env(safe-area-inset-right, 0px)) calc(28px + env(safe-area-inset-bottom, 0px)) 22px; display: grid; gap: 16px; align-content: start; }
+@media (max-width: 700px) { .cajon { top: auto; left: 0; width: 100%; max-height: 88%; border-radius: 18px 18px 0 0; padding-left: max(18px, env(safe-area-inset-left, 0px)); } }
+.cajon > header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.cajon h2 { font-size: 21px; font-weight: 600; letter-spacing: -.01em; display: flex; gap: 10px; align-items: center; }
+.cajon h2 .ico { width: 22px; height: 22px; color: var(--acento); }
+.cajon .cerrar { border: 1px solid var(--linea-2); background: transparent; border-radius: 999px; width: 34px; height: 34px; display: grid; place-items: center; flex: none; }
+.cajon h4 { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--tinta-2); margin-bottom: 6px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.nota { background: var(--acento-f); border-radius: 10px; padding: 12px 14px; display: grid; gap: 6px; font-size: 13.5px; }
+.nota b { font-weight: 600; }
+.bloque { display: grid; gap: 8px; }
+.campo { display: grid; gap: 2px; } .campos { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+.filas { display: grid; } .fila { padding: 9px 0; border-top: 1px solid var(--linea); display: grid; gap: 3px; } .fila:first-child { border-top: 0; padding-top: 0; }
+.fila .p { font-size: 12.5px; color: var(--tinta-2); display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; }
+.cita { font-size: 17px; line-height: 1.45; font-style: italic; border-left: 3px solid var(--linea-2); padding-left: 12px; }
+.proceso { border-top: 1px dashed var(--linea-2); padding-top: 14px; display: grid; gap: 14px; }
+.filtros { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.filtros button { border: 1px solid var(--linea-2); background: transparent; border-radius: 999px; padding: 3px 12px; font-size: 12.5px; }
 .filtros button[aria-pressed="true"] { background: var(--tinta); color: var(--panel); border-color: var(--tinta); }
-.filas { display: grid; }
-.fila { padding: 10px 0; border-top: 1px solid var(--linea); display: grid; gap: 3px; }
-.fila:first-child { border-top: 0; padding-top: 2px; }
-.fila .pie { font-size: 12.5px; color: var(--tinta-2); display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; }
+.opcion { border: 1px solid var(--linea); border-radius: 12px; padding: 11px 13px; display: grid; gap: 6px; background: var(--panel-2); }
+.opcion.rec { border-color: var(--ok); background: var(--ok-f); } .opcion.pedida { border-style: dashed; }
+.opcion h5 { margin: 0; font-size: 14.5px; font-weight: 600; display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; }
+.sellito { font-size: 10.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--linea-2); color: var(--tinta-2); }
+.sellito.rec { background: var(--ok); border-color: var(--ok); color: #fff; }
+.opcion dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; font-size: 12.5px; } .opcion dt { color: var(--tinta-2); }
+.tres { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
 
-/* opciones */
-.opciones { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-.opcion { border: 1px solid var(--linea); border-radius: 12px; padding: 12px 14px; display: grid; gap: 8px; align-content: start; background: var(--panel-2); min-width: 0; }
-.opcion.rec { border-color: var(--ok); background: var(--ok-f); }
-.opcion.pedida { border-style: dashed; }
-.opcion h4 { font-size: 14.5px; font-weight: 600; display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; }
-.marca-op { font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; padding: 1px 8px; border-radius: 999px; background: var(--tinta); color: var(--panel); }
-.marca-op.rec { background: var(--ok); color: #fff; } .marca-op.corta { background: transparent; border: 1px solid var(--linea-2); color: var(--tinta-2); }
-.opcion p { font-size: 13.5px; }
-.opcion dl { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 3px 10px; font-size: 12.5px; }
-.opcion dt { color: var(--tinta-2); } .opcion dd { margin: 0; }
-.lineas { display: grid; }
-.linea-v { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; padding: 9px 0; border-top: 1px solid var(--linea); }
-.linea-v:first-child { border-top: 0; }
-.linea-v .r { font-weight: 600; }
-@media (min-width: 620px) { .linea-v { grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) minmax(0, 4fr) auto; gap: 12px; align-items: baseline; } }
-.tres { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
-.tres h4 { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; display: flex; gap: 7px; align-items: center; }
-.punto { width: 9px; height: 9px; border-radius: 50%; background: var(--tinta-3); flex: none; }
-.punto.ok { background: var(--ok); } .punto.aviso { background: var(--aviso); border-radius: 0; clip-path: polygon(50% 0, 100% 100%, 0 100%); } .punto.critico { background: var(--critico); border-radius: 2px; }
-.clave { border: 2px solid var(--tinta); border-radius: 12px; padding: 14px 16px; display: grid; gap: 10px; }
-.indicador { display: grid; gap: 4px; padding: 10px 0; border-top: 1px solid var(--linea); }
-.indicador:first-of-type { border-top: 0; padding-top: 2px; }
-.indicador .tramo-i { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; font-size: 14px; }
-.indicador .tramo-i b { font-size: 20px; font-weight: 600; }
-.decision { display: grid; gap: 10px; }
-.decision .sello { background: var(--panel-2); color: var(--tinta); font-size: 15px; padding: 7px 18px 7px 13px; justify-self: start; }
-
-/* ---------- cómo funciona */
-.intro { display: grid; gap: 14px; max-width: 72ch; }
-.intro h1 { font-size: clamp(26px, 4.4vw, 38px); font-weight: 600; line-height: 1.15; letter-spacing: -.015em; text-wrap: balance; }
-.intro p { font-size: 16px; color: var(--tinta-2); }
-.pasos { counter-reset: paso; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); list-style: none; padding: 0; }
-.pasos li { counter-increment: paso; background: var(--panel); border: 1px solid var(--linea); border-radius: 12px; padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
-.pasos li::before { content: counter(paso); font-family: var(--f-dato); font-size: 12px; width: 24px; height: 24px; border-radius: 50%; background: var(--tinta); color: var(--panel); display: grid; place-items: center; }
-.pasos b { font-weight: 600; } .pasos span { font-size: 13.5px; color: var(--tinta-2); }
+/* ---------- cómo funciona / mi equipo */
+.texto { display: grid; gap: 12px; max-width: 70ch; padding-block: 26px 6px; }
+.texto h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 600; letter-spacing: -.02em; line-height: 1.12; text-wrap: balance; }
+.texto p { font-size: 16px; color: var(--tinta-2); }
+.pasos { display: flex; flex-wrap: wrap; gap: 6px; }
+.pasos button { border: 1px solid var(--linea-2); background: var(--panel); border-radius: 999px; padding: 6px 13px; font-size: 13px; display: inline-flex; gap: 8px; align-items: center; }
+.pasos button b { font-family: var(--f-dato); font-weight: 500; font-size: 11px; color: var(--tinta-3); }
+.pasos button[aria-pressed="true"] { background: var(--tinta); color: var(--panel); border-color: var(--tinta); } .pasos button[aria-pressed="true"] b { color: inherit; opacity: .7; }
+.flujo { display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) { .flujo { grid-template-columns: minmax(0, 3fr) minmax(0, 5fr) minmax(0, 3fr); } }
 .botones { display: flex; flex-wrap: wrap; gap: 10px; }
-.btn { border: 1px solid var(--linea-2); background: var(--panel); border-radius: 10px; padding: 9px 16px; font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none; color: var(--tinta); display: inline-flex; align-items: center; gap: 8px; }
+.btn { border: 1px solid var(--linea-2); background: var(--panel); border-radius: 10px; padding: 9px 16px; font-size: 14px; font-weight: 500; text-decoration: none; color: var(--tinta); display: inline-flex; align-items: center; gap: 8px; }
 .btn:hover { border-color: var(--acento); }
-.btn.primario { background: var(--acento); border-color: var(--acento); color: #fff; }
-:root[data-theme="dark"] .btn.primario { color: #020633; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primario { color: #020633; } }
-.usos { display: grid; }
-.uso { display: grid; gap: 4px 16px; padding: 12px 0; border-top: 1px solid var(--linea); grid-template-columns: minmax(0, 1fr); }
-.uso:first-child { border-top: 0; }
-@media (min-width: 700px) { .uso { grid-template-columns: minmax(0, 3fr) minmax(0, 4fr) minmax(0, 4fr); } }
-.uso b { font-weight: 600; } .uso span { font-size: 13.5px; color: var(--tinta-2); }
-.uso .eti { display: block; }
-.caso30 { background: var(--panel); border: 1px solid var(--linea); border-left: 4px solid var(--acento); border-radius: 12px; padding: 14px 18px; display: grid; gap: 6px; }
-.caso30 p { max-width: 78ch; }
-
-/* ---------- mi equipo */
-.pegar { display: grid; gap: 14px; max-width: 760px; }
+.btn.primario { background: var(--tinta); border-color: var(--tinta); color: var(--panel); }
+.pegar { display: grid; gap: 14px; max-width: 760px; padding-bottom: 60px; }
 .pegar textarea { width: 100%; min-height: 190px; border: 1px solid var(--linea-2); border-radius: 12px; padding: 12px 14px; background: var(--panel); font-family: var(--f-dato); font-size: 12.5px; line-height: 1.5; resize: vertical; }
 .error { color: var(--critico); background: var(--critico-f); border-radius: 10px; padding: 10px 14px; font-size: 14px; }
-.barra-equipo { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; font-size: 13.5px; color: var(--tinta-2); }
-
-/* ---------- recorrido */
-.guia { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--banda); color: var(--sobre-banda); box-shadow: 0 -10px 30px rgba(0, 0, 40, .25);
-  padding-bottom: env(safe-area-inset-bottom, 0px); }
-.guia .ancho { padding-block: 14px; display: grid; gap: 8px; }
-.guia .cab { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-.guia .eti { color: var(--sobre-banda-2); }
-.guia h4 { font-size: 16px; font-weight: 600; }
-.guia p { font-size: 14px; color: var(--sobre-banda-2); max-width: 88ch; }
-.guia p b { color: var(--sobre-banda); font-weight: 500; }
-.guia .botones button { border: 1px solid rgba(255, 255, 255, .35); background: transparent; color: var(--sobre-banda); border-radius: 10px; padding: 7px 16px; font-size: 14px; cursor: pointer; }
-.guia .botones button.sig { background: var(--sobre-banda); color: var(--banda); border-color: var(--sobre-banda); font-weight: 600; }
-.guia .botones button:disabled { opacity: .4; cursor: default; }
-.pie { color: var(--tinta-3); font-size: 12.5px; }
-@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+.barra-equipo { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; font-size: 13px; color: var(--tinta-2); margin-top: 22px; }
+.guia { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--tinta); color: var(--panel); padding-bottom: env(safe-area-inset-bottom, 0px); box-shadow: 0 -10px 30px rgba(0, 0, 0, .25); }
+.guia .ancho { padding-block: 12px; display: grid; gap: 6px; }
+.guia .c { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.guia .eti { color: inherit; opacity: .6; } .guia h4 { font-size: 16px; font-weight: 600; } .guia p { font-size: 14px; opacity: .85; max-width: 90ch; }
+.guia button { border: 1px solid currentColor; background: transparent; color: inherit; border-radius: 10px; padding: 6px 15px; font-size: 13.5px; }
+.guia button.sig { background: var(--panel); color: var(--tinta); border-color: var(--panel); font-weight: 600; }
+.guia button.salir { border: 0; text-decoration: underline; padding: 0; font-size: 12.5px; opacity: .8; }
+.guia button:disabled { opacity: .35; cursor: default; }
+.pie-pag { color: var(--tinta-3); font-size: 12.5px; padding-block: 26px 150px; }
+@media (max-width: 700px) { .dos { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 <!--/CABEZA-->
 </head>
 <body>
 <!--CUERPO-->
 <nav class="nav"><div class="ancho">
-  <div class="marca">POS<small>Project Operating System</small></div>
+  <div class="marca"><i></i>POS <small>Project Operating System</small></div>
   <div class="pestanas" id="pestanas">
     <a href="#como-funciona" data-vista="como-funciona">Cómo funciona</a>
     <a href="#ejemplo" data-vista="ejemplo">Ejemplo</a>
@@ -232,34 +282,51 @@ mark.pc { background: var(--aviso-f); color: inherit; border-radius: 6px; paddin
   </div>
 </div></nav>
 <div id="vista"></div>
+<div id="capa-cajon"></div>
 <div class="guia" id="guia" hidden><div class="ancho">
-  <div class="cab"><span class="eti" id="guia-paso"></span><button type="button" id="guia-cerrar" style="background:none;border:0;color:inherit;cursor:pointer;font-size:13px;text-decoration:underline">Salir del recorrido</button></div>
-  <h4 id="guia-titulo"></h4>
-  <p id="guia-texto"></p>
+  <div class="c"><span class="eti" id="guia-paso"></span><button type="button" class="salir" id="guia-cerrar">Salir del recorrido</button></div>
+  <h4 id="guia-titulo"></h4><p id="guia-texto"></p>
   <div class="botones"><button type="button" id="guia-ant">Anterior</button><button type="button" class="sig" id="guia-sig">Siguiente</button></div>
 </div></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
 <script>
 "use strict";
-const EJEMPLO = /*__EJEMPLO__*/null;
+const EJEMPLO = /*__EJEMPLO__*/null, SIM = /*__SIMULACION__*/null;
 const $ = (s, r = document) => r.querySelector(s);
 const h = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const vacio = x => x == null || String(x).trim() === "";
 const FALTA = '<span class="falta">falta definir</span>';
-/* Texto del equipo: lo vacío se marca, y los [POR CONFIRMAR: …] se resaltan. */
 const t = x => vacio(x) ? FALTA : h(x).replace(/\[POR CONFIRMAR:?\s*([^\]]*)\]/gi, (_, q) => `<mark class="pc">por confirmar${q ? ": " + q : ""}</mark>`);
-const lista = a => (a && a.length) ? `<ul>${a.map(x => `<li>${t(x)}</li>`).join("")}</ul>` : `<p>${FALTA}</p>`;
 const cita = x => vacio(x) ? FALTA : "«" + t(String(x).trim().replace(/^[«"“”']+|[»"“”']+$/g, "")) + "»";
+const lista = a => (a && a.length) ? `<ul>${a.map(x => `<li>${t(x)}</li>`).join("")}</ul>` : `<p>${FALTA}</p>`;
 const campo = (rot, v) => `<div class="campo"><span class="eti">${rot}</span><div>${t(v)}</div></div>`;
-const sinAcentos = s => String(s ?? "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
-function etiqueta(e) {
-  const k = sinAcentos(e), c = ["dato", "supuesto", "esperanza"].includes(k) ? k : "otra";
-  return vacio(e) ? "" : `<span class="et ${c}"><i></i>${h(k === "incognita" ? "incógnita" : e)}</span>`;
-}
-function luz(c) {
-  const k = sinAcentos(c), cl = k.startsWith("verde") ? "verde" : k.startsWith("amar") ? "amarillo" : k.startsWith("roj") ? "rojo" : "";
-  return vacio(c) ? '<span class="luz"><i></i>no aplica</span>' : `<span class="luz ${cl}"><i></i>${h(c)}</span>`;
-}
+const sinAc = s => String(s ?? "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
+const nums = s => (String(s ?? "").replace(/,/g, "").match(/\d+(?:\.\d+)?/g) || []).map(Number);
+const recorta = (s, n) => { s = String(s ?? "").replace(/\[POR CONFIRMAR[^\]]*\]/gi, "por confirmar"); return s.length > n ? s.slice(0, n - 1).trimEnd() + "…" : s; };
+
+/* ------------------------------------------------------------ iconos (trazo, 24×24) */
+const I = {
+  proposito: "M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0-18z M15.5 8.5l-2 5l-5 2l2-5z",
+  exito: "M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0-18z M12 7.5a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9z M12 11.4v1.2",
+  alcance: "M4 9V5a1 1 0 0 1 1-1h4 M15 4h4a1 1 0 0 1 1 1v4 M20 15v4a1 1 0 0 1-1 1h-4 M9 20H5a1 1 0 0 1-1-1v-4 M9 12h6",
+  supuestos: "M9 3h6 M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3 M7.5 15h9",
+  riesgos: "M12 4l9 15.5H3z M12 10v4.5 M12 17v.4",
+  presupuesto: "M4 7a2 2 0 0 1 2-2h11v4 M4 7v10a2 2 0 0 0 2 2h13a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1H6a2 2 0 0 1-2-2z M16 14h.6",
+  hitos: "M5 21V4 M5 4h11l-2 4l2 4H5",
+  interesados: "M9 11a3 3 0 1 0 0-6a3 3 0 0 0 0 6z M3.5 19a5.5 5.5 0 0 1 11 0 M16 11.5a2.5 2.5 0 1 0 0-5 M17 14.2a4.5 4.5 0 0 1 3.5 4.8",
+  autoridad: "M12 3l7 3v5.5c0 4.2-2.8 7.6-7 9.5c-4.2-1.9-7-5.3-7-9.5V6z M9 12l2.2 2.2L15.2 10",
+  solicitud: "M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-7l-4 4v-4H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z",
+  problema: "M11 4a7 7 0 1 0 0 14a7 7 0 0 0 0-14z M20 20l-4-4",
+  evidencia: "M12 4l8 4l-8 4l-8-4z M4 12l8 4l8-4 M4 16l8 4l8-4",
+  opciones: "M6 4v16 M6 8c6 0 6 4 12 4 M6 14c6 0 6-6 12-6",
+  firma: "M4 17c3-6 5-9 6-9s0 7 2 7s2-4 3-4s1 3 5 3 M4 20h16",
+  si: "M5 12.5l4.5 4.5L19 7.5", no: "M6 6l12 12 M18 6L6 18", ir: "M5 12h14 M13 6l6 6l-6 6", pausa: "M12 6v7 M12 16.5v.5", punto: "M12 11.5v1",
+};
+const ico = (n, cls = "") => `<svg class="ico ${cls}" viewBox="0 0 24 24" aria-hidden="true"><path d="${I[n]}"/></svg>`;
+function etiqueta(e) { const k = sinAc(e), c = ["dato", "supuesto", "esperanza"].includes(k) ? k : ""; return vacio(e) ? "" : `<span class="et ${c}"><i></i>${h(e)}</span>`; }
+function luz(c) { const k = sinAc(c), cl = k.startsWith("verde") ? "verde" : k.startsWith("amar") ? "amarillo" : k.startsWith("roj") ? "rojo" : ""; return vacio(c) ? '<span class="luz"><i></i>no aplica</span>' : `<span class="luz ${cl}"><i></i>${h(c)}</span>`; }
+const est = (cls, txt) => `<span class="est ${cls}"><i></i>${h(txt)}</span>`;
 
 /* ------------------------------------------------------------ leer el bloque */
 const ARR = ["angulos", "encuadres", "evidencia", "preguntas_abiertas", "ideas_estacionadas", "objetivos", "obligatorio", "opciones", "supuestos", "premortem", "huecos"];
@@ -279,307 +346,450 @@ function leerBloque(texto) {
   if (vacio(texto)) return { error: "Pega aquí el bloque POS que te entregó la skill." };
   const i = texto.indexOf("{"), f = texto.lastIndexOf("}");
   if (i < 0 || f <= i) return { error: "No encontré el bloque. Tiene que empezar con { y terminar con }. Cópialo completo desde el chat." };
-  const crudo = texto.slice(i, f + 1);
-  let d;
-  for (const intento of [crudo, crudo.replace(/[“”]/g, '"'), crudo.replace(/[“”]/g, '"').replace(/,\s*([}\]])/g, "$1")]) {
-    try { d = JSON.parse(intento); break; } catch (_) { /* probar el siguiente */ }
-  }
+  const crudo = texto.slice(i, f + 1); let d;
+  for (const intento of [crudo, crudo.replace(/[“”]/g, '"'), crudo.replace(/[“”]/g, '"').replace(/,\s*([}\]])/g, "$1")]) { try { d = JSON.parse(intento); break; } catch (_) { /* siguiente intento */ } }
   if (!d) return { error: "El bloque está incompleto o se alteró al copiarlo. Pídele a la skill: «vuelve a darme el bloque POS completo» y pégalo de nuevo." };
-  if (typeof d !== "object" || Array.isArray(d) || !["solicitud", "a", "b", "exito", "acta", "decision"].some(k => k in d))
-    return { error: "Esto no parece un bloque POS. Pídele a la skill el bloque POS de tu Framing Brief." };
+  if (typeof d !== "object" || Array.isArray(d) || !["solicitud", "a", "b", "exito", "acta", "decision"].some(k => k in d)) return { error: "Esto no parece un bloque POS. Pídele a la skill el bloque POS de tu Framing Brief." };
   return { datos: normalizar(d) };
 }
 
-/* ------------------------------------------------------------ qué tan completa está */
-/* Cada parte devuelve los textos que la componen. Está lista si ninguno está vacío ni por confirmar. */
-const cada = (a, ...claves) => a.length ? a.flatMap(x => claves.map(k => x[k])) : [""];
-const CAMPOS = [
-  ["La solicitud tal como llegó", d => [d.solicitud.texto]], ["Quién pidió y cuándo", d => [d.solicitud.quien, d.solicitud.cuando]],
-  ["Estado actual (A)", d => [d.a]], ["Estado deseado (B)", d => [d.b]],
-  ["Los cinco ángulos", d => d.angulos.length >= 5 ? cada(d.angulos, "hallazgo") : [""]], ["El encuadre elegido", d => [(d.encuadres.find(e => e.elegido) || {}).texto]],
-  ["Evidencia con fuente", d => cada(d.evidencia, "afirmacion", "fuente")],
-  ["La necesidad", d => [d.necesidad]], ["Objetivo con línea base", d => cada(d.objetivos, "objetivo", "linea_base")],
-  ["Al menos cuatro opciones", d => d.opciones.length >= 4 ? cada(d.opciones, "descripcion") : [""]], ["El proyecto recomendado", d => [d.proyecto.nombre]],
-  ["Valor y costo con fuente", d => [...cada(d.proyecto.valor, "rango", "fuente"), ...cada(d.proyecto.costo, "rango", "fuente")]], ["Un efecto negativo", d => [d.proyecto.efecto_negativo]],
-  ["El supuesto que cambia la decisión", d => [d.supuesto_clave.supuesto]], ["La prueba de ese supuesto, con fecha y dueño", d => [d.supuesto_clave.prueba, d.supuesto_clave.fecha, d.supuesto_clave.dueno]],
-  ["El beneficio", d => [d.exito.beneficio]], ["Indicador con fuente, línea base y meta", d => cada(d.exito.indicadores, "indicador", "fuente", "linea_base", "meta")],
-  ["El examen intermedio", d => [d.exito.examen_intermedio]], ["Lo que no debe empeorar", d => [d.exito.guardrail]],
-  ["Los tres dueños del éxito", d => [d.exito.duenos.beneficio, d.exito.duenos.medicion, d.exito.duenos.desviaciones]],
-  ["El pre-mortem", d => d.premortem.length ? d.premortem : [""]], ["Quién gana, quién pierde y quién se ve afectado", d => [d.interesados.ganan, d.interesados.pierden, d.interesados.afectados]],
-  ["Lo que queda dentro y al menos tres cosas fuera", d => d.acta.dentro.length && d.acta.fuera.length >= 3 ? [...d.acta.dentro, ...d.acta.fuera] : [""]],
-  ["Quién decide", d => [d.acta.decide]], ["Qué puede hacer la IA", d => ["puede", "pregunta", "nunca"].every(k => d.permisos[k].length) ? ["ok"] : [""]],
-  ["La decisión: qué autoriza, quién sigue y cuándo se revisa", d => [d.decision.resultado, d.decision.autoriza, d.decision.dueno_siguiente_paso, d.decision.siguiente_revision]],
+/* ------------------------------------------------------------ simulación (solo el ejemplo) */
+let sim = { on: false, w: 0, reloj: null };
+const en = (serie, w) => { let v = serie[0][1]; for (const [s, x] of serie) if (s <= w) v = x; return v; };
+function S() {   /* estado de la semana simulada, o null si se ve solo el acta */
+  if (!sim.on) return null; const w = sim.w;
+  return { w, salud: SIM.salud[w], plan: SIM.plan[w], real: SIM.real[w], gPlan: SIM.gasto_plan[w], gReal: SIM.gasto_real[w], techo: SIM.techo[w],
+    clave: en(SIM.supuesto_clave, w), sup: i => SIM.supuestos[i] ? en(SIM.supuestos[i], w) : "sin probar", riesgo: i => SIM.riesgos[i] ? en(SIM.riesgos[i], w) : "vigilado",
+    ind: i => SIM.indicadores[i] ? SIM.indicadores[i][w] : null, examen: SIM.examen.valores[w],
+    hitos: SIM.hitos.map(x => ({ ...x, hecho: x.real <= w, tarde: x.real > w && x.plan <= w })), eventos: SIM.eventos.filter(e => e.w <= w), hoy: SIM.eventos.filter(e => e.w === w) };
+}
+const CLS = { "validado": "ok", "mitigado": "ok", "en duda": "aviso", "con señales": "aviso", "roto": "critico", "ocurrió": "critico", "sin probar": "hueco", "vigilado": "hueco" };
+const SALUD = { verde: ["ok", "En ruta"], ambar: ["aviso", "Atención"], rojo: ["critico", "Fuera de ruta"], "": ["hueco", "Arranque"] };
+const TIPO_EV = { senal: "Señal", alerta: "Alerta", decision: "Decisión", logro: "Avance" };
+
+/* ------------------------------------------------------------ qué tan lista está el acta */
+const cada = (a, ...c) => a.length ? a.flatMap(x => c.map(k => x[k])) : [""];
+const PARTES = [
+  ["Propósito: estado actual (A), estado deseado (B) y justificación", "proposito", d => [d.a, d.b, d.necesidad]],
+  ["Criterios de éxito: indicador con instrumento, línea base y meta", "exito", d => [d.exito.beneficio, ...cada(d.exito.indicadores, "indicador", "fuente", "linea_base", "meta")]],
+  ["Criterios de éxito: examen intermedio y guardrail", "exito", d => [d.exito.examen_intermedio, d.exito.guardrail]],
+  ["Criterios de éxito: los tres dueños", "exito", d => [d.exito.duenos.beneficio, d.exito.duenos.medicion, d.exito.duenos.desviaciones]],
+  ["Alcance: qué incluye y al menos tres cosas que no incluye", "alcance", d => d.acta.dentro.length && d.acta.fuera.length >= 3 ? [...d.acta.dentro, ...d.acta.fuera] : [""]],
+  ["Supuestos: el que cambia la decisión, con prueba, fecha y dueño", "supuestos", d => [d.supuesto_clave.supuesto, d.supuesto_clave.prueba, d.supuesto_clave.fecha, d.supuesto_clave.dueno]],
+  ["Restricciones", "supuestos", d => d.acta.restricciones.length ? d.acta.restricciones : [""]],
+  ["Riesgos principales", "riesgos", d => d.premortem.length ? d.premortem : [""]],
+  ["Presupuesto: costo estimado con fuente y límite aprobado", "presupuesto", d => [...cada(d.proyecto.costo, "rango", "fuente"), d.decision.limite]],
+  ["Interesados: quién gana, quién pierde y quién se ve afectado", "interesados", d => [d.interesados.ganan, d.interesados.pierden, d.interesados.afectados]],
+  ["Patrocinador: quién decide", "autoridad", d => [d.acta.decide]],
+  ["Autoridad de la IA: puede, pregunta antes, nunca", "autoridad", d => ["puede", "pregunta", "nunca"].every(k => d.permisos[k].length) ? ["ok"] : [""]],
+  ["La decisión: qué autoriza, quién sigue y cuándo se revisa", "decision", d => [d.decision.resultado, d.decision.autoriza, d.decision.dueno_siguiente_paso, d.decision.siguiente_revision]],
+  ["Caso de negocio: la solicitud original, con quién y cuándo", "solicitud", d => [d.solicitud.texto, d.solicitud.quien, d.solicitud.cuando]],
+  ["Caso de negocio: evidencia con fuente", "evidencia", d => cada(d.evidencia, "afirmacion", "fuente")],
+  ["Caso de negocio: al menos cuatro opciones comparadas", "opciones", d => d.opciones.length >= 4 ? cada(d.opciones, "descripcion") : [""]],
 ];
 const PC = /\[POR CONFIRMAR/i;
+const incompleta = v => v.some(x => vacio(x) || PC.test(String(x)));
 function avance(d) {
-  const faltan = CAMPOS.filter(([, f]) => f(d).some(v => vacio(v) || PC.test(String(v)))).map(c => c[0]);
-  const pc = (JSON.stringify(d).match(/\[POR CONFIRMAR/gi) || []).length;
-  return { total: CAMPOS.length, listos: CAMPOS.length - faltan.length, faltan, pc };
+  const faltan = PARTES.filter(([, , f]) => incompleta(f(d)));
+  return { total: PARTES.length, listos: PARTES.length - faltan.length, faltan, pc: (JSON.stringify(d).match(/\[POR CONFIRMAR/gi) || []).length };
 }
+const faltaEn = (d, id) => PARTES.filter(([, m, f]) => m === id && incompleta(f(d))).length;
 
-/* ------------------------------------------------------------ tarjetas del acta */
-const T = [
-  { id: "solicitud", tramo: 3, ancho: "m", titulo: "Lo que nos pidieron", origen: "Sesión 3 · modo reframe",
-    que: "La solicitud tal como llegó, con las palabras de quien la pidió.",
-    porque: "Una solicitud casi siempre trae una solución adentro. Se guarda textual para no confundirla con el problema.",
-    despues: "Queda como una opción más entre las que se comparan. Si alguien pregunta «¿y lo que pedí?», aquí está la respuesta.",
-    cuerpo: d => `<p class="cita">${cita(d.solicitud.texto)}</p><p class="sub">Es una hipótesis de solución, no el problema.</p>
-      <div class="campos" style="margin-top:12px">${campo("Quién la pidió", d.solicitud.quien)}${campo("Cuándo", d.solicitud.cuando)}</div>` },
-  { id: "afectados", tramo: 3, ancho: "m", titulo: "A quién le pasa y cuál es nuestro papel", origen: "Sesión 3 · modo reframe",
-    que: "Quién vive el problema, quién lo pide y qué le toca a nuestro equipo.",
-    porque: "Quien pide no siempre es quien sufre el problema. Si se confunden, se resuelve lo que le duele a otro.",
-    despues: "Sirve para saber a quién preguntar si el beneficio llegó.",
-    cuerpo: d => `<div class="campos">${campo("Quién vive el problema", d.afectados.viven_el_problema)}${campo("Quién lo pide", d.afectados.lo_pide)}${campo("Nuestro papel", d.afectados.nuestro_papel)}</div>` },
-  { id: "ab", tramo: 3, ancho: "", titulo: "De dónde venimos y a dónde vamos", origen: "Sesión 3 · modo reframe",
-    que: "El estado actual (A) y el estado deseado (B), sin nombrar la solución.",
-    porque: "B dice qué podrá hacer o lograr alguien cuando esto se resuelva. «Tener un chatbot» no es un B.",
-    despues: "B es el destino de toda la ruta: el plan, los indicadores y las alertas se miden contra llegar aquí.",
-    cuerpo: d => `<div class="duo"><div class="caja"><span class="eti">A · hoy</span><p>${t(d.a)}</p></div><span class="flecha" aria-hidden="true">→</span><div class="caja"><span class="eti">B · a dónde vamos</span><p class="grande">${t(d.b)}</p></div></div>` },
-  { id: "angulos", tramo: 3, ancho: "", titulo: "Lo que vimos desde cinco ángulos", origen: "Sesión 3 · modo reframe",
-    que: "La solicitud revisada desde cinco lugares distintos antes de aceptar el problema.",
-    porque: "Cada ángulo busca algo que la solicitud no dice: la causa, la meta de fondo, las excepciones, nuestra parte y cómo lo vive el otro.",
-    despues: "Explica por qué se eligió este problema y no otro, cuando alguien lo cuestione meses después.",
-    cuerpo: d => d.angulos.length ? `<div class="campos">${d.angulos.map(a => `<div class="campo"><span class="eti">${h(a.angulo)}</span><div>${t(a.hallazgo)} ${etiqueta(a.etiqueta)}</div></div>`).join("")}</div>` : `<p>${FALTA}</p>` },
-  { id: "encuadre", tramo: 3, ancho: "g", titulo: "El problema que elegimos", origen: "Sesión 3 · modo reframe",
-    que: "El encuadre con el que el equipo decidió avanzar, entre dos o tres posibles.",
-    porque: "Cada encuadre dice qué pasa, a quién, cómo lo sabemos y qué nos falta saber. El equipo elige; la IA no.",
-    despues: "Si la evidencia cambia, este es el primer texto que hay que volver a leer.",
-    cuerpo: d => { const el = d.encuadres.find(e => e.elegido), otros = d.encuadres.filter(e => !e.elegido);
-      return `<p class="grande">${t(el && el.texto)}</p>${el && !vacio(el.por_que) ? `<p class="sub"><b>Por qué este.</b> ${t(el.por_que)}</p>` : ""}
-        ${otros.length ? `<p class="eti" style="margin-top:14px">Los otros encuadres que consideramos</p><ul>${otros.map(o => `<li class="sub">${t(o.texto)}</li>`).join("")}</ul>` : ""}`; } },
-  { id: "preguntas", tramo: 3, ancho: "c", titulo: "Lo que todavía no sabemos", origen: "Sesión 3 · modo reframe",
-    que: "Las preguntas abiertas y las ideas de solución que se dejaron estacionadas.",
-    porque: "Decir «no sé» a tiempo es más barato que descubrirlo en ejecución.",
-    despues: "Cada pregunta abierta es candidata a convertirse en un supuesto con prueba y fecha.",
-    cuerpo: d => `<span class="eti">Preguntas abiertas</span>${lista(d.preguntas_abiertas)}<p class="eti" style="margin-top:12px">Ideas estacionadas</p>${lista(d.ideas_estacionadas)}` },
-  { id: "evidencia", tramo: 3, ancho: "", titulo: "Lo que sabemos y cómo lo sabemos", origen: "Sesión 3 · modo reframe",
-    que: "Cada afirmación con su fuente y su etiqueta: dato, supuesto o esperanza.",
-    porque: "Un dato tiene fuente. Un supuesto lo cree alguien y nadie lo ha comprobado. Una esperanza es lo que nos gustaría que fuera cierto. El caso no puede descansar en esperanzas.",
-    despues: "Los supuestos se vigilan: cada uno tiene que pasar a dato o caerse antes de que cueste caro.",
-    cuerpo: d => evidencia(d) },
-  { id: "necesidad", tramo: 4, ancho: "m", titulo: "Por qué hace falta hacer algo", origen: "Sesión 4 · modo business-case",
-    que: "La necesidad en una frase y el objetivo con su valor de hoy.",
-    porque: "Sin línea base no hay forma de saber si algo mejoró.",
-    despues: "La línea base es el punto de partida de cada indicador.",
-    cuerpo: d => `<p class="grande">${t(d.necesidad)}</p>${d.objetivos.length ? `<p class="eti" style="margin-top:12px">Objetivos</p><ul>${d.objetivos.map(o => `<li>${t(o.objetivo)} <span class="sub">· hoy: ${t(o.linea_base)} · ${t(o.fuente)}</span></li>`).join("")}</ul>` : ""}
-      ${!vacio(d.linea_base) ? `<p class="sub"><b>Línea base.</b> ${t(d.linea_base)}</p>` : ""}` },
-  { id: "obligatorio", tramo: 4, ancho: "m", titulo: "Lo que no se negocia", origen: "Sesión 4 · modo business-case",
-    que: "Las restricciones reales: una opción las cumple o queda fuera.",
-    porque: "El dinero entra aquí una sola vez, como techo. Después se compara el valor, no otra vez el costo.",
-    despues: "Son límites del proyecto: si un cambio los toca, tiene que volver a quien decide.",
-    cuerpo: d => lista(d.obligatorio) },
-  { id: "opciones", tramo: 4, ancho: "", titulo: "Las opciones que comparamos", origen: "Sesión 4 · modo business-case",
-    que: "Seis casillas: seguir como estamos, lo mínimo, sin proyecto, quitar algo, más ambiciosa y, al final, la solicitud.",
-    porque: "Si la única opción es lo que pidieron, no hubo decisión. «Seguir como estamos» siempre se compara con honestidad.",
-    despues: "Si el supuesto clave falla, aquí ya está escrita la opción que sigue.",
-    cuerpo: d => opciones(d) },
-  { id: "proyecto", tramo: 4, ancho: "", titulo: "El proyecto recomendado", origen: "Sesión 4 · modo business-case",
-    que: "El caso en una página: valor y costo en rangos, cada línea con su fuente.",
-    porque: "Un rango con fuente es más honesto que un número exacto sin ella. También se nombra un efecto negativo.",
-    despues: "El costo se compara contra lo gastado; el valor, contra lo que midan los indicadores.",
-    cuerpo: d => proyecto(d) },
-  { id: "supuesto", tramo: 4, ancho: "", titulo: "Lo que tiene que ser cierto", origen: "Sesión 4 · modo business-case",
-    que: "El supuesto que, si resulta falso, cambia la recomendación. Con su prueba más barata, su fecha y su dueño.",
-    porque: "Es la apuesta del proyecto dicha en voz alta. Probarla pronto cuesta poco; descubrirla tarde cuesta el proyecto.",
-    despues: "Es lo primero que vigila la torre: si la prueba se vence o falla, avisa a quien decide.",
-    cuerpo: d => supuestos(d) },
-  { id: "exito", tramo: 5, ancho: "g", titulo: "Qué es éxito", origen: "Sesión 5 · modo charter",
-    que: "El bloque de éxito, con sus seis campos: beneficio y efecto negativo, indicador e instrumento, línea base, meta y fecha, examen intermedio y guardrail, y dueños.",
-    porque: "Entregar no es beneficiar. El proyecto puede terminar a tiempo y no cambiar nada para el cliente.",
-    despues: "Cada indicador se mide con la cadencia acordada. Si se sale de rango o deja de medirse, hay alerta.",
-    cuerpo: d => exito(d) },
-  { id: "premortem", tramo: 5, ancho: "c", titulo: "Lo que podría salir mal", origen: "Sesión 5 · modo charter",
-    que: "El pre-mortem: es dentro de un año y el proyecto fracasó. Estas son las razones más probables.",
-    porque: "Es más fácil ver los riesgos antes de empezar, cuando todavía nadie está defendiendo el plan.",
-    despues: "Las tres más probables ya pasaron al registro de supuestos, con dueño. Más adelante cada una tendrá su señal temprana: qué veríamos primero si empieza a ocurrir.",
-    cuerpo: d => lista(d.premortem) },
-  { id: "interesados", tramo: 5, ancho: "", titulo: "Quién gana, quién pierde y quién se ve afectado", origen: "Sesión 5 · modo charter",
-    que: "Las personas y áreas a las que el proyecto les cambia algo, para bien o para mal.",
-    porque: "Quien pierde con el proyecto rara vez lo dice en la reunión. Nombrarlo a tiempo evita un veto silencioso.",
-    despues: "Cuando una alerta toca a alguno de ellos, se sabe a quién hay que avisar además de quien decide.",
-    cuerpo: d => `<div class="campos">${campo("Quién gana", d.interesados.ganan)}${campo("Quién pierde", d.interesados.pierden)}${campo("Quién se ve afectado", d.interesados.afectados)}</div>` },
-  { id: "limites", tramo: 5, ancho: "", titulo: "Hasta dónde llega el proyecto", origen: "Sesión 5 · modo charter",
-    que: "Lo que queda dentro, lo que queda fuera y las restricciones.",
-    porque: "Lo que no se dice que está fuera, alguien lo va a pedir después.",
-    despues: "Un cambio que mueve estos límites se registra como cambio y lo aprueba quien decide.",
-    cuerpo: d => `<div class="tres"><div><h4><span class="punto ok"></span>Dentro</h4>${lista(d.acta.dentro)}</div><div><h4><span class="punto critico"></span>Fuera</h4>${lista(d.acta.fuera)}</div><div><h4><span class="punto"></span>Restricciones</h4>${lista(d.acta.restricciones)}</div></div>` },
-  { id: "decide", tramo: 5, ancho: "c", titulo: "Quién decide", origen: "Sesión 5 · modo charter",
-    que: "El patrocinio: una persona que decide, y quiénes pueden vetar y sobre qué.",
-    porque: "Si deciden todos, no decide nadie. El desacuerdo se escucha antes de la firma.",
-    despues: "A esta persona le llega el brief cuando algo necesita decisión.",
-    cuerpo: d => `${campo("Decide", d.acta.decide)}<p class="eti" style="margin-top:12px">Pueden vetar</p>${lista(d.acta.vetos)}` },
-  { id: "permisos", tramo: 5, ancho: "g", titulo: "Qué puede hacer la IA", origen: "Sesión 5 · modo charter",
-    que: "Lo que la IA puede hacer sola, lo que tiene que preguntar antes y lo que nunca hace.",
-    porque: "Cuando los agentes tienen permisos, «quién puede hacer qué» deja de ser una frase y se vuelve configuración.",
-    despues: "Son las reglas del agente que actualiza el POS y manda avisos.",
-    cuerpo: d => `<div class="tres"><div><h4><span class="punto ok"></span>Puede</h4>${lista(d.permisos.puede)}</div><div><h4><span class="punto aviso"></span>Pregunta antes</h4>${lista(d.permisos.pregunta)}</div><div><h4><span class="punto critico"></span>Nunca</h4>${lista(d.permisos.nunca)}</div></div>` },
-  { id: "decision", tramo: 5, ancho: "m", titulo: "La decisión", origen: "Sesión 5 · modo charter",
-    que: "Go, investigar, todavía no o no-go: qué se decidió, qué autoriza, quién es dueño del siguiente paso y cuándo se vuelve a revisar.",
-    porque: "El caso dice «conviene apostar». El acta dice «quién puede gastar y hasta cuánto». Son dos firmas distintas.",
-    despues: "Es la primera entrada del registro de decisiones. Las siguientes se agregan debajo, nunca la reemplazan.",
-    cuerpo: d => { const s = sello(d.decision.resultado); return `<div class="decision"><span class="sello ${s.c}"><i></i>${h(s.t)}</span><p class="grande">${t(d.decision.texto)}</p>
-      <div class="campos">${campo("Quién decidió", d.decision.quien)}${campo("Qué autoriza", d.decision.autoriza)}${campo("Límite", d.decision.limite)}${campo("Dueño del siguiente paso", d.decision.dueno_siguiente_paso)}${campo("Cuándo se vuelve a revisar", d.decision.siguiente_revision)}</div></div>`; } },
-  { id: "huecos", tramo: 5, ancho: "m", titulo: "Lo que falta", origen: "Revisión final de la skill y de esta página",
-    que: "Los huecos que encontró la skill al revisar, más los campos que esta página ve vacíos o por confirmar.",
-    porque: "Un acta con huecos a la vista es más útil que una que parece completa.",
-    despues: "Cada hueco cerrado deja al equipo más cerca de un acta que alguien puede firmar.",
-    cuerpo: d => { const a = avance(d);
-      return `<span class="eti">Los encontró la skill</span>${d.huecos.length ? lista(d.huecos) : '<p class="sub">La skill no listó huecos.</p>'}
-        <p class="eti" style="margin-top:12px">Los ve esta página</p>${a.faltan.length ? `<ul>${a.faltan.map(x => `<li>${h(x)}</li>`).join("")}</ul>` : '<p class="sub">Todos los campos tienen contenido.</p>'}`; } },
+/* ------------------------------------------------------------ piezas visuales */
+function arco(frac, color) {   /* medidor de 270° */
+  const r = 38, c = 2 * Math.PI * r, largo = c * .75;
+  return `<svg viewBox="0 0 92 92" aria-hidden="true"><g transform="rotate(135 46 46)" fill="none" stroke-width="8" stroke-linecap="round">
+    <circle cx="46" cy="46" r="${r}" stroke="var(--panel-2)" stroke-dasharray="${largo} ${c}"/><circle cx="46" cy="46" r="${r}" stroke="${color}" stroke-dasharray="${Math.max(.01, largo * frac)} ${c}"/></g></svg>`;
+}
+function dona(partes) {   /* partes: [[n, color]] */
+  const r = 22, c = 2 * Math.PI * r, tot = partes.reduce((s, p) => s + p[0], 0) || 1; let off = 0;
+  return `<svg viewBox="0 0 58 58" aria-hidden="true"><g transform="rotate(-90 29 29)" fill="none" stroke-width="9">${partes.map(([n, col]) => { const l = c * n / tot, s = `<circle cx="29" cy="29" r="${r}" stroke="${col}" stroke-dasharray="${Math.max(0, l - 2)} ${c}" stroke-dashoffset="${-off}"/>`; off += l; return n ? s : ""; }).join("")}</g></svg>`;
+}
+function pista(ind, ahora) {   /* de la línea base a la meta; con la simulación, dónde va hoy */
+  const b = nums(ind.linea_base)[0], m = nums(ind.meta).slice(0, 2);
+  const cab = `<div class="nom corta">${t(ind.indicador)}</div>`;
+  if (b == null || !m.length) return `<div class="pista">${cab}<div class="vals"><span>línea base <b>${t(ind.linea_base)}</b></span><span>meta <b>${t(ind.meta)}</b></span></div></div>`;
+  const m1 = Math.min(...m), m2 = Math.max(...m), vs = [b, m1, m2].concat(ahora == null ? [] : [ahora]), lo = Math.min(...vs), hi = Math.max(...vs), pad = (hi - lo) * .1 || 1;
+  const x = v => ((v - (lo - pad)) / (hi - lo + 2 * pad) * 100).toFixed(1) + "%", w = ((m2 - m1) / (hi - lo + 2 * pad) * 100).toFixed(1) + "%";
+  return `<div class="pista">${cab}<div class="riel"><span class="banda" style="left:${x(m1)};width:${w}"></span><span class="pt" style="left:${x(b)}"></span>${ahora == null ? "" : `<span class="pt ahora" style="left:${x(ahora)}"></span>`}</div>
+    <div class="vals"><span>línea base <b>${h(ind.linea_base)}</b></span>${ahora == null ? "" : `<span>ahora <b>${ahora}${/%/.test(ind.linea_base) ? "%" : ""}</b></span>`}<span>meta <b>${h(ind.meta)}</b></span></div></div>`;
+}
+function sello(r) { const k = sinAc(r); return k === "go" ? { c: "go", t: "GO", i: "si" } : k.startsWith("no") ? { c: "no", t: "NO-GO", i: "no" } : k.startsWith("invest") ? { c: "espera", t: "INVESTIGAR", i: "problema" } : k.startsWith("todav") ? { c: "espera", t: "TODAVÍA NO", i: "pausa" } : { c: "", t: "SIN DECISIÓN", i: "punto" }; }
+
+/* ------------------------------------------------------------ módulos del acta (primer nivel) */
+const MOD = [
+  { id: "proposito", t: "Propósito", pmi: "Por qué existe el proyecto: la necesidad de negocio que atiende y el cambio que busca.", despues: "Es el destino de la ruta. El plan, los indicadores y las alertas se miden contra llegar aquí.",
+    cuerpo: d => `<p class="clave corta c3">${t(d.b)}</p><p class="sub corta">Hoy: ${t(d.a)}</p>`,
+    detalle: d => `<div class="bloque"><h4>Estado actual (A)</h4><p>${t(d.a)}</p></div><div class="bloque"><h4>Estado deseado (B)</h4><p style="font-size:17px;font-weight:500">${t(d.b)}</p></div>
+      <div class="bloque"><h4>Justificación</h4><p>${t(d.necesidad)}</p></div>
+      <div class="proceso"><span class="eti">Cómo llegamos aquí</span><div class="bloque"><h4>La solicitud original</h4><p class="cita">${cita(d.solicitud.texto)}</p><p class="sub">${t(d.solicitud.quien)} · ${t(d.solicitud.cuando)}</p></div>
+      <div class="bloque"><h4>El problema que elegimos</h4><p>${t((d.encuadres.find(e => e.elegido) || {}).texto)}</p></div></div>` },
+  { id: "exito", t: "Objetivos y criterios de éxito", pmi: "Objetivos medibles y los criterios con los que se sabrá si el proyecto funcionó.", despues: "Cada indicador se mide con su cadencia. Si sale de rango o deja de medirse, hay alerta.",
+    cuerpo: (d, s) => d.exito.indicadores.length ? d.exito.indicadores.slice(0, 2).map((x, i) => pista(x, s ? s.ind(i) : null)).join("") + (s ? `<p class="sub">Examen intermedio: ${s.examen}% de avisos entregados (meta ${SIM.examen.meta}%)</p>` : `<p class="sub corta">Examen intermedio: ${t(d.exito.examen_intermedio)}</p>`) : `<p>${FALTA}</p>`,
+    detalle: (d, s) => { const e = d.exito; return `<div class="campos">${campo("Beneficio", e.beneficio)}${campo("Efecto negativo a vigilar", e.efecto_negativo)}</div>
+      <div class="bloque"><h4>Indicador e instrumento</h4>${e.indicadores.map((x, i) => pista(x, s ? s.ind(i) : null) + `<p class="sub">Instrumento: ${t(x.fuente)}${vacio(x.plazo) ? "" : " · plazo: " + h(x.plazo)}</p>`).join("") || FALTA}</div>
+      <div class="campos">${campo("Examen intermedio", e.examen_intermedio)}${campo("Guardrail: lo que no debe empeorar", e.guardrail)}</div>
+      <div class="bloque"><h4>Dueños</h4><div class="campos">${campo("Quién recibe el beneficio", e.duenos.beneficio)}${campo("Quién lo mide", e.duenos.medicion)}${campo("Quién decide si hay desviación", e.duenos.desviaciones)}</div></div>
+      ${d.objetivos.length ? `<div class="proceso"><span class="eti">Cómo llegamos aquí</span><div class="bloque"><h4>Objetivos del caso de negocio</h4><ul>${d.objetivos.map(o => `<li>${t(o.objetivo)} <span class="sub">· línea base ${t(o.linea_base)} · ${t(o.fuente)}</span></li>`).join("")}</ul></div></div>` : ""}`; } },
+  { id: "alcance", t: "Alcance", pmi: "Descripción de alto nivel, entregables clave y límites: qué incluye el proyecto y qué no.", despues: "Un cambio que mueve estos límites se registra como control de cambios y lo aprueba el patrocinador.",
+    cuerpo: d => { const col = (a, cl, ic) => `<ul class="lista-c">${a.slice(0, 3).map(x => `<li>${ico(ic, cl)}<span class="corta">${t(x)}</span></li>`).join("") || `<li>${ico("punto", "neutro")}${FALTA}</li>`}</ul>`;
+      return `<div class="dos"><div><span class="eti">Incluye · ${d.acta.dentro.length}</span>${col(d.acta.dentro, "si", "si")}</div><div><span class="eti">No incluye · ${d.acta.fuera.length}</span>${col(d.acta.fuera, "no", "no")}</div></div>`; },
+    detalle: d => `<div class="bloque"><h4>Descripción</h4><p style="font-weight:500">${t(d.proyecto.nombre)}</p><p>${t(d.proyecto.descripcion)}</p></div>
+      <div class="tres"><div><h4>Incluye</h4>${lista(d.acta.dentro)}</div><div><h4>No incluye</h4>${lista(d.acta.fuera)}</div></div>` },
+  { id: "supuestos", t: "Supuestos y restricciones", pmi: "Lo que se da por cierto sin haberlo comprobado, y los límites que el proyecto no puede cruzar.", despues: "Es lo primero que vigila la torre: si una prueba se vence o un supuesto falla, avisa a quien decide.",
+    cuerpo: (d, s) => `<div><span class="eti">El supuesto que cambia la decisión</span><p class="clave corta c3">${t(d.supuesto_clave.supuesto)}</p></div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center">${est(s ? CLS[s.clave] : "hueco", s ? s.clave : "sin probar")}<span class="sub">+${d.supuestos.length} abiertos · ${d.acta.restricciones.length} restricciones</span></div>`,
+    detalle: (d, s) => { const k = d.supuesto_clave; return `<div class="bloque"><h4>El supuesto que cambia la decisión ${s ? est(CLS[s.clave], s.clave) : ""}</h4><p style="font-size:17px;font-weight:500">${t(k.supuesto)}</p>
+      <div class="campos">${campo("Si resulta falso", k.si_es_falso)}${campo("La prueba más barata", k.prueba)}${campo("Fecha", k.fecha)}${campo("Dueño", k.dueno)}</div></div>
+      <div class="bloque"><h4>Registro de supuestos</h4><div class="filas">${d.supuestos.map((x, i) => `<div class="fila"><div>${t(x.supuesto)}</div><div class="p">${s ? est(CLS[s.sup(i)], s.sup(i)) : etiqueta(x.etiqueta || "supuesto")}<span>Dueño: ${t(x.dueno)}</span><span>Prueba: ${vacio(x.fecha_prueba) ? "sin fecha" : t(x.fecha_prueba)}</span><span>${t(x.fuente)}</span></div></div>`).join("") || FALTA}</div></div>
+      <div class="bloque"><h4>Restricciones</h4>${lista(d.acta.restricciones)}</div>`; } },
+  { id: "riesgos", t: "Riesgos", pmi: "El riesgo general del proyecto: lo que con más probabilidad puede impedir el resultado.", despues: "Cada riesgo tendrá su señal temprana. Dos señales sin decisión son una alerta.",
+    cuerpo: (d, s) => `<ul class="lista-c">${d.premortem.slice(0, 3).map((x, i) => { const c = s ? CLS[s.riesgo(i)] : "hueco"; return `<li>${ico("riesgos", { ok: "si", aviso: "av", critico: "no" }[c] || "neutro")}<span><span class="corta">${t(x)}</span>${s ? est(c, s.riesgo(i)) : ""}</span></li>`; }).join("") || `<li>${ico("punto", "neutro")}${FALTA}</li>`}</ul>${d.premortem.length > 3 ? `<p class="sub">+${d.premortem.length - 3} más</p>` : ""}`,
+    detalle: (d, s) => `<div class="bloque"><h4>Del pre-mortem: «es dentro de un año y el proyecto fracasó»</h4><div class="filas">${d.premortem.map((x, i) => `<div class="fila"><div>${t(x)}</div>${s ? `<div class="p">${est(CLS[s.riesgo(i)], s.riesgo(i))}</div>` : ""}</div>`).join("") || FALTA}</div></div>
+      <div class="bloque"><h4>Efecto negativo del propio proyecto</h4><p>${t(d.proyecto.efecto_negativo)}</p></div>` },
+  { id: "presupuesto", t: "Presupuesto", pmi: "Los recursos financieros aprobados de antemano y el costo estimado, en rangos.", despues: "El gasto real se compara cada semana contra el límite y contra el valor del avance.",
+    cuerpo: (d, s) => s ? `<div class="grande">$${s.gReal} mil <span class="sub" style="font-weight:400">de $${s.techo} mil</span></div><div class="barra"><i class="${s.gReal > s.gPlan * 1.1 ? "aviso" : "ok"}" style="width:${Math.min(100, 100 * s.gReal / s.techo)}%"></i></div><p class="sub">Plan a la semana ${s.w}: $${s.gPlan} mil</p>`
+      : `<div><span class="eti">Límite aprobado</span><div class="grande">${t(d.decision.limite)}</div></div><p class="sub corta">Costo estimado: ${t((d.proyecto.costo[0] || {}).rango)}</p>`,
+    detalle: d => { const lin = a => a.map(l => `<div class="fila"><div><b style="font-weight:600">${t(l.rango)}</b> · ${t(l.linea)}</div><div class="p">${etiqueta(l.tipo)}<span>${t(l.fuente)}</span></div></div>`).join("") || FALTA;
+      return `<div class="campos">${campo("Límite aprobado", d.decision.limite)}${campo("Lo obligatorio", d.obligatorio.join(" · "))}</div><div class="bloque"><h4>Costo estimado</h4><div class="filas">${lin(d.proyecto.costo)}</div></div>
+      <div class="proceso"><span class="eti">Cómo llegamos aquí</span><div class="bloque"><h4>Valor esperado</h4><div class="filas">${lin(d.proyecto.valor)}</div></div>${campo("Quién recibe el beneficio", d.proyecto.beneficiario)}</div>`; } },
+  { id: "hitos", t: "Hitos", pmi: "El cronograma resumido: los pocos momentos que marcan si el proyecto va a tiempo.", despues: "Con el plan del módulo 2, cada hito tiene fecha y dueño, y la torre avisa cuando uno se mueve.",
+    cuerpo: (d, s) => s ? `<div class="grande">${s.hitos.filter(x => x.hecho).length} <span class="sub" style="font-weight:400">de ${s.hitos.length} hitos</span></div><div class="puntos">${s.hitos.map(x => `<i class="${x.hecho ? "ok" : x.tarde ? "tarde" : ""}"></i>`).join("")}</div><p class="sub">${s.hitos.filter(x => x.tarde).length} atrasados en la semana ${s.w}</p>`
+      : `<ul class="lista-c"><li>${ico("hitos", "neutro")}<span class="corta">${t(d.exito.examen_intermedio)}</span></li><li>${ico("hitos", "neutro")}<span class="corta">Revisión: ${t(d.decision.siguiente_revision)}</span></li></ul><p class="sub">El cronograma completo se arma en el módulo 2.</p>`,
+    detalle: (d, s) => `<div class="bloque"><h4>Lo que el acta ya fija</h4><div class="campos">${campo("Examen intermedio", d.exito.examen_intermedio)}${campo("Siguiente revisión", d.decision.siguiente_revision)}</div></div>
+      ${s ? `<div class="bloque"><h4>Hitos del plan (simulación)</h4><div class="filas">${s.hitos.map(x => `<div class="fila"><div>${h(x.hito)}</div><div class="p">${x.hecho ? est("ok", x.real > x.plan ? `hecho, ${x.real - x.plan} sem tarde` : "hecho a tiempo") : x.tarde ? est("aviso", "atrasado") : est("hueco", "pendiente")}<span>plan: semana ${x.plan}</span></div></div>`).join("")}</div></div>` : `<p class="sub">Los hitos, sus fechas y sus dueños se definen en el módulo 2. Aparecerán aquí y sobre la ruta.</p>`}` },
+  { id: "interesados", t: "Interesados", pmi: "Las personas y áreas clave a las que el proyecto les cambia algo, a favor o en contra.", despues: "Cuando una alerta toca a alguno, se sabe a quién avisar además del patrocinador.",
+    cuerpo: d => `<ul class="lista-c"><li>${ico("si", "si")}<span><span class="eti">Gana</span><span class="corta">${t(d.interesados.ganan)}</span></span></li><li>${ico("no", "no")}<span><span class="eti">Pierde</span><span class="corta">${t(d.interesados.pierden)}</span></span></li><li>${ico("punto", "neutro")}<span><span class="eti">Afectado</span><span class="corta">${t(d.interesados.afectados)}</span></span></li></ul>`,
+    detalle: d => `<div class="bloque">${campo("Quién gana", d.interesados.ganan)}${campo("Quién pierde", d.interesados.pierden)}${campo("Quién se ve afectado", d.interesados.afectados)}</div>
+      <div class="proceso"><span class="eti">Cómo llegamos aquí</span><div class="campos">${campo("Quién vive el problema", d.afectados.viven_el_problema)}${campo("Quién lo pide", d.afectados.lo_pide)}${campo("Nuestro papel", d.afectados.nuestro_papel)}</div></div>` },
+  { id: "autoridad", t: "Patrocinador y autoridad", pmi: "Quién autoriza el proyecto, quién lo dirige y con qué nivel de autoridad. Hoy eso incluye a la IA.", despues: "Al patrocinador le llega el brief cuando algo necesita decisión. Los permisos son las reglas del agente.",
+    cuerpo: d => { const p = d.permisos;
+      return `<div><span class="eti">Patrocinador · decide</span><p class="clave corta">${t(d.acta.decide)}</p></div>
+        <div><span class="eti">Autoridad de la IA</span><div class="seg"><i style="flex:${p.puede.length};background:var(--ok)"></i><i style="flex:${p.pregunta.length};background:var(--aviso)"></i><i style="flex:${p.nunca.length};background:var(--critico)"></i></div>
+        <p class="sub" style="margin-top:4px">puede ${p.puede.length} · pregunta antes ${p.pregunta.length} · nunca ${p.nunca.length}</p></div>`; },
+    detalle: d => `<div class="campos">${campo("Patrocinador: decide", d.acta.decide)}${campo("Dueño del siguiente paso", d.decision.dueno_siguiente_paso)}</div><div class="bloque"><h4>Pueden vetar</h4>${lista(d.acta.vetos)}</div>
+      <div class="bloque"><h4>Autoridad de la IA</h4><div class="tres"><div>${est("ok", "Puede")}${lista(d.permisos.puede)}</div><div>${est("aviso", "Pregunta antes")}${lista(d.permisos.pregunta)}</div><div>${est("critico", "Nunca")}${lista(d.permisos.nunca)}</div></div></div>` },
 ];
-const TRAMOS = { 3: ["Sesión 3 · El problema correcto", "De la solicitud al problema, con evidencia."], 4: ["Sesión 4 · El caso de negocio", "Las opciones, el proyecto recomendado y la apuesta."], 5: ["Sesión 5 · El acta", "Qué es éxito, hasta dónde llega, quién decide y qué puede hacer la IA."] };
-
-function sello(r) {
-  const k = sinAcentos(r);
-  if (k === "go") return { c: "go", t: "Go" };
-  if (k.startsWith("no")) return { c: "no", t: "No-go" };
-  if (k.startsWith("invest")) return { c: "espera", t: "Investigar" };
-  if (k.startsWith("todav")) return { c: "espera", t: "Todavía no" };
-  return { c: "", t: "Sin decisión" };
-}
+/* ------------------------------------------------------------ cómo llegamos aquí (segundo nivel) */
 let filtroEv = "";
-function evidencia(d) {
-  if (!d.evidencia.length) return `<p>${FALTA}</p>`;
-  const tipos = ["dato", "supuesto", "esperanza"], n = k => d.evidencia.filter(e => sinAcentos(e.etiqueta) === k).length;
-  const reparto = tipos.map(k => n(k) ? `<i style="flex:${n(k)};background:var(--${k})" title="${n(k)} ${k}"></i>` : "").join("");
-  const botones = [["", `Todo · ${d.evidencia.length}`], ...tipos.map(k => [k, `${k[0].toUpperCase() + k.slice(1)}s · ${n(k)}`])]
-    .map(([k, txt]) => `<button type="button" data-filtro="${k}" aria-pressed="${filtroEv === k}">${txt}</button>`).join("");
-  const filas = d.evidencia.filter(e => !filtroEv || sinAcentos(e.etiqueta) === filtroEv).map(e => `<div class="fila"><div>${t(e.afirmacion)}</div>
-    <div class="pie">${etiqueta(e.etiqueta)}<span>Fuente: ${t(e.fuente)}</span>${vacio(e.fecha) ? "<span>sin fecha</span>" : `<span>${t(e.fecha)}</span>`}</div></div>`).join("");
-  return `<div class="reparto" aria-hidden="true">${reparto}</div><div class="filtros">${botones}</div><div class="filas">${filas || '<p class="sub">Nada con esa etiqueta.</p>'}</div>`;
+function listaEvidencia(d) {
+  const tipos = ["dato", "supuesto", "esperanza"], n = k => d.evidencia.filter(e => sinAc(e.etiqueta) === k).length;
+  const bot = [["", `Todo · ${d.evidencia.length}`], ...tipos.map(k => [k, `${k[0].toUpperCase() + k.slice(1)}s · ${n(k)}`])].map(([k, x]) => `<button type="button" data-filtro="${k}" aria-pressed="${filtroEv === k}">${x}</button>`).join("");
+  return `<div class="filtros">${bot}</div><div class="filas">${d.evidencia.filter(e => !filtroEv || sinAc(e.etiqueta) === filtroEv).map(e => `<div class="fila"><div>${t(e.afirmacion)}</div><div class="p">${etiqueta(e.etiqueta)}<span>Fuente: ${t(e.fuente)}</span><span>${vacio(e.fecha) ? "sin fecha" : t(e.fecha)}</span></div></div>`).join("") || '<p class="sub">Nada con esa etiqueta.</p>'}</div>`;
 }
-function opciones(d) {
-  if (!d.opciones.length) return `<p>${FALTA}</p>`;
-  return `<div class="opciones">${d.opciones.map((o, i) => `<article class="opcion ${o.recomendada ? "rec" : ""} ${o.es_la_solicitud ? "pedida" : ""}">
-    <h4>${i + 1}. ${t(o.casilla)}${o.recomendada ? '<span class="marca-op rec">Recomendada</span>' : o.en_lista_corta ? '<span class="marca-op corta">Lista corta</span>' : ""}${o.es_la_solicitud ? '<span class="marca-op">Lo que pidieron</span>' : ""}</h4>
-    <p>${t(o.descripcion)}</p>
-    <dl><dt>Lo obligatorio</dt><dd>${t(o.obligatorio)}</dd><dt>Ajuste estratégico</dt><dd>${luz(o.ajuste)}</dd><dt>Valor por el dinero</dt><dd>${luz(o.valor)}</dd><dt>Se puede lograr</dt><dd>${luz(o.lograr)}</dd><dt>Es</dt><dd>${t(o.tipo)}</dd></dl>
-  </article>`).join("")}</div>`;
-}
-function proyecto(d) {
-  const p = d.proyecto, lin = a => a.map(l => `<div class="linea-v"><span>${t(l.linea)}</span><span class="r">${t(l.rango)}</span><span class="sub">${t(l.fuente)}</span><span>${etiqueta(l.tipo)}</span></div>`).join("");
-  return `<p class="grande">${t(p.nombre)}</p><p>${t(p.descripcion)}</p>
-    <p class="eti" style="margin-top:14px">Valor</p><div class="lineas">${p.valor.length ? lin(p.valor) : `<p>${FALTA}</p>`}</div>
-    <p class="eti" style="margin-top:14px">Costo</p><div class="lineas">${p.costo.length ? lin(p.costo) : `<p>${FALTA}</p>`}</div>
-    <div class="campos" style="margin-top:14px">${campo("Quién recibe el beneficio", p.beneficiario)}${campo("Efecto negativo", p.efecto_negativo)}</div>`;
-}
-function supuestos(d) {
-  const s = d.supuesto_clave;
-  return `<div class="clave"><span class="eti">El supuesto que cambia la decisión</span><p class="grande">${t(s.supuesto)}</p>
-    <div class="campos">${campo("Si resulta falso", s.si_es_falso)}${campo("La prueba más barata", s.prueba)}${campo("Fecha", s.fecha)}${campo("Dueño", s.dueno)}</div></div>
-    ${d.supuestos.length ? `<p class="eti" style="margin-top:14px">Otros supuestos del caso</p><div class="filas">${d.supuestos.map(x => `<div class="fila"><div>${t(x.supuesto)}</div>
-      <div class="pie">${etiqueta(x.etiqueta || "supuesto")}<span>Fuente: ${t(x.fuente)}</span><span>Dueño: ${t(x.dueno)}</span><span>Prueba: ${vacio(x.fecha_prueba) ? "sin fecha" : t(x.fecha_prueba)}</span></div></div>`).join("")}</div>` : ""}`;
-}
-function exito(d) {
-  const e = d.exito;
-  return `<div class="campos">${campo("Beneficio", e.beneficio)}${campo("Efecto negativo a vigilar", e.efecto_negativo)}</div>
-    <p class="eti" style="margin-top:14px">Indicador y el instrumento que lo mide</p>
-    ${e.indicadores.length ? e.indicadores.map(i => `<div class="indicador"><div>${t(i.indicador)}</div>
-      <div class="tramo-i"><span class="sub">hoy</span><b>${t(i.linea_base)}</b><span aria-hidden="true">→</span><span class="sub">meta</span><b>${t(i.meta)}</b><span class="sub">${vacio(i.plazo) ? "" : "en " + h(String(i.plazo).toLowerCase())}</span></div>
-      <div class="sub">Instrumento: ${t(i.fuente)}</div></div>`).join("") : `<p>${FALTA}</p>`}
-    <div class="campos" style="margin-top:14px">${campo("Examen intermedio", e.examen_intermedio)}${campo("Guardrail: lo que no debe empeorar", e.guardrail)}</div>
-    <p class="eti" style="margin-top:14px">Dueños</p>
-    <div class="campos">${campo("Quién recibe el beneficio", e.duenos.beneficio)}${campo("Quién lo mide", e.duenos.medicion)}${campo("Quién decide si hay desviación", e.duenos.desviaciones)}</div>`;
+const PRO = [
+  { id: "solicitud", t: "La solicitud", pmi: "Lo que se pidió, con las palabras de quien lo pidió. Es una hipótesis de solución, no el problema.", despues: "Queda como una opción más entre las que se comparan.",
+    cuerpo: d => `<p class="corta c3" style="font-style:italic">${cita(d.solicitud.texto)}</p>`,
+    detalle: d => `<p class="cita">${cita(d.solicitud.texto)}</p><div class="campos">${campo("Quién la pidió", d.solicitud.quien)}${campo("Cuándo", d.solicitud.cuando)}</div><div class="bloque"><h4>Ideas de solución estacionadas</h4>${lista(d.ideas_estacionadas)}</div>` },
+  { id: "problema", t: "El problema", pmi: "El encuadre con el que el equipo decidió avanzar, después de mirar la solicitud desde cinco ángulos.", despues: "Si la evidencia cambia, es el primer texto que hay que volver a leer.",
+    cuerpo: d => `<p class="corta c3">${t((d.encuadres.find(e => e.elegido) || {}).texto)}</p><p class="sub">${d.angulos.length} ángulos · ${d.encuadres.length} encuadres</p>`,
+    detalle: d => { const el = d.encuadres.find(e => e.elegido) || {}; return `<div class="bloque"><h4>Encuadre elegido</h4><p style="font-size:16px;font-weight:500">${t(el.texto)}</p>${vacio(el.por_que) ? "" : `<p class="sub">Por qué: ${t(el.por_que)}</p>`}</div>
+      <div class="bloque"><h4>Otros encuadres considerados</h4>${lista(d.encuadres.filter(e => !e.elegido).map(e => e.texto))}</div>
+      <div class="bloque"><h4>Cinco ángulos</h4><div class="filas">${d.angulos.map(a => `<div class="fila"><span class="eti">${h(a.angulo)}</span><div>${t(a.hallazgo)} ${etiqueta(a.etiqueta)}</div></div>`).join("") || FALTA}</div></div>
+      <div class="bloque"><h4>Preguntas abiertas</h4>${lista(d.preguntas_abiertas)}</div>`; } },
+  { id: "evidencia", t: "La evidencia", pmi: "Cada afirmación con su fuente y su etiqueta: dato, supuesto o esperanza.", despues: "Los supuestos se vigilan hasta que pasan a dato o se caen.",
+    cuerpo: d => { const n = k => d.evidencia.filter(e => sinAc(e.etiqueta) === k).length;
+      return `<div class="anillo">${dona([[n("dato"), "var(--acento)"], [n("supuesto"), "var(--aviso)"], [n("esperanza"), "var(--violeta)"]])}<div class="sub"><b style="color:var(--tinta)">${n("dato")}</b> datos<br><b style="color:var(--tinta)">${n("supuesto")}</b> supuestos<br><b style="color:var(--tinta)">${n("esperanza")}</b> esperanzas</div></div>`; },
+    detalle: d => `<div id="c-evidencia">${listaEvidencia(d)}</div>${vacio(d.linea_base) ? "" : `<div class="bloque"><h4>Línea base</h4><p>${t(d.linea_base)}</p></div>`}` },
+  { id: "opciones", t: "Las opciones", pmi: "Las alternativas que se compararon antes de recomendar una, incluida seguir como estamos.", despues: "Si el supuesto clave falla, aquí ya está escrita la opción que sigue.",
+    cuerpo: d => { const r = d.opciones.filter(o => o.recomendada).map(o => o.casilla); return `<div class="grande">${d.opciones.length} <span class="sub" style="font-weight:400">comparadas</span></div><p class="sub corta">Recomendada: ${r.length ? h(r.join(" + ")) : FALTA}</p>`; },
+    detalle: d => `<div class="bloque"><h4>Lo obligatorio</h4>${lista(d.obligatorio)}</div><div class="bloque">${d.opciones.map((o, i) => `<article class="opcion ${o.recomendada ? "rec" : ""} ${o.es_la_solicitud ? "pedida" : ""}">
+      <h5>${i + 1}. ${t(o.casilla)}${o.recomendada ? '<span class="sellito rec">Recomendada</span>' : o.en_lista_corta ? '<span class="sellito">Lista corta</span>' : ""}${o.es_la_solicitud ? '<span class="sellito">Lo que pidieron</span>' : ""}</h5><p style="font-size:13.5px">${t(o.descripcion)}</p>
+      <dl><dt>Lo obligatorio</dt><dd>${t(o.obligatorio)}</dd><dt>Ajuste estratégico</dt><dd>${luz(o.ajuste)}</dd><dt>Valor por el dinero</dt><dd>${luz(o.valor)}</dd><dt>Se puede lograr</dt><dd>${luz(o.lograr)}</dd><dt>Es</dt><dd>${t(o.tipo)}</dd></dl></article>`).join("") || FALTA}</div>` },
+];
+const TODOS = Object.fromEntries([...MOD, ...PRO].map(m => [m.id, m]));
+
+function tarjeta(m, d, s) {
+  const f = faltaEn(d, m.id), luego = m.id === "hitos" && !s;
+  return `<article class="mod ${luego ? "luego" : ""}" id="m-${m.id}"><header><h3>${ico(m.id)}${m.t}</h3>${f ? est("hueco", f === 1 ? "1 hueco" : f + " huecos") : ""}</header>
+    <div class="cuerpo">${m.cuerpo(d, s)}</div><div class="pie"><span>${luego ? "Capa 2 · módulo 2" : ""}</span><span>Ver detalle ${ico("ir")}</span></div>
+    <button type="button" class="abrir" data-abrir="${m.id}" aria-label="Ver detalle de ${m.t}"></button></article>`;
 }
 
-/* ------------------------------------------------------------ la página del acta */
-const CAPAS = [["Acta", "Módulo 1", "Por qué existe el proyecto y qué es éxito."], ["Plan", "Módulo 2", "Qué se entrega, cuándo y quién."], ["Pulso", "Módulo 3", "Qué pasó esta semana."], ["Torre", "Módulo 4", "Qué se está desviando y quién decide."]];
-const capas = () => `<div class="capas">${CAPAS.map(([n, m, d], i) => `<div class="capa ${i ? "luego" : "viva"}"><span class="eti">Capa ${i + 1} · ${m}${i ? " · próximamente" : " · hoy"}</span><b>${n}</b><span>${d}</span></div>`).join("")}</div>`;
-function acta(d, extra = "") {
-  const a = avance(d), s = sello(d.decision.resultado);
-  const tarjeta = c => `<section class="tarjeta ${c.ancho}" id="t-${c.id}"><header><h3>${c.titulo}</h3><button type="button" class="que" data-que="${c.id}" aria-expanded="false">¿Qué es esto?</button></header>
-    <div class="explica" id="e-${c.id}" hidden><p><b>Qué es.</b> ${c.que}</p><p><b>Por qué importa.</b> ${c.porque}</p><p><b>Qué pasa después.</b> ${c.despues}</p><p class="eti">${c.origen}</p></div>
-    <div id="c-${c.id}">${c.cuerpo(d)}</div></section>`;
-  return `<header class="banda"><div class="ancho">
-      <div><p class="eti">${[d.organizacion, d.equipo, d.fecha].filter(x => !vacio(x)).map(h).join(" · ") || "Acta del proyecto"}</p><h1>${t(d.iniciativa || d.proyecto.nombre)}</h1></div>
-      <div class="giro"><div class="lado pedido"><span class="eti">Nos pidieron</span><p>${cita(d.solicitud.texto)}</p></div><span class="flecha" aria-hidden="true">→</span><div class="lado destino"><span class="eti">Vamos a lograr</span><p>${t(d.b)}</p></div></div>
-      <div class="hechos"><span class="sello ${s.c}"><i></i>${h(s.t)}</span>${vacio(d.acta.decide) ? "" : `<span>Decide: <b>${h(d.acta.decide)}</b></span>`}${vacio(d.decision.limite) ? "" : `<span>Límite: <b>${h(d.decision.limite)}</b></span>`}
-        <span class="medidor"><span class="barra"><i style="width:${Math.round(100 * a.listos / a.total)}%"></i></span><span><b>${a.listos} de ${a.total}</b> partes listas${a.pc ? ` · <b>${a.pc}</b> por confirmar` : ""}</span></span></div>
-    </div></header>
-    <main class="ancho">${extra}${capas()}
-      ${[3, 4, 5].map(n => `<section class="tramo"><header><h2>${TRAMOS[n][0]}</h2><p>${TRAMOS[n][1]}</p></header><div class="rejilla">${T.filter(c => c.tramo === n).map(tarjeta).join("")}</div></section>`).join("")}
-      <p class="pie">Esta página solo muestra lo que el equipo escribió en su Framing Brief. No inventa ni completa nada: lo que falta se ve como «falta definir».</p>
-    </main>`;
+/* ------------------------------------------------------------ consola: decisión, firma, torre */
+function consola(d) {
+  const s = S(), a = avance(d), dec = d.decision, se = sello(dec.resultado), cajas = [];
+  if (sel) cajas.push(`<section class="caja ficha"><header><h3>${h(sel.tipo)}</h3><button type="button" class="enlace" id="quitar-sel">Cerrar</button></header>${sel.html}</section>`);
+  if (s) {
+    const [cl, tx] = SALUD[s.salud], ev = s.hoy;
+    cajas.push(`<section class="caja"><header><h3>Torre · semana ${s.w} de ${SIM.semanas}</h3><span class="eti">simulación</span></header>
+      <div class="sello ${cl === "ok" ? "go" : cl === "aviso" ? "espera" : cl === "critico" ? "no" : ""}"><span class="lamp">${ico(cl === "ok" ? "si" : cl === "hueco" ? "punto" : "riesgos")}</span><div><strong>${tx}</strong><span class="sub">${s.eventos.length} eventos registrados</span></div></div>
+      <div class="kpis"><div class="kpi"><b>${s.real}%</b><span>avance · plan ${s.plan}%</span></div><div class="kpi"><b>$${s.gReal}</b><span>mil gastados · plan $${s.gPlan}</span></div><div class="kpi"><b>${s.ind(0)}%</b><span>contactos de estatus</span></div></div>
+      ${ev.length ? ev.map(e => `<div class="evento ${e.tipo}"><span class="eti">${TIPO_EV[e.tipo]}</span><b>${h(e.titulo)}</b><p>${h(e.texto)}</p></div>`).join("") : `<div class="evento"><p>${s.w === 0 ? "Semana 0: el acta está firmada. Todavía no hay plan ni pulso." : "Sin novedades esta semana."}</p></div>`}</section>`);
+  }
+  cajas.push(`<section class="caja" id="m-decision"><header><h3>${ico("firma")}Decisión</h3><button type="button" class="enlace" data-abrir="decision">Ver detalle</button></header>
+    <div class="sello ${se.c}"><span class="lamp">${ico(se.i)}</span><div><strong>${se.t}</strong><span class="sub">${vacio(dec.quien) ? "" : h(dec.quien)}</span></div></div>
+    <dl class="dl"><dt>Autoriza</dt><dd>${t(dec.autoriza)}</dd><dt>Límite</dt><dd>${t(dec.limite)}</dd><dt>Se revisa</dt><dd>${t(dec.siguiente_revision)}</dd></dl>
+    <div class="puestos"><div class="puesto"><span>${t(d.acta.decide)}</span>${est("ok", "decide")}</div>${d.acta.vetos.map(v => `<div class="puesto"><span>${t(v)}</span>${est("aviso", "puede vetar")}</div>`).join("")}</div></section>`);
+  if (!s) cajas.push(`<section class="caja" id="m-firma"><header><h3>Lista para firma</h3></header><div class="medidor">${arco(a.listos / a.total, a.listos === a.total ? "var(--ok)" : "var(--acento)")}
+    <div><div class="n">${a.listos}<span class="sub" style="font-weight:400"> de ${a.total}</span></div><p class="sub">partes completas${a.pc ? ` · ${a.pc} por confirmar` : ""}</p>
+    <button type="button" class="enlace" data-abrir="firma" style="margin-top:4px;font-size:13px">Ver lo que falta</button></div></div></section>`);
+  return cajas.join("");
 }
+const EXTRA = {
+  decision: { t: "Decisión", ic: "firma", pmi: "El acta autoriza formalmente el proyecto. El caso dice «conviene apostar»; el acta dice «quién puede gastar y hasta cuánto».", despues: "Es la primera entrada del registro de decisiones. Las siguientes se agregan debajo; nunca la reemplazan.",
+    detalle: d => { const x = d.decision; return `<p style="font-size:17px;font-weight:500">${t(x.texto)}</p><div class="campos">${campo("Quién decidió", x.quien)}${campo("Qué autoriza", x.autoriza)}${campo("Límite", x.limite)}${campo("Dueño del siguiente paso", x.dueno_siguiente_paso)}${campo("Cuándo se vuelve a revisar", x.siguiente_revision)}</div>
+      <div class="bloque"><h4>Pueden vetar</h4>${lista(d.acta.vetos)}</div>`; } },
+  firma: { t: "Lo que falta para firmar", ic: "si", pmi: "Un acta con huecos a la vista es más útil que una que parece completa.", despues: "Cada hueco cerrado deja al equipo más cerca de un acta que alguien puede firmar.",
+    detalle: d => { const a = avance(d); return `<div class="bloque"><h4>Lo ve esta página</h4>${a.faltan.length ? `<ul>${a.faltan.map(x => `<li>${h(x[0])}</li>`).join("")}</ul>` : '<p class="sub">Todas las partes tienen contenido.</p>'}</div>
+      <div class="bloque"><h4>Lo encontró la skill en su revisión final</h4>${d.huecos.length ? lista(d.huecos) : '<p class="sub">La skill no listó huecos.</p>'}</div>`; } },
+};
+
+/* ------------------------------------------------------------ cajón */
+let abierto = null;
+function abrir(id) {
+  const m = TODOS[id] || EXTRA[id]; if (!m || !actual) return; abierto = id;
+  $("#capa-cajon").innerHTML = `<div class="velo" data-cerrar></div><aside class="cajon" role="dialog" aria-label="${h(m.t)}"><header><h2>${ico(m.ic || id)}${m.t}</h2><button type="button" class="cerrar" data-cerrar aria-label="Cerrar">${ico("no")}</button></header>
+    <div class="nota"><p><b>Qué es.</b> ${m.pmi}</p><p><b>Más adelante, en la torre.</b> ${m.despues}</p></div>${m.detalle(actual, S())}</aside>`;
+}
+function cerrar() { abierto = null; $("#capa-cajon").innerHTML = ""; }
+document.addEventListener("keydown", e => { if (e.key === "Escape" && abierto) cerrar(); });
+
+/* ------------------------------------------------------------ escena 3D */
+const Escena = (() => {
+  let R = null;
+  function quitar() { if (!R) return; cancelAnimationFrame(R.raf); R.obs.forEach(o => o.disconnect()); R.fuera(); R.renderer.dispose(); R = null; }
+  function montar(el, d, conSim, alElegir) {
+    quitar();
+    const T = window.THREE; let renderer;
+    const canvas = document.createElement("canvas"), capa = document.createElement("div"); capa.className = "rotulos";
+    try { if (!T) throw 0; renderer = new T.WebGLRenderer({ canvas, antialias: true, alpha: true }); } catch (_) { el.innerHTML = '<p class="sin3d">La vista de ruta no está disponible en este navegador. Los módulos de abajo tienen toda la información.</p>'; return; }
+    el.innerHTML = ""; el.append(canvas, capa);
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+    const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim(), col = n => new T.Color(css(n));
+    const C = { tinta: col("--p-tinta"), t2: col("--p-tinta-2"), t3: col("--p-tinta-3"), linea: col("--p-linea"), plan: col("--p-plan"), meta: col("--p-meta"), ok: col("--p-ok"), aviso: col("--p-aviso"), critico: col("--p-critico"), fondo: col("--p-fondo") };
+    const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const scene = new T.Scene(), cam = new T.PerspectiveCamera(36, 2, .1, 400); scene.fog = new T.Fog(C.fondo, 48, 125);
+    const N = 12, LX = 26, LY = 8, X = w => (w / N - .5) * LX, Y = p => p / 100 * LY, V = (x, y, z) => new T.Vector3(x, y, z);
+    const brillo = (() => { const k = document.createElement("canvas"); k.width = k.height = 64; const g = k.getContext("2d"), r = g.createRadialGradient(32, 32, 0, 32, 32, 32); r.addColorStop(0, "rgba(255,255,255,1)"); r.addColorStop(.3, "rgba(255,255,255,.45)"); r.addColorStop(1, "rgba(255,255,255,0)"); g.fillStyle = r; g.fillRect(0, 0, 64, 64); return new T.CanvasTexture(k); })();
+    const halo = (c, s, o = .85) => { const sp = new T.Sprite(new T.SpriteMaterial({ map: brillo, color: c, transparent: true, depthWrite: false, opacity: o, blending: T.AdditiveBlending })); sp.scale.set(s, s, 1); return sp; };
+    const mat = (c, o = 1, x = {}) => new T.MeshBasicMaterial({ color: c, transparent: o < 1, opacity: o, depthWrite: o >= 1, ...x });
+    const linea = (pts, c, o = 1, dash) => { const g = new T.BufferGeometry().setFromPoints(pts), m = dash ? new T.LineDashedMaterial({ color: c, transparent: true, opacity: o, dashSize: dash, gapSize: dash * .8 }) : new T.LineBasicMaterial({ color: c, transparent: o < 1, opacity: o }); const l = new T.Line(g, m); if (dash) l.computeLineDistances(); return l; };
+    const gBase = new T.Group(), gGuia = new T.Group(), gSim = new T.Group(); scene.add(gBase, gGuia, gSim); gSim.visible = false;
+    const objs = {}, rot = [], picks = [], porSem = [], angosto = el.clientWidth < 560;
+    function rotulo(id, txt, pos, fijo) { const b = document.createElement(fijo ? "span" : "button"); b.className = "rot" + (fijo ? " fijo" : ""); b.textContent = txt; if (!fijo) { b.type = "button"; b.dataset.obj = id; } capa.appendChild(b); rot.push({ el: b, pos, id }); return b; }
+    function registrar(id, mesh, pos, txt, grupo, menor) { mesh.userData.id = id; picks.push(mesh); objs[id] = { mesh, pos, grupo: grupo || gBase }; if (txt) { const b = rotulo(id, txt, pos.clone().add(V(0, .95, 0))); if (menor || (angosto && !["hoy", "meta", "apuesta"].includes(id))) b.classList.add("menor"); }
+      const toque = new T.Mesh(new T.SphereGeometry(.7, 8, 6), mat(C.fondo, 0)); toque.position.copy(pos); toque.userData.id = id; (grupo || gBase).add(toque); picks.push(toque); }
+
+    // mesa
+    const RAD = LX * .78;
+    for (let i = 1; i <= 4; i++) { const p = []; for (let a = 0; a <= 96; a++) p.push(V(Math.cos(a / 96 * 6.2832) * RAD * i / 4, 0, Math.sin(a / 96 * 6.2832) * RAD * i / 4)); gBase.add(linea(p, C.linea, i === 4 ? .9 : .55)); }
+    for (let a = 0; a < 8; a++) gBase.add(linea([V(0, 0, 0), V(Math.cos(a / 8 * 6.2832) * RAD, 0, Math.sin(a / 8 * 6.2832) * RAD)], C.linea, .35));
+    const barrido = new T.Mesh(new T.CircleGeometry(RAD, 20, 0, .45), mat(C.meta, .03, { side: T.DoubleSide })); barrido.rotation.x = -Math.PI / 2; barrido.position.y = .01; gBase.add(barrido);
+    gBase.add(linea([V(X(0), 0, 0), V(X(N + 1.4), 0, 0)], C.t3, .6));
+    for (let w = 0; w <= N; w++) { gBase.add(linea([V(X(w), 0, -.3), V(X(w), 0, .3)], C.t3, .7)); if (conSim && w && w % 2 === 0) rotulo("", "sem " + w, V(X(w), 0, -1.2), true); }
+    // hoy y meta
+    const aro = new T.Mesh(new T.TorusGeometry(.5, .05, 8, 36), mat(C.t2)); aro.rotation.x = Math.PI / 2; aro.position.set(X(0), .03, 0); gBase.add(aro); registrar("hoy", aro, V(X(0), .1, 0), "Hoy");
+    const meta = new T.Mesh(new T.TorusGeometry(1, .06, 10, 56), mat(C.meta)); meta.rotation.y = Math.PI / 2; meta.position.set(X(N), LY, 0); gBase.add(meta, linea([V(X(N), 0, 0), V(X(N), LY - 1, 0)], C.meta, .4, .25));
+    const hm = halo(C.meta, 3.6, .6); hm.position.copy(meta.position); gBase.add(hm); registrar("meta", meta, V(X(N), LY + .6, 0), "La meta");
+    gGuia.add(linea([V(X(0), 0, 0), V(X(N), LY, 0)], C.t2, .75, .35));
+    // puntos de control del acta
+    const enRuta = f => V(X(N * f), LY * f, 0);
+    const puerta = (id, f, txt) => { const m = new T.Mesh(new T.TorusGeometry(.42, .035, 8, 28), mat(C.tinta)); m.rotation.y = Math.PI / 2; m.position.copy(enRuta(f)); gGuia.add(m, linea([V(X(N * f), 0, 0), enRuta(f)], C.t3, .5, .2)); registrar(id, m, enRuta(f), txt, gGuia); };
+    if (!vacio(d.decision.siguiente_revision)) puerta("revision", .17, "Revisión");
+    if (!vacio(d.exito.examen_intermedio)) puerta("examen", .34, "Examen intermedio");
+    // supuestos: balizas al frente
+    const baliza = (id, x, z, alto, r, txt) => { const luz = new T.Mesh(new T.SphereGeometry(r, 16, 12), mat(C.t2)), hl = halo(C.t2, r * 7, .7); luz.position.set(x, alto, z); hl.position.copy(luz.position); gBase.add(luz, hl, linea([V(x, 0, z), V(x, alto, z)], C.t3, .7)); registrar(id, luz, luz.position, txt, gBase, id !== "apuesta"); objs[id].hl = hl; };
+    if (!vacio(d.supuesto_clave.supuesto)) baliza("apuesta", X(3.1), 4.6, 2.3, .3, "La apuesta");
+    d.supuestos.slice(0, 4).forEach((s, i) => baliza("sup-" + i, X(4.6 + i * 1.5), 5.6 + (i % 2) * 1.2, 1.3, .17, recorta(s.supuesto, 24)));
+    // riesgos: celdas al fondo
+    d.premortem.slice(0, 4).forEach((r, i) => { const x = X(3.4 + i * 2.7), z = -8.5 - (i % 2) * 2.4, y = LY * .58 + (i % 2) * 1.3, rad = .62;
+      const jaula = new T.Mesh(new T.IcosahedronGeometry(rad, 1), mat(C.t2, .85, { wireframe: true })), nuc = new T.Mesh(new T.IcosahedronGeometry(rad * .5, 1), mat(C.t2, .3));
+      jaula.position.set(x, y, z); nuc.position.copy(jaula.position); gBase.add(jaula, nuc, linea([V(x, 0, z), V(x, y - rad, z)], C.t3, .3, .2)); registrar("riesgo-" + i, jaula, jaula.position, recorta(r, 24)); objs["riesgo-" + i].nuc = nuc; objs["riesgo-" + i].rad = rad; });
+
+    // capas simuladas: plan, ruta real, señales y decisiones
+    let cPlan, cReal, segs = [], cintas = [], avion, sombra, fantasma, huella, pron;
+    if (conSim && SIM) {
+      const deriva = w => Math.max(0, (SIM.gasto_real[w] / 400 - SIM.real[w] / 100)) * 15;
+      cPlan = new T.CatmullRomCurve3(SIM.plan.map((p, w) => V(X(w), Y(p), 0)));
+      const tubo = new T.Mesh(new T.TubeGeometry(cPlan, 140, .05, 8), mat(C.plan, .95)); tubo.userData.id = "ruta"; picks.push(tubo); gSim.add(tubo);
+      const pp = cPlan.getPoints(48), tela = []; for (let i = 0; i < pp.length - 1; i++) { const a = pp[i], b = pp[i + 1]; tela.push(a.x, a.y, 0, a.x, 0, 0, b.x, b.y, 0, b.x, b.y, 0, a.x, 0, 0, b.x, 0, 0); }
+      const tg = new T.BufferGeometry(); tg.setAttribute("position", new T.Float32BufferAttribute(tela, 3)); gSim.add(new T.Mesh(tg, mat(C.plan, .06, { side: T.DoubleSide })));
+      SIM.hitos.forEach((x, i) => { const p = V(X(x.plan), Y(SIM.plan[Math.min(N, x.plan)]), 0), m = new T.Mesh(new T.OctahedronGeometry(.24), mat(C.plan)); m.position.copy(p); gSim.add(m); registrar("hito-" + i, m, p, "", gSim); });
+      cReal = new T.CatmullRomCurve3(SIM.real.map((p, w) => V(X(w), Y(p), deriva(w))));
+      for (let i = 0; i < N; i++) { const sub = []; for (let k = 0; k <= 8; k++) sub.push(cReal.getPoint((i + k / 8) / N));
+        const c = { verde: C.ok, ambar: C.aviso, rojo: C.critico }[SIM.salud[i + 1]] || C.tinta, tb = new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(sub), 10, .09, 8), mat(c)); tb.userData.id = "ruta"; picks.push(tb); gSim.add(tb); segs.push(tb);
+        const q = []; for (let k = 0; k < 8; k++) { const a = sub[k], b = sub[k + 1], pa = cPlan.getPoint((i + k / 8) / N), pb = cPlan.getPoint((i + (k + 1) / 8) / N); q.push(a.x, a.y, a.z, pa.x, pa.y, pa.z, b.x, b.y, b.z, b.x, b.y, b.z, pa.x, pa.y, pa.z, pb.x, pb.y, pb.z); }
+        const cg = new T.BufferGeometry(); cg.setAttribute("position", new T.Float32BufferAttribute(q, 3)); const ci = new T.Mesh(cg, mat(c, .15, { side: T.DoubleSide })); gSim.add(ci); cintas.push(ci); }
+      huella = linea(cReal.getPoints(N * 8).map(p => V(p.x, .03, p.z)), C.t2, .6); gSim.add(huella);
+      avion = new T.Group(); const cono = new T.Mesh(new T.ConeGeometry(.2, .72, 14), mat(C.tinta)); cono.rotation.z = -Math.PI / 2; cono.userData.id = "ruta"; picks.push(cono); avion.add(cono, halo(C.tinta, 2.6)); gSim.add(avion);
+      sombra = new T.Mesh(new T.RingGeometry(.2, .28, 24), mat(C.t2, .8, { side: T.DoubleSide })); sombra.rotation.x = -Math.PI / 2; gSim.add(sombra);
+      fantasma = new T.Mesh(new T.TorusGeometry(.26, .03, 8, 24), mat(C.plan)); fantasma.rotation.y = Math.PI / 2; gSim.add(fantasma);
+      const pila = {};
+      SIM.eventos.forEach((e, k) => {
+        if (e.tipo === "decision") { const base = cReal.getPoint(e.w / N), m = new T.Mesh(new T.OctahedronGeometry(.26), mat(C.tinta)); m.position.copy(base).add(V(0, .7, 0)); m.userData = { id: "evento-" + k, w: e.w }; picks.push(m);
+          const p = linea([V(base.x, 0, base.z), base.clone()], C.tinta, .5); p.userData.w = e.w; gSim.add(m, p); porSem.push(m, p); objs["evento-" + k] = { mesh: m, pos: m.position, grupo: gSim }; }
+        else if (e.tipo !== "logro" && objs[e.a]) { const o = objs[e.a], n = pila[e.a] = (pila[e.a] || 0) + 1, abajo = !!o.rad, c = e.tipo === "alerta" ? C.critico : C.aviso, m = new T.Mesh(new T.SphereGeometry(.12, 10, 8), mat(c));
+          m.position.copy(o.pos).add(V(0, abajo ? -(o.rad + .1 + .32 * n) : .2 + .34 * n, 0)); m.userData = { id: "evento-" + k, w: e.w }; picks.push(m); const hl = halo(c, 1); hl.position.copy(m.position); hl.userData.w = e.w;
+          gSim.add(m, hl); porSem.push(m, hl); objs["evento-" + k] = { mesh: m, pos: m.position, grupo: gSim }; }
+      });
+    }
+    const marca = halo(C.meta, 2.4, .9); marca.visible = false; scene.add(marca);
+
+    let wf = 0, wObj = 0, simOn = false, elegido = null;
+    function pintaSemana(w) {
+      const s = simOn ? S() : null, c = e => ({ ok: C.ok, aviso: C.aviso, critico: C.critico }[CLS[e]] || C.t2);
+      const tinte = (o, k) => { if (!o) return; o.mesh.material.color.copy(k); if (o.hl) o.hl.material.color.copy(k); if (o.nuc) o.nuc.material.color.copy(k); };
+      tinte(objs.apuesta, s ? c(s.clave) : C.t2); d.supuestos.slice(0, 4).forEach((_, i) => tinte(objs["sup-" + i], s ? c(s.sup(i)) : C.t2));
+      d.premortem.slice(0, 4).forEach((_, i) => { const o = objs["riesgo-" + i]; if (!o) return; tinte(o, s ? c(s.riesgo(i)) : C.t2); o.vivo = !!s && s.riesgo(i) === "ocurrió"; });
+      if (s) s.hitos.forEach((x, i) => objs["hito-" + i] && objs["hito-" + i].mesh.material.color.copy(x.hecho ? C.ok : x.tarde ? C.aviso : C.plan));
+      porSem.forEach(o => o.visible = o.userData.w <= w);
+      if (pron) { gSim.remove(pron); pron.geometry.dispose(); pron = null; }
+      if (s && cReal && w < N) { const a = cReal.getPoint(w / N); pron = linea([a, V(X(N + 1), LY, a.z * 1.15)], C.t2, .85, .28); gSim.add(pron); }
+    }
+    function semana(w) { wObj = w; pintaSemana(w); }
+    function simular(on) { simOn = on && !!cReal; gSim.visible = simOn; gGuia.visible = !simOn; wObj = simOn ? sim.w : 0; if (!simOn) wf = 0; pintaSemana(wObj); }
+    function elegir(id) { elegido = objs[id] ? id : null; rot.forEach(r => r.el.classList.toggle("sel", !!id && r.id === id)); marca.visible = !!elegido; }
+
+    let az = -.5, pol = 1.12, radio = 34, azO = az, polO = pol, manual = 0, arr = null, movio = false;
+    function encuadrar() { const w = el.clientWidth, hh = el.clientHeight; if (!w || !hh) return; renderer.setSize(w, hh, false); cam.aspect = w / hh; cam.updateProjectionMatrix(); const hf = Math.atan(Math.tan(cam.fov * Math.PI / 360) * cam.aspect); radio = Math.max(30, Math.min(84, LX * .7 / Math.tan(hf))); }
+    el.addEventListener("pointerdown", e => { arr = { x: e.clientX, y: e.clientY, az: azO, pol: polO, tactil: e.pointerType === "touch" }; movio = false; });
+    const suelta = () => { arr = null; }; addEventListener("pointerup", suelta); addEventListener("pointercancel", suelta);
+    const rayo = new T.Raycaster(), raton = new T.Vector2();
+    const visible = o => { for (let g = o; g; g = g.parent) if (!g.visible) return false; return true; };
+    const bajo = e => { const r = canvas.getBoundingClientRect(); raton.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); rayo.setFromCamera(raton, cam); const hit = rayo.intersectObjects(picks.filter(visible), false)[0]; return hit ? hit.object.userData.id : null; };
+    el.addEventListener("pointermove", e => { if (arr) { if (Math.abs(e.clientX - arr.x) + Math.abs(e.clientY - arr.y) > 5) movio = true; manual = performance.now(); azO = arr.az - (e.clientX - arr.x) * .006; if (!arr.tactil) polO = Math.max(.55, Math.min(1.45, arr.pol - (e.clientY - arr.y) * .004)); return; } el.style.cursor = bajo(e) ? "pointer" : ""; });
+    el.addEventListener("click", e => { if (movio) return; const b = e.target.closest("[data-obj]"), id = b ? b.dataset.obj : e.target === canvas ? bajo(e) : null; if (id) alElegir(id); });
+    const proy = new T.Vector3();
+    function ciclo(tm) {
+      R.raf = requestAnimationFrame(ciclo); if (!R.visible) return;
+      wf += (wObj - wf) * (quieto ? 1 : .1); if (Math.abs(wObj - wf) < .003) wf = wObj;
+      if (gSim.visible) { segs.forEach((s, i) => s.visible = i < Math.ceil(wf - .001)); cintas.forEach((s, i) => s.visible = i < Math.ceil(wf - .001)); huella.geometry.setDrawRange(0, Math.max(2, Math.round(wf * 8) + 1));
+        const u = Math.min(1, wf / N), p = cReal.getPoint(u); avion.position.copy(p); avion.quaternion.setFromUnitVectors(V(1, 0, 0), cReal.getTangent(Math.min(.999, u)).normalize()); sombra.position.set(p.x, .03, p.z); fantasma.position.copy(cPlan.getPoint(u)); }
+      if (!quieto) { barrido.rotation.z = -tm * .0003; Object.values(objs).forEach(o => { if (o.nuc) { o.mesh.rotation.y = tm * .0002; o.mesh.scale.setScalar(o.vivo ? 1 + Math.sin(tm * .006) * .14 : 1); } }); }
+      if (elegido) { marca.position.copy(objs[elegido].pos); const k = 2.2 + (quieto ? 0 : Math.sin(tm * .005) * .35); marca.scale.set(k, k, 1); }
+      const idle = quieto || performance.now() - manual < 6000 ? 0 : Math.sin(tm * .00016) * .14; az += (azO + idle - az) * .08; pol += (polO - pol) * .08;
+      const c = V(X(N / 2) + .6, LY * .36, .8); cam.position.set(c.x + radio * Math.sin(pol) * Math.sin(az), c.y + radio * Math.cos(pol), c.z + radio * Math.sin(pol) * Math.cos(az)); cam.lookAt(c);
+      renderer.render(scene, cam);
+      const w = el.clientWidth, hh = el.clientHeight;
+      for (const r of rot) { const o = objs[r.id]; if ((o && !o.grupo.visible) || (!o && !gSim.visible)) { r.el.hidden = true; continue; }
+        proy.copy(r.pos).project(cam); const fuera = proy.z > 1 || Math.abs(proy.x) > 1 || Math.abs(proy.y) > 1; r.el.hidden = fuera; if (!fuera) r.el.style.transform = `translate(-50%,-50%) translate(${((proy.x + 1) / 2 * w).toFixed(1)}px,${((1 - proy.y) / 2 * hh).toFixed(1)}px)`; }
+    }
+    const io = new IntersectionObserver(en => { if (R) R.visible = en[0].isIntersecting; }), ro = new ResizeObserver(encuadrar); io.observe(el); ro.observe(el);
+    R = { renderer, raf: 0, visible: true, obs: [io, ro], semana, simular, elegir, fuera() { removeEventListener("pointerup", suelta); removeEventListener("pointercancel", suelta); } };
+    encuadrar(); pintaSemana(0); R.raf = requestAnimationFrame(ciclo);
+  }
+  return { montar, quitar, semana: w => R && R.semana(w), simular: on => R && R.simular(on), elegir: id => R && R.elegir(id) };
+})();
+
+/* lo que se muestra al tocar un objeto de la pantalla */
+let sel = null;
+function fichaDe(id, d) {
+  const s = S(), p = (a, b) => `<p><b style="font-weight:600">${a}</b> ${b}</p>`;
+  if (id === "hoy") return { tipo: "Hoy · estado actual", html: `<p>${t(d.a)}</p>`, mod: "proposito" };
+  if (id === "meta") return { tipo: "La meta · estado deseado", html: `<p style="font-weight:500">${t(d.b)}</p>${d.exito.indicadores.slice(0, 2).map((x, i) => pista(x, s ? s.ind(i) : null)).join("")}`, mod: "exito" };
+  if (id === "apuesta") return { tipo: "La apuesta · supuesto clave", html: `<p style="font-weight:500">${t(d.supuesto_clave.supuesto)}</p>${s ? `<p>${est(CLS[s.clave], s.clave)}</p>` : ""}${p("Prueba:", t(d.supuesto_clave.prueba))}${p("Si resulta falso:", t(d.supuesto_clave.si_es_falso))}`, mod: "supuestos" };
+  if (id === "examen") return { tipo: "Punto de control", html: `${p("Examen intermedio:", t(d.exito.examen_intermedio))}${s ? p("Semana " + s.w + ":", `${s.examen}% de avisos entregados, contra ${SIM.examen.meta}% de meta.`) : ""}`, mod: "exito" };
+  if (id === "revision") return { tipo: "Punto de control", html: p("Siguiente revisión:", t(d.decision.siguiente_revision)), mod: "decision" };
+  if (id === "ruta") return { tipo: "Cómo se lee la ruta", html: `${p("Altura:", "cuánto del trabajo está terminado. Cada hito pesa una parte del proyecto.")}${p("Línea magenta:", "lo que el plan decía para esa semana.")}${p("Deriva hacia el frente:", "gasto por encima del valor del trabajo terminado.")}${s ? p("Semana " + s.w + ":", `avance ${s.real}% contra ${s.plan}% planeado; gastado $${s.gReal} mil contra $${s.gPlan} mil planeados.`) : ""}` };
+  let m;
+  if ((m = /^sup-(\d+)$/.exec(id))) { const x = d.supuestos[+m[1]]; return { tipo: "Supuesto", html: `<p style="font-weight:500">${t(x.supuesto)}</p>${s ? `<p>${est(CLS[s.sup(+m[1])], s.sup(+m[1]))}</p>` : ""}${p("Dueño:", t(x.dueno))}`, mod: "supuestos" }; }
+  if ((m = /^riesgo-(\d+)$/.exec(id))) return { tipo: "Riesgo", html: `<p style="font-weight:500">${t(d.premortem[+m[1]])}</p>${s ? `<p>${est(CLS[s.riesgo(+m[1])], s.riesgo(+m[1]))}</p>` : '<p class="sub">Del pre-mortem del equipo.</p>'}`, mod: "riesgos" };
+  if ((m = /^hito-(\d+)$/.exec(id))) { const x = SIM.hitos[+m[1]]; return { tipo: "Hito del plan", html: `<p style="font-weight:500">${h(x.hito)}</p>${p("Plan:", "semana " + x.plan)}${p(x.real <= (s ? s.w : 0) ? "Terminado:" : "Pronóstico:", "semana " + x.real)}`, mod: "hitos" }; }
+  if ((m = /^evento-(\d+)$/.exec(id))) { const e = SIM.eventos[+m[1]]; return { tipo: TIPO_EV[e.tipo] + " · semana " + e.w, html: `<p style="font-weight:500">${h(e.titulo)}</p><p>${h(e.texto)}</p>` }; }
+  return null;
+}
+function elegirObjeto(id) { const f = fichaDe(id, actual); if (!f) return; sel = { id, tipo: f.tipo, mod: f.mod, html: f.html + (f.mod ? `<p><button type="button" class="enlace" data-abrir="${f.mod}" style="font-size:13px">Ver el módulo completo</button></p>` : "") }; Escena.elegir(id); $("#consola").innerHTML = consola(actual); }
 
 /* ------------------------------------------------------------ vistas */
-let vista = "como-funciona", actual = null, guia = -1;
-const guardado = { leer() { try { return localStorage.getItem("pos-bloque") || ""; } catch (_) { return ""; } }, poner(v) { try { v ? localStorage.setItem("pos-bloque", v) : localStorage.removeItem("pos-bloque"); } catch (_) { /* sin almacenamiento: la página sigue funcionando */ } } };
+let vista = "como-funciona", actual = null, guia = -1, pasoSkill = 0;
+const guardado = { leer() { try { return localStorage.getItem("pos-bloque") || ""; } catch (_) { return ""; } }, poner(v) { try { v ? localStorage.setItem("pos-bloque", v) : localStorage.removeItem("pos-bloque"); } catch (_) { /* la página funciona igual sin almacenamiento */ } } };
 let bloqueEquipo = guardado.leer(), errorEquipo = "";
-
-function comoFunciona() {
-  return `<main class="ancho">
-    <div class="intro"><p class="eti">Project Operating System</p><h1>Todo lo que tu equipo sabe, decidió y vigila de su proyecto, en un solo lugar</h1>
-      <p>El POS crece una capa por módulo. Hoy construyes la primera: el acta. No es un documento para archivar; es lo que después usan tu plan, tus reportes y tus agentes de IA para saber qué importa.</p></div>
-    ${capas()}
-    <section class="tramo"><header><h2>Cómo llega tu acta a esta página</h2><p>Sin instalar nada.</p></header>
-      <ol class="pasos">
-        <li><b>La skill arma tu Framing Brief</b><span>Con @framing brief: primero el problema (v0), luego el caso de negocio (v1) y hoy el acta (v2).</span></li>
-        <li><b>Te entrega un bloque POS</b><span>Es tu Brief v2 en un formato que esta página sabe leer. Lo copias del chat.</span></li>
-        <li><b>Lo pegas en «Mi equipo»</b><span>Y ves tu acta completa, con lo que falta marcado a la vista.</span></li>
-        <li><b>Cierras un hueco</b><span>Eliges algo que falta, lo resuelves con tu equipo y vuelves a pegar el bloque.</span></li>
-      </ol>
-      <div class="botones"><button type="button" class="btn primario" id="ir-guia">Ver el ejemplo paso a paso</button><a class="btn" href="#mi-equipo">Cargar el acta de mi equipo</a></div>
-    </section>
-    <section class="tramo"><header><h2>Lo que viene: para qué sirve cada parte del acta</h2><p>Lo que escribes hoy es lo que la torre de control vigila en el módulo 4.</p></header>
-      <div class="tarjeta"><div class="usos">
-        ${[["Tu supuesto clave", "Con su prueba, su fecha y su dueño.", "Si la prueba se vence o el supuesto falla, avisa a quien decide."],
-           ["Tus indicadores de éxito", "Con línea base, meta y fuente.", "Se miden cada semana. Si salen de rango o dejan de medirse, hay alerta."],
-           ["Tu pre-mortem", "Lo que podría salir mal.", "Cada punto se vuelve un riesgo con su señal temprana."],
-           ["Tus límites", "Dentro, fuera y restricciones.", "Un cambio que los mueve se registra y lo aprueba quien decide."],
-           ["Quién decide", "Una persona con nombre.", "A esa persona le llega el brief cuando algo necesita decisión."],
-           ["Los permisos de la IA", "Puede, pregunta antes, nunca.", "Son las reglas del agente que mantiene el POS al día."]]
-          .map(([a, b, c]) => `<div class="uso"><b>${a}</b><span><span class="eti">Hoy, en el acta</span>${b}</span><span><span class="eti">Después, en la torre</span>${c}</span></div>`).join("")}
-      </div></div>
-    </section></main>`;
+const CAPAS = [["Acta", "Módulo 1", "Por qué existe el proyecto y qué es éxito", "firma"], ["Plan", "Módulo 2", "Qué se entrega, cuándo y quién", "hitos"], ["Pulso", "Módulo 3", "Qué pasó esta semana", "evidencia"], ["Torre", "Módulo 4", "Qué se desvía y quién decide", "proposito"]];
+const rail = n => `<div class="rail">${CAPAS.map(([a, m, x, ic], i) => `<div class="${i < n ? "viva" : ""}"><span class="eti">Capa ${i + 1} · ${m}</span><b>${ico(ic)}${a}</b><span>${x}</span></div>`).join("")}</div>`;
+function simbar() {
+  if (!sim.on) return `<div class="fila"><button type="button" class="jugar" id="sim-on"><svg viewBox="0 0 12 12"><path d="M2 1v10l9-5z"/></svg>Ver lo que viene: simular 12 semanas</button><span class="txt">Hoy tienes la capa 1: el acta. Esto muestra lo que agregan el plan, el pulso y la torre.</span></div>`;
+  const ev = SIM.eventos.filter(e => e.w === sim.w)[0];
+  return `<div class="fila"><button type="button" class="jugar" id="sim-jugar">${sim.reloj ? '<svg viewBox="0 0 12 12"><path d="M2 1h3v10H2zM7 1h3v10H7z"/></svg>Pausa' : '<svg viewBox="0 0 12 12"><path d="M2 1v10l9-5z"/></svg>Reproducir'}</button>
+    <div class="semanas" role="group" aria-label="Semana">${Array.from({ length: SIM.semanas + 1 }, (_, w) => `<button type="button" class="sem ${SIM.eventos.some(e => e.w === w) ? "ev" : ""}" data-w="${w}" data-s="${SIM.salud[w]}" aria-pressed="${w === sim.w}" aria-label="Semana ${w}">${w}</button>`).join("")}</div>
+    <button type="button" class="salir" id="sim-off">Volver al acta</button></div><div class="txt"><b style="color:var(--p-tinta)">Semana ${sim.w}.</b> ${ev ? h(ev.titulo) + "." : "Sin novedades."} <span style="color:var(--p-tinta-3)">Datos simulados.</span></div>`;
 }
-const caso30 = () => `<div class="caso30"><span class="eti">El caso en 30 segundos · ficticio</span>
-  <p><b>Aseguradora Faro</b> tiene 900 empleados y un call center que recibe 41,000 llamadas al mes. Cuando un cliente tiene un siniestro (un choque, un robo), su trámite tarda semanas y nadie le avisa cómo va.</p>
-  <p>El director de Experiencia del Cliente pidió un chatbot. El equipo del proyecto revisó la solicitud y encontró otro problema detrás. Esta es su acta.</p>
-  <div class="botones"><button type="button" class="btn primario" id="ir-guia">Recorrerla paso a paso</button></div></div>`;
+const leyenda = () => sim.on ? `<span><i class="plan"></i>Plan</span><span><i></i>Ruta real</span><span><i class="pt sen"></i>Señal</span><span><i class="pt dec"></i>Decisión</span>` : `<span><i class="punt"></i>Ruta por definir</span><span><i class="pt"></i>Toca cualquier punto para ver qué es</span>`;
+const pcab = () => `<div><span class="eti">${sim.on ? "Plan · pulso · torre (simulación)" : "Capa 1 · la ruta según el acta"}</span><strong>${sim.on ? "De hoy a la meta, semana a semana" : "De hoy a la meta"}</strong></div>${sim.on ? '<button type="button" data-ficha="ruta">¿Cómo se lee?</button>' : ""}`;
+function pagina(d, esEjemplo, extra = "") {
+  const s = S();
+  return `<div class="ancho"><header class="cab"><div><p class="eti">${[d.organizacion, d.equipo, d.fecha, "Acta de constitución del proyecto"].filter(x => !vacio(x)).map(h).join(" · ")}</p><h1>${t(d.iniciativa || d.proyecto.nombre)}</h1></div>
+      <div class="hechos">${esEjemplo ? '<button type="button" class="chip" id="ir-guia"><b>Recorrido guiado</b></button>' : ""}<span class="chip">Patrocinador <b>${vacio(d.acta.decide) ? "sin definir" : h(recorta(d.acta.decide, 34))}</b></span></div></header>
+    <div class="principal"><section class="pantalla" aria-label="Ruta del proyecto">
+        <div class="lienzo-caja"><div class="lienzo" id="lienzo"></div><div class="p-cab" id="pcab">${pcab()}</div><div class="p-ley" id="leyenda">${leyenda()}</div></div>
+        ${esEjemplo ? `<div class="simbar" id="simbar">${simbar()}</div>` : ""}</section>
+      <aside class="consola" id="consola">${consola(d)}</aside></div>
+    ${extra}
+    <section class="seccion"><header><h2>Acta de constitución</h2><p>Lo que el proyecto promete, hasta dónde llega y quién lo autoriza.</p></header><div class="modulos" id="modulos">${MOD.map(m => tarjeta(m, d, s)).join("")}</div></section>
+    <section class="seccion"><header><h2>Cómo llegamos aquí</h2><p>El caso de negocio que sostiene el acta.</p></header><div class="modulos chicos" id="proceso">${PRO.map(m => tarjeta(m, d, s)).join("")}</div></section>
+    <section class="seccion">${rail(sim.on ? 4 : 1)}</section>
+    <p class="pie-pag">Esta página muestra lo que el equipo escribió en su Framing Brief. No completa ni inventa nada: lo que falta se ve como «falta definir».${esEjemplo ? " Aseguradora Faro es un caso ficticio." : ""}</p></div>`;
+}
+const SKILL = [["Repite lo esencial", "Copia textual el A → B, la opción recomendada y el supuesto que cambia la decisión. No los reescribe."], ["Revisa el éxito", "Los seis campos del bloque de éxito, uno por uno. Cada campo está o no está."], ["Pasa el pre-mortem", "Las tres razones que eligieron van al registro de supuestos, con dueño y fecha de prueba."], ["Patrocinio", "Quién decide, una persona o un rol, y quién puede vetar y sobre qué."], ["Interesados", "Quién gana, quién pierde y quién se ve afectado."], ["Alcance", "Qué incluye, al menos tres cosas que no incluye, y las restricciones."], ["Autoridad de la IA", "Puede, pregunta antes, nunca. Revisa que ningún permiso contradiga una restricción."], ["La decisión", "Go, investigar, todavía no o no-go; qué autoriza, quién sigue y cuándo se revisa."]];
+function comoFunciona() {
+  return `<div class="ancho"><div class="texto"><p class="eti">Project Operating System</p><h1>Una sala de control para tu proyecto, que empieza por el acta</h1>
+      <p>El POS reúne lo que tu equipo sabe, decidió y vigila. Crece una capa por módulo. Hoy construyes la primera: el acta de constitución, que es lo que después usan tu plan, tus reportes y tus agentes de IA para saber qué importa.</p>
+      <div class="botones"><a class="btn primario" href="#ejemplo">Ver el ejemplo</a><a class="btn" href="#mi-equipo">Cargar el acta de mi equipo</a></div></div>
+    <section class="seccion">${rail(1)}</section>
+    <section class="seccion"><header><h2>Qué hace la skill en modo charter</h2><p>Toca cada paso.</p></header>
+      <div class="flujo"><div class="caja"><header><h3>Recibe</h3></header><ul class="lista-c"><li>${ico("evidencia", "neutro")}Tu Framing Brief v1</li><li>${ico("riesgos", "neutro")}Las razones de tu pre-mortem</li><li>${ico("exito", "neutro")}Tu bloque de éxito</li><li>${ico("autoridad", "neutro")}Patrocinio, alcance y permisos</li></ul></div>
+        <div class="caja"><header><h3>Revisa, en ocho pasos</h3></header><div class="pasos" id="pasos-skill">${SKILL.map((p, i) => `<button type="button" data-paso="${i}" aria-pressed="${i === pasoSkill}"><b>${i + 1}</b>${p[0]}</button>`).join("")}</div><p style="margin-top:12px" id="paso-texto">${SKILL[pasoSkill][1]}</p>
+          <p class="sub" style="margin-top:10px">No planea, no inventa y no decide por ti. Si falta un dato escribe «por confirmar».</p></div>
+        <div class="caja"><header><h3>Entrega</h3></header><ul class="lista-c"><li>${ico("firma", "si")}Tu Framing Brief v2: el acta</li><li>${ico("problema", "si")}La lista de huecos, del más grave al menos grave</li><li>${ico("alcance", "si")}El bloque POS, que pegas en «Mi equipo»</li></ul></div></div></section>
+    <p class="pie-pag">¿Quieres saber cómo se escribió la skill? El prompt con el que se creó está en los recursos de la sesión.</p></div>`;
+}
 function miEquipo() {
-  if (actual) return acta(actual, `<div class="barra-equipo"><span>Este es el acta de tu equipo. Se guarda solo en este navegador.</span><span class="botones"><button type="button" class="btn" id="cambiar">Pegar otro bloque</button><button type="button" class="btn" id="borrar">Borrar</button></span></div>`);
-  return `<main class="ancho"><div class="pegar">
-    <div class="intro"><p class="eti">Mi equipo</p><h1>Pega aquí tu bloque POS</h1><p>En ChatGPT, modo Work, escribe <b>@framing brief, modo charter</b> y pega tu Framing Brief v1 con lo que llenaron en las rondas 1 a 3. Al final te entrega tu Framing Brief v2 y, debajo, el bloque POS. Copia el bloque completo y pégalo aquí.</p></div>
-    <textarea id="bloque" spellcheck="false" aria-label="Bloque POS" placeholder='{ "pos": "1", "iniciativa": "…" }'>${h(bloqueEquipo)}</textarea>
+  if (actual) return pagina(actual, false, `<div class="barra-equipo"><span>Esta es el acta de tu equipo. Se guarda solo en este navegador.</span><span class="botones"><button type="button" class="btn" id="cambiar">Pegar otro bloque</button><button type="button" class="btn" id="borrar">Borrar</button></span></div>`);
+  return `<div class="ancho"><div class="texto"><p class="eti">Mi equipo</p><h1>Pega aquí tu bloque POS</h1><p>En ChatGPT, modo Work, escribe <b>@framing brief, modo charter</b>, pega tu Framing Brief v1 con lo que llenaron en las rondas 1 a 3 y pide «Pasa el contexto a acta». Al final te entrega el bloque POS. Cópialo completo y pégalo aquí.</p></div>
+    <div class="pegar"><textarea id="bloque" spellcheck="false" aria-label="Bloque POS" placeholder='{ "pos": "1", "iniciativa": "…" }'>${h(bloqueEquipo)}</textarea>
     ${errorEquipo ? `<p class="error" role="alert">${h(errorEquipo)}</p>` : ""}
     <div class="botones"><button type="button" class="btn primario" id="mostrar">Mostrar mi acta</button><a class="btn" href="#ejemplo">Ver primero el ejemplo</a></div>
-    <p class="pie">Lo que pegas se queda en este navegador. No se envía a ningún lado.</p></div></main>`;
+    <p class="sub">Lo que pegas se queda en este navegador. No se envía a ningún lado.</p></div></div>`;
 }
 function pintar() {
   document.querySelectorAll("#pestanas a").forEach(a => a.dataset.vista === vista ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
-  if (vista === "ejemplo") actual = normalizar(EJEMPLO);
-  else if (vista === "mi-equipo") { const r = bloqueEquipo ? leerBloque(bloqueEquipo) : {}; actual = r.datos || null; }
-  else actual = null;
-  $("#vista").innerHTML = vista === "ejemplo" ? acta(actual, caso30()) : vista === "mi-equipo" ? miEquipo() : comoFunciona();
-  if (guia >= 0 && vista !== "ejemplo") cerrarGuia(); else if (guia >= 0) pasoGuia(guia, false);
+  cerrar(); sel = null; if (vista !== "ejemplo") pararSim(true);
+  if (vista === "ejemplo") actual = normalizar(EJEMPLO); else if (vista === "mi-equipo") { const r = bloqueEquipo ? leerBloque(bloqueEquipo) : {}; actual = r.datos || null; } else actual = null;
+  $("#vista").innerHTML = vista === "ejemplo" ? pagina(actual, true) : vista === "mi-equipo" ? miEquipo() : comoFunciona();
+  if (actual && $("#lienzo")) { Escena.montar($("#lienzo"), actual, vista === "ejemplo", elegirObjeto); Escena.simular(sim.on); Escena.semana(sim.w); } else Escena.quitar();
+  if (guia >= 0 && vista !== "ejemplo") cerrarGuia();
 }
+function refrescar() {   /* cambia la semana o el modo: se repintan consola, módulos y barra; la escena solo se mueve */
+  const s = S(); $("#consola").innerHTML = consola(actual); $("#modulos").innerHTML = MOD.map(m => tarjeta(m, actual, s)).join(""); if ($("#simbar")) $("#simbar").innerHTML = simbar(); $("#leyenda").innerHTML = leyenda(); $("#pcab").innerHTML = pcab();
+  document.querySelectorAll(".rail div").forEach((x, i) => x.classList.toggle("viva", i < (sim.on ? 4 : 1)));
+  Escena.semana(sim.w); if (abierto) abrir(abierto);
+}
+function pararSim(todo) { if (sim.reloj) { clearInterval(sim.reloj); sim.reloj = null; } if (todo) { sim.on = false; sim.w = 0; } }
+function irSemana(w) { sim.w = Math.max(0, Math.min(SIM.semanas, w)); if (sel && /^(evento|hito)/.test(sel.id)) { sel = null; Escena.elegir(null); } else if (sel) { const f = fichaDe(sel.id, actual); if (f) sel.html = f.html + (f.mod ? `<p><button type="button" class="enlace" data-abrir="${f.mod}" style="font-size:13px">Ver el módulo completo</button></p>` : ""); } refrescar(); }
+function jugar() { if (sim.w >= SIM.semanas) sim.w = 0; sim.reloj = setInterval(() => { if (sim.w >= SIM.semanas) { pararSim(false); refrescar(); return; } irSemana(sim.w + 1); }, 2600); refrescar(); }
 function ir(v) { const antes = vista; vista = ["ejemplo", "mi-equipo"].includes(v) ? v : "como-funciona"; pintar(); if (antes !== vista) scrollTo(0, 0); }
 addEventListener("hashchange", () => ir(location.hash.slice(1)));
 
 /* ------------------------------------------------------------ recorrido guiado */
-function pasoGuia(n, mover = true) {
-  guia = Math.max(0, Math.min(T.length - 1, n)); const c = T[guia];
-  document.querySelectorAll(".tarjeta.enfoque").forEach(e => e.classList.remove("enfoque"));
-  const el = $("#t-" + c.id); if (el) { el.classList.add("enfoque"); if (mover) el.scrollIntoView({ block: "start" }); }
-  $("#guia").hidden = false;
-  $("#guia-paso").textContent = `Paso ${guia + 1} de ${T.length} · ${c.origen}`;
-  $("#guia-titulo").textContent = c.titulo;
-  $("#guia-texto").innerHTML = `${c.que} <b>${c.porque}</b> Después: ${c.despues}`;
-  $("#guia-ant").disabled = guia === 0; $("#guia-sig").textContent = guia === T.length - 1 ? "Terminar" : "Siguiente";
+const PASOS = [{ id: "lienzo", t: "La ruta del proyecto", x: "De hoy a la meta. Las luces del frente son supuestos; las celdas del fondo, riesgos. Toca cualquiera para ver qué es." }, { id: "m-decision", t: "La decisión", x: EXTRA.decision.pmi }, { id: "m-firma", t: "Lista para firma", x: "Cuántas partes del acta están completas. Lo que falta se ve, no se esconde." },
+  ...MOD.map(m => ({ id: "m-" + m.id, t: m.t, x: m.pmi + " " + m.despues })), ...PRO.map(m => ({ id: "m-" + m.id, t: m.t, x: m.pmi }))];
+function pasoGuia(n) {
+  guia = Math.max(0, Math.min(PASOS.length - 1, n)); const p = PASOS[guia];
+  document.querySelectorAll(".enfoque").forEach(e => e.classList.remove("enfoque"));
+  let el = document.getElementById(p.id); if (el) { el = el.closest(".pantalla") || el; el.classList.add("enfoque"); el.scrollIntoView({ block: "center" }); }
+  $("#guia").hidden = false; $("#guia-paso").textContent = `Paso ${guia + 1} de ${PASOS.length}`; $("#guia-titulo").textContent = p.t; $("#guia-texto").textContent = p.x;
+  $("#guia-ant").disabled = guia === 0; $("#guia-sig").textContent = guia === PASOS.length - 1 ? "Terminar" : "Siguiente";
 }
-function cerrarGuia() { guia = -1; $("#guia").hidden = true; document.querySelectorAll(".tarjeta.enfoque").forEach(e => e.classList.remove("enfoque")); }
+function cerrarGuia() { guia = -1; $("#guia").hidden = true; document.querySelectorAll(".enfoque").forEach(e => e.classList.remove("enfoque")); }
 $("#guia-ant").addEventListener("click", () => pasoGuia(guia - 1));
-$("#guia-sig").addEventListener("click", () => guia === T.length - 1 ? cerrarGuia() : pasoGuia(guia + 1));
+$("#guia-sig").addEventListener("click", () => guia === PASOS.length - 1 ? cerrarGuia() : pasoGuia(guia + 1));
 $("#guia-cerrar").addEventListener("click", cerrarGuia);
 
 document.addEventListener("click", e => {
+  if (e.target.closest("[data-cerrar]")) return cerrar();
   const b = e.target.closest("button"); if (!b) return;
-  if (b.dataset.que) { const p = $("#e-" + b.dataset.que), abrir = p.hidden; p.hidden = !abrir; b.setAttribute("aria-expanded", abrir); b.textContent = abrir ? "Cerrar" : "¿Qué es esto?"; }
-  else if (b.dataset.filtro != null) { filtroEv = b.dataset.filtro; $("#c-evidencia").innerHTML = evidencia(actual); }
-  else if (b.id === "ir-guia") { if (vista !== "ejemplo") { vista = "ejemplo"; try { history.replaceState(null, "", "#ejemplo"); } catch (_) { location.hash = "ejemplo"; } pintar(); } pasoGuia(0); }
+  if (b.dataset.abrir) abrir(b.dataset.abrir);
+  else if (b.dataset.ficha) elegirObjeto(b.dataset.ficha);
+  else if (b.dataset.filtro != null) { filtroEv = b.dataset.filtro; $("#c-evidencia").innerHTML = listaEvidencia(actual); }
+  else if (b.dataset.paso != null) { pasoSkill = +b.dataset.paso; document.querySelectorAll("#pasos-skill button").forEach((x, i) => x.setAttribute("aria-pressed", i === pasoSkill)); $("#paso-texto").textContent = SKILL[pasoSkill][1]; }
+  else if (b.dataset.w != null) { pararSim(false); irSemana(+b.dataset.w); }
+  else if (b.id === "quitar-sel") { sel = null; Escena.elegir(null); $("#consola").innerHTML = consola(actual); }
+  else if (b.id === "sim-on") { if (guia >= 0) cerrarGuia(); sim.on = true; sim.w = 0; sel = null; Escena.elegir(null); Escena.simular(true); jugar(); }
+  else if (b.id === "sim-off") { pararSim(true); sel = null; Escena.elegir(null); Escena.simular(false); refrescar(); }
+  else if (b.id === "sim-jugar") { if (sim.reloj) { pararSim(false); refrescar(); } else jugar(); }
+  else if (b.id === "ir-guia") { if (sim.on) { pararSim(true); Escena.simular(false); refrescar(); } pasoGuia(0); }
   else if (b.id === "mostrar") { const txt = $("#bloque").value, r = leerBloque(txt); bloqueEquipo = txt; errorEquipo = r.error || ""; if (r.datos) guardado.poner(txt); pintar(); if (r.datos) scrollTo(0, 0); }
-  else if (b.id === "cambiar") { actual = null; errorEquipo = ""; $("#vista").innerHTML = miEquipo(); scrollTo(0, 0); }
+  else if (b.id === "cambiar") { actual = null; errorEquipo = ""; Escena.quitar(); $("#vista").innerHTML = miEquipo(); scrollTo(0, 0); }
   else if (b.id === "borrar") { bloqueEquipo = ""; errorEquipo = ""; guardado.poner(""); pintar(); }
 });
 ir(location.hash.slice(1));

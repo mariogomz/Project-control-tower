@@ -1,20 +1,14 @@
 # Kit · Sesión 5 · Del caso al acta, y el acta al POS
 
-Todo lo que van a copiar está en este documento. Cada prompt va dentro de un recuadro: copien solo lo que está dentro.
+Este documento tiene tres partes: lo que hace quien dicta antes de la sesión, el guion de la demo
+guiada y un recurso para quien quiera saber cómo se hizo la skill.
 
-## 0. Antes de empezar
+## A. Antes de la sesión · instalar el modo charter en cada cuenta de equipo
 
-- **Modo Work.** Abran ChatGPT y cambien a modo Work. Las skills solo aparecen ahí.
-- **Tengan a la mano** su Framing Brief v1 (está en su tablero de la sesión 4, zona 4).
-- **La página del POS:** [PEGAR AQUÍ EL ENLACE DE LA PÁGINA]
+Se hace una vez por cuenta, en ChatGPT, modo Work: Plugins → Skills → framing-brief → editar con chat
+(**@skill-creator**). Sirve igual si el equipo se quedó con la skill de referencia o con la suya.
 
-## 1. Agregar el modo charter a su skill (1 minuto)
-
-**Dónde va:** en el chat de **@skill-creator** (Plugins → Skills → framing-brief → editar con chat).
-
-Sirve igual si se quedaron con la skill de referencia o con la suya.
-
-**Copien todo lo que está dentro del recuadro**
+**Pegar todo lo que está dentro del recuadro**
 
 ````text
 Agrega a mi skill framing-brief el archivo references/charter.md con exactamente el contenido que va abajo, sin cambiar nada. Además, al final de la sección «Modos de esta skill» del SKILL.md agrega esta línea, textual: "Si el equipo ya tiene su Framing Brief v1 y pide el acta, la definición de éxito o la decisión ('modo charter'), lee references/charter.md y sigue sus pasos. Si ese archivo no existe, dilo y pide que lo agreguen." No cambies nada más, no me hagas preguntas y avísame cuando esté lista.
@@ -137,27 +131,53 @@ Reglas del bloque:
 - Dejar un campo vacío sin decirlo en la lista de huecos.
 ````
 
-**Hasta aquí se copia**
+**Prueba rápida después de instalar:** chat nuevo, modo Work, `@framing brief, modo charter`. Debe pedir
+el Framing Brief v1. Si pide otra cosa, el archivo no quedó instalado.
 
-## 2. Ronda 4 · La skill completa el acta y la revisa (5 minutos)
+## B. En la sesión · demo guiada
 
-1. Chat nuevo en modo Work. Escriban **@framing brief, modo charter**.
-2. Peguen su Framing Brief v1 y lo que llenaron en las rondas 1 a 3. Pidan: **«Pasa el contexto a acta»**.
-3. Reciben tres cosas: su Framing Brief v2, la revisión final con la lista de huecos y el bloque POS.
-4. Si la skill agregó un plan, hitos o un presupuesto detallado, sale: eso es del módulo 2.
+Un equipo voluntario comparte pantalla. En cada paso, el voluntario lo hace primero y después los
+demás equipos hacen lo mismo con su propia iniciativa.
 
-## 3. Ver el acta en su POS (2 minutos)
+**La página del POS:** [PEGAR AQUÍ EL ENLACE DE LA PÁGINA]
 
-1. Copien el bloque POS completo, desde la primera `{` hasta la última `}`.
-2. Abran la página del POS → **Mi equipo** → peguen → **Mostrar mi acta**.
-3. Revisen la barra de arriba: cuántas partes están listas y cuántas quedaron por confirmar.
+| Paso | Qué hace el equipo | Qué mirar en pantalla |
+|---|---|---|
+| 1. Así se ve un POS | Nada todavía: quien dicta abre **Ejemplo** y corre «Ver lo que viene» | La ruta, la decisión y los módulos del acta; después, doce semanas simuladas |
+| 2. La skill arma el acta | Chat nuevo, modo Work: **@framing brief, modo charter**. Pegan su Framing Brief v1 y lo que llenaron en las rondas 1 a 3. Piden: **«Pasa el contexto a acta»** | Cómo repite sin reescribir, cuándo escribe «por confirmar» y la lista de huecos al final |
+| 3. El acta entra al POS | Copian el bloque POS completo, de la primera `{` a la última `}`. En la página: **Mi equipo** → pegar → **Mostrar mi acta** | El medidor «Lista para firma» y los módulos con huecos |
+| 4. Panel de decisión | El Sponsor lee el acta en la página, en silencio, y decide. El Escéptico da la mejor razón para no hacerlo. El PM propone qué autoriza la decisión | El módulo **Decisión**: qué autoriza, quién sigue y cuándo se revisa |
+| 5. La decisión queda registrada | Le dicen a la skill qué decidieron y piden: **«vuelve a darme el bloque POS completo»**. Lo pegan en **Mi equipo → Pegar otro bloque** | El sello cambia a Go, Investigar, Todavía no o No-go |
 
-## 4. Ronda 5 · Panel de decisión, con el acta en pantalla (7 minutos)
+Si la skill agrega un plan, hitos o un presupuesto detallado, sale: eso es del módulo 2.
 
-El Sponsor lee el acta en la página del POS, en silencio (2 minutos), y decide. El Escéptico da la mejor razón para no hacerlo o para hacer otra opción. El PM responde y propone qué autoriza la decisión.
+**Pregunta para el Escéptico:** ¿qué parte de esta acta firmamos con nuestro nombre, y qué parte todavía
+es fluidez sin evidencia?
 
-Cuando decidan, díganle a la skill qué decidieron, qué autoriza, quién es dueño del siguiente paso y cuándo se vuelve a revisar. Pidan: **«vuelve a darme el bloque POS completo»** y péguenlo otra vez en **Mi equipo → Pegar otro bloque**.
+## C. Recurso · cómo se hizo esta skill
 
-## 5. Si queda tiempo: cerrar un hueco
+Para quien quiera hacer una skill parecida para otro documento de su trabajo. Este es el pedido con el
+que se puede construir un modo como el de hoy, en un chat con **@skill-creator**:
 
-Abran la tarjeta **Lo que falta**, al final de la página. Elijan el hueco más grave que puedan resolver hoy, denle el dato a la skill y vuelvan a pegar el bloque.
+```text
+Quiero agregar un modo a una skill que ya tengo. La skill acompaña a un equipo a construir un
+documento por versiones. Ayúdame a escribir el archivo de referencia del modo nuevo. Hazme una
+pregunta a la vez y no escribas nada hasta tener mis respuestas.
+
+Pregúntame, en este orden:
+1. Qué recibe el modo: qué versión anterior del documento es obligatoria y qué pasa si falta.
+2. Qué reglas no se rompen nunca: qué no puede inventar y cómo marca lo que falta.
+3. Los pasos, uno por uno: qué revisa cada paso y cómo sabe que está completo.
+4. Qué no le toca hacer, aunque se lo pidan.
+5. La revisión final: la lista de comprobaciones que entrega siempre.
+6. El formato de salida: las secciones del documento, en orden.
+
+Después escribe el archivo con esta estructura: Entradas · Reglas · Pasos · Revisión final ·
+Formato de salida · No hagas. Al terminar, dime qué partes agregaste sin que yo las decidiera.
+```
+
+Tres ideas que hacen que una skill sea confiable, y que están en la de hoy:
+
+- **Dice qué hacer cuando falta algo.** Escribe «por confirmar: qué falta y quién lo sabe» en lugar de rellenar.
+- **Dice qué no le toca.** Si le piden un cronograma, responde que eso es de otro momento.
+- **Termina revisándose.** Entrega siempre la lista de huecos, del más grave al menos grave.
