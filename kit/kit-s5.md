@@ -139,7 +139,10 @@ el Framing Brief v1. Si pide otra cosa, el archivo no quedó instalado.
 Un equipo voluntario comparte pantalla. En cada paso, el voluntario lo hace primero y después los
 demás equipos hacen lo mismo con su propia iniciativa.
 
-**La página del POS:** [PEGAR AQUÍ EL ENLACE DE LA PÁGINA]
+**La página del POS:** https://project-operating-system-pos.early-gnat-2404.chatgpt.site/
+
+- El ejemplo: https://project-operating-system-pos.early-gnat-2404.chatgpt.site/#ejemplo
+- Mi equipo: https://project-operating-system-pos.early-gnat-2404.chatgpt.site/#mi-equipo
 
 | Paso | Qué hace el equipo | Qué mirar en pantalla |
 |---|---|---|
