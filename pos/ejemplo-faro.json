@@ -207,7 +207,7 @@
   ],
   "proyecto": {
     "nombre": "Estatus sin llamar",
-    "descripcion": "Avisos automáticos de estatus + un dueño para la cuenta de GIB + medir el SLA del despacho. Después: un canal digital con autenticación entra como fase 2.",
+    "descripcion": "Avisos automáticos de estatus + un responsable para la cuenta de GIB + medir el SLA del despacho. Después: un canal digital con autenticación entra como fase 2.",
     "valor": [
       {
         "linea": "Llamadas de estatus evitadas",
@@ -360,7 +360,7 @@
   },
   "decision": {
     "resultado": "go",
-    "texto": "Pasa a planeación con un techo de 400 mil MXN. El chatbot: todavía no, cuando existan datos de los avisos.",
+    "texto": "Pasa a planeación con un presupuesto límite de 400 mil MXN. El chatbot: todavía no, cuando existan datos de los avisos.",
     "quien": "El director que patrocina",
     "fecha": "",
     "autoriza": "Pasar a planeación (módulo 2).",
