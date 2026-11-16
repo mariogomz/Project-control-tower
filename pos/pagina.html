@@ -393,8 +393,8 @@ const PARTES = [
   ["Restricciones", "supuestos", d => d.acta.restricciones.length ? d.acta.restricciones : [""]],
   ["Riesgos principales", "riesgos", d => d.premortem.length ? d.premortem : [""]],
   ["Presupuesto: costo estimado con fuente y límite aprobado", "presupuesto", d => [...cada(d.proyecto.costo, "rango", "fuente"), d.decision.limite]],
-  ["Interesados: quién gana, quién pierde y quién se ve afectado", "interesados", d => [d.interesados.ganan, d.interesados.pierden, d.interesados.afectados]],
-  ["Patrocinador: quién decide", "autoridad", d => [d.acta.decide]],
+  ["Stakeholders: quién gana, quién pierde y quién se ve afectado", "interesados", d => [d.interesados.ganan, d.interesados.pierden, d.interesados.afectados]],
+  ["Sponsor: quién decide", "autoridad", d => [d.acta.decide]],
   ["Autoridad de la IA: puede, pregunta antes, nunca", "autoridad", d => ["puede", "pregunta", "nunca"].every(k => d.permisos[k].length) ? ["ok"] : [""]],
   ["La decisión: qué autoriza, quién sigue y cuándo se revisa", "decision", d => [d.decision.resultado, d.decision.autoriza, d.decision.dueno_siguiente_paso, d.decision.siguiente_revision]],
   ["Caso de negocio: la solicitud original, con quién y cuándo", "solicitud", d => [d.solicitud.texto, d.solicitud.quien, d.solicitud.cuando]],
@@ -445,7 +445,7 @@ const MOD = [
       <div class="campos">${campo("Examen intermedio", e.examen_intermedio)}${campo("Guardrail: lo que no debe empeorar", e.guardrail)}</div>
       <div class="bloque"><h4>Dueños</h4><div class="campos">${campo("Quién recibe el beneficio", e.duenos.beneficio)}${campo("Quién lo mide", e.duenos.medicion)}${campo("Quién decide si hay desviación", e.duenos.desviaciones)}</div></div>
       ${d.objetivos.length ? `<div class="proceso"><span class="eti">Cómo llegamos aquí</span><div class="bloque"><h4>Objetivos del caso de negocio</h4><ul>${d.objetivos.map(o => `<li>${t(o.objetivo)} <span class="sub">· línea base ${t(o.linea_base)} · ${t(o.fuente)}</span></li>`).join("")}</ul></div></div>` : ""}`; } },
-  { id: "alcance", t: "Alcance", pmi: "Descripción de alto nivel, entregables clave y límites: qué incluye el proyecto y qué no.", despues: "Un cambio que mueve estos límites se registra como control de cambios y lo aprueba el patrocinador.",
+  { id: "alcance", t: "Alcance", pmi: "Descripción de alto nivel, entregables clave y límites: qué incluye el proyecto y qué no.", despues: "Un cambio que mueve estos límites se registra como control de cambios y lo aprueba el sponsor.",
     cuerpo: d => { const col = (a, cl, ic) => `<ul class="lista-c">${a.slice(0, 3).map(x => `<li>${ico(ic, cl)}<span class="corta">${t(x)}</span></li>`).join("") || `<li>${ico("punto", "neutro")}${FALTA}</li>`}</ul>`;
       return `<div class="dos"><div><span class="eti">Incluye · ${d.acta.dentro.length}</span>${col(d.acta.dentro, "si", "si")}</div><div><span class="eti">No incluye · ${d.acta.fuera.length}</span>${col(d.acta.fuera, "no", "no")}</div></div>`; },
     detalle: d => `<div class="bloque"><h4>Descripción</h4><p style="font-weight:500">${t(d.proyecto.nombre)}</p><p>${t(d.proyecto.descripcion)}</p></div>
@@ -472,16 +472,16 @@ const MOD = [
       : `<ul class="lista-c"><li>${ico("hitos", "neutro")}<span class="corta">${t(d.exito.examen_intermedio)}</span></li><li>${ico("hitos", "neutro")}<span class="corta">Revisión: ${t(d.decision.siguiente_revision)}</span></li></ul><p class="sub">El cronograma completo se arma en el módulo 2.</p>`,
     detalle: (d, s) => `<div class="bloque"><h4>Lo que el acta ya fija</h4><div class="campos">${campo("Examen intermedio", d.exito.examen_intermedio)}${campo("Siguiente revisión", d.decision.siguiente_revision)}</div></div>
       ${s ? `<div class="bloque"><h4>Hitos del plan (simulación)</h4><div class="filas">${s.hitos.map(x => `<div class="fila"><div>${h(x.hito)}</div><div class="p">${x.hecho ? est("ok", x.real > x.plan ? `hecho, ${x.real - x.plan} sem tarde` : "hecho a tiempo") : x.tarde ? est("aviso", "atrasado") : est("hueco", "pendiente")}<span>plan: semana ${x.plan}</span></div></div>`).join("")}</div></div>` : `<p class="sub">Los hitos, sus fechas y sus dueños se definen en el módulo 2. Aparecerán aquí y sobre la ruta.</p>`}` },
-  { id: "interesados", t: "Interesados", pmi: "Las personas y áreas clave a las que el proyecto les cambia algo, a favor o en contra.", despues: "Cuando una alerta toca a alguno, se sabe a quién avisar además del patrocinador.",
+  { id: "interesados", t: "Stakeholders", pmi: "Las personas y áreas clave a las que el proyecto les cambia algo, a favor o en contra.", despues: "Cuando una alerta toca a alguno, se sabe a quién avisar además del sponsor.",
     cuerpo: d => `<ul class="lista-c"><li>${ico("si", "si")}<span><span class="eti">Gana</span><span class="corta">${t(d.interesados.ganan)}</span></span></li><li>${ico("no", "no")}<span><span class="eti">Pierde</span><span class="corta">${t(d.interesados.pierden)}</span></span></li><li>${ico("punto", "neutro")}<span><span class="eti">Afectado</span><span class="corta">${t(d.interesados.afectados)}</span></span></li></ul>`,
     detalle: d => `<div class="bloque">${campo("Quién gana", d.interesados.ganan)}${campo("Quién pierde", d.interesados.pierden)}${campo("Quién se ve afectado", d.interesados.afectados)}</div>
       <div class="proceso"><span class="eti">Cómo llegamos aquí</span><div class="campos">${campo("Quién vive el problema", d.afectados.viven_el_problema)}${campo("Quién lo pide", d.afectados.lo_pide)}${campo("Nuestro papel", d.afectados.nuestro_papel)}</div></div>` },
-  { id: "autoridad", t: "Patrocinador y autoridad", pmi: "Quién autoriza el proyecto, quién lo dirige y con qué nivel de autoridad. Hoy eso incluye a la IA.", despues: "Al patrocinador le llega el brief cuando algo necesita decisión. Los permisos son las reglas del agente.",
+  { id: "autoridad", t: "Sponsor y autoridad", pmi: "Quién autoriza el proyecto, quién lo dirige y con qué nivel de autoridad. Hoy eso incluye a la IA.", despues: "Al sponsor le llega el brief cuando algo necesita decisión. Los permisos son las reglas del agente.",
     cuerpo: d => { const p = d.permisos;
-      return `<div><span class="eti">Patrocinador · decide</span><p class="clave corta">${t(d.acta.decide)}</p></div>
+      return `<div><span class="eti">Sponsor · decide</span><p class="clave corta">${t(d.acta.decide)}</p></div>
         <div><span class="eti">Autoridad de la IA</span><div class="seg"><i style="flex:${p.puede.length};background:var(--ok)"></i><i style="flex:${p.pregunta.length};background:var(--aviso)"></i><i style="flex:${p.nunca.length};background:var(--critico)"></i></div>
         <p class="sub" style="margin-top:4px">puede ${p.puede.length} · pregunta antes ${p.pregunta.length} · nunca ${p.nunca.length}</p></div>`; },
-    detalle: d => `<div class="campos">${campo("Patrocinador: decide", d.acta.decide)}${campo("Dueño del siguiente paso", d.decision.dueno_siguiente_paso)}</div><div class="bloque"><h4>Pueden vetar</h4>${lista(d.acta.vetos)}</div>
+    detalle: d => `<div class="campos">${campo("Sponsor: decide", d.acta.decide)}${campo("Dueño del siguiente paso", d.decision.dueno_siguiente_paso)}</div><div class="bloque"><h4>Pueden vetar</h4>${lista(d.acta.vetos)}</div>
       <div class="bloque"><h4>Autoridad de la IA</h4><div class="tres"><div>${est("ok", "Puede")}${lista(d.permisos.puede)}</div><div>${est("aviso", "Pregunta antes")}${lista(d.permisos.pregunta)}</div><div>${est("critico", "Nunca")}${lista(d.permisos.nunca)}</div></div></div>` },
 ];
 /* ------------------------------------------------------------ cómo llegamos aquí (segundo nivel) */
@@ -727,7 +727,7 @@ const pcab = () => `<div><span class="eti">${sim.on ? "Plan · pulso · torre (s
 function pagina(d, esEjemplo, extra = "") {
   const s = S();
   return `<div class="ancho"><header class="cab"><div><p class="eti">${[d.organizacion, d.equipo, d.fecha, "Acta de constitución del proyecto"].filter(x => !vacio(x)).map(h).join(" · ")}</p><h1>${t(d.iniciativa || d.proyecto.nombre)}</h1></div>
-      <div class="hechos">${esEjemplo ? '<button type="button" class="chip" id="ir-guia"><b>Recorrido guiado</b></button>' : ""}<span class="chip">Patrocinador <b>${vacio(d.acta.decide) ? "sin definir" : h(recorta(d.acta.decide, 34))}</b></span></div></header>
+      <div class="hechos">${esEjemplo ? '<button type="button" class="chip" id="ir-guia"><b>Recorrido guiado</b></button>' : ""}<span class="chip">Sponsor <b>${vacio(d.acta.decide) ? "sin definir" : h(recorta(d.acta.decide, 34))}</b></span></div></header>
     <div class="principal"><section class="pantalla" aria-label="Ruta del proyecto">
         <div class="lienzo-caja"><div class="lienzo" id="lienzo"></div><div class="p-cab" id="pcab">${pcab()}</div><div class="p-ley" id="leyenda">${leyenda()}</div></div>
         <div class="anun" id="anun">${luces(d)}</div>
@@ -739,14 +739,14 @@ function pagina(d, esEjemplo, extra = "") {
     <section class="seccion">${rail(sim.on ? 4 : 1)}</section>
     <p class="pie-pag">Esta página muestra lo que el equipo escribió en su Framing Brief. No completa ni inventa nada: lo que falta se ve como «falta definir».${esEjemplo ? " Aseguradora Faro es un caso ficticio." : ""}</p></div>`;
 }
-const SKILL = [["Repite lo esencial", "Copia textual el A → B, la opción recomendada y el supuesto que cambia la decisión. No los reescribe."], ["Revisa el éxito", "Los seis campos del bloque de éxito, uno por uno. Cada campo está o no está."], ["Pasa el pre-mortem", "Las tres razones que eligieron van al registro de supuestos, con dueño y fecha de prueba."], ["Patrocinio", "Quién decide, una persona o un rol, y quién puede vetar y sobre qué."], ["Interesados", "Quién gana, quién pierde y quién se ve afectado."], ["Alcance", "Qué incluye, al menos tres cosas que no incluye, y las restricciones."], ["Autoridad de la IA", "Puede, pregunta antes, nunca. Revisa que ningún permiso contradiga una restricción."], ["La decisión", "Go, investigar, todavía no o no-go; qué autoriza, quién sigue y cuándo se revisa."]];
+const SKILL = [["Repite lo esencial", "Copia textual el A → B, la opción recomendada y el supuesto que cambia la decisión. No los reescribe."], ["Revisa el éxito", "Los seis campos del bloque de éxito, uno por uno. Cada campo está o no está."], ["Pasa el pre-mortem", "Las tres razones que eligieron van al registro de supuestos, con dueño y fecha de prueba."], ["Sponsor", "Quién decide, una persona o un rol, y quién puede vetar y sobre qué."], ["Stakeholders", "Quién gana, quién pierde y quién se ve afectado."], ["Alcance", "Qué incluye, al menos tres cosas que no incluye, y las restricciones."], ["Autoridad de la IA", "Puede, pregunta antes, nunca. Revisa que ningún permiso contradiga una restricción."], ["La decisión", "Go, investigar, todavía no o no-go; qué autoriza, quién sigue y cuándo se revisa."]];
 function comoFunciona() {
   return `<div class="ancho"><div class="texto"><p class="eti">Project Operating System</p><h1>Una sala de control para tu proyecto, que empieza por el acta</h1>
       <p>El POS reúne lo que tu equipo sabe, decidió y vigila. Crece una capa por módulo. Hoy construyes la primera: el acta de constitución, que es lo que después usan tu plan, tus reportes y tus agentes de IA para saber qué importa.</p>
       <div class="botones"><a class="btn primario" href="#ejemplo">Ver el ejemplo</a><a class="btn" href="#mi-equipo">Cargar el acta de mi equipo</a></div></div>
     <section class="seccion">${rail(1)}</section>
     <section class="seccion"><header><h2>Qué hace la skill en modo charter</h2><p>Toca cada paso.</p></header>
-      <div class="flujo"><div class="caja"><header><h3>Recibe</h3></header><ul class="lista-c"><li>${ico("evidencia", "neutro")}Tu Framing Brief v1</li><li>${ico("riesgos", "neutro")}Las razones de tu pre-mortem</li><li>${ico("exito", "neutro")}Tu bloque de éxito</li><li>${ico("autoridad", "neutro")}Patrocinio, alcance y permisos</li></ul></div>
+      <div class="flujo"><div class="caja"><header><h3>Recibe</h3></header><ul class="lista-c"><li>${ico("evidencia", "neutro")}Tu Framing Brief v1</li><li>${ico("riesgos", "neutro")}Las razones de tu pre-mortem</li><li>${ico("exito", "neutro")}Tu bloque de éxito</li><li>${ico("autoridad", "neutro")}Sponsor, alcance y permisos</li></ul></div>
         <div class="caja"><header><h3>Revisa, en ocho pasos</h3></header><div class="pasos" id="pasos-skill">${SKILL.map((p, i) => `<button type="button" data-paso="${i}" aria-pressed="${i === pasoSkill}"><b>${i + 1}</b>${p[0]}</button>`).join("")}</div><p style="margin-top:12px" id="paso-texto">${SKILL[pasoSkill][1]}</p>
           <p class="sub" style="margin-top:10px">No planea, no inventa y no decide por ti. Si falta un dato escribe «por confirmar».</p></div>
         <div class="caja"><header><h3>Entrega</h3></header><ul class="lista-c"><li>${ico("firma", "si")}Tu Framing Brief v2: el acta</li><li>${ico("problema", "si")}La lista de huecos, del más grave al menos grave</li><li>${ico("alcance", "si")}El bloque POS, que pegas en «Mi equipo»</li></ul></div></div></section>

@@ -17,7 +17,7 @@ Agrega a mi skill framing-brief el archivo references/charter.md con exactamente
 
 ## Entradas
 1. El Framing Brief v1 (obligatorio). Si no trae opción recomendada ni supuesto que cambia la decisión, detente y pídelos.
-2. Lo que el equipo llenó hoy en su tablero: las razones del pre-mortem, el bloque de éxito (seis campos) y el acta (patrocinio, stakeholders, límites, permisos de la IA).
+2. Lo que el equipo llenó hoy en su tablero: las razones del pre-mortem, el bloque de éxito (seis campos) y el acta (sponsor, stakeholders, alcance, permisos de la IA).
 3. El Framing Brief v0, si el v1 no repite sus secciones (solicitud, afectados, A → B, ángulos, encuadres, evidencia).
 Si falta algo, escribe [POR CONFIRMAR: qué falta y quién lo sabe]. No lo inventes.
 
@@ -31,9 +31,9 @@ Si falta algo, escribe [POR CONFIRMAR: qué falta y quién lo sabe]. No lo inven
 1. Repite textual, del v1: el A → B, la opción recomendada y el supuesto que cambia la decisión, con su prueba.
 2. Revisa el bloque de éxito, campo por campo: (1) beneficio y efecto negativo a vigilar, máximo tres beneficios; (2) indicador y el instrumento que lo mide, es decir, el sistema o reporte; (3) línea base con valor, fecha y fuente; (4) meta y fecha; (5) examen intermedio y guardrail: una señal temprana de que vamos bien y algo que no debe empeorar; (6) dueños: quién recibe el beneficio, quién lo mide y quién decide si hay desviación. Cada campo está o no está.
 3. Pasa las tres razones del pre-mortem que eligió el equipo al registro de supuestos, cada una con dueño y fecha de prueba.
-4. Patrocinio: quién decide (una persona o un rol, no un comité) y quién puede vetar, diciendo sobre qué.
+4. Sponsor: quién decide (una persona o un rol, no un comité) y quién puede vetar, diciendo sobre qué.
 5. Stakeholders: quién gana, quién pierde y quién se ve afectado. Parte de los afectados del v0.
-6. Límites: qué queda dentro, qué queda fuera (al menos tres cosas) y las restricciones que nadie negocia.
+6. Alcance: qué incluye, qué no incluye (al menos tres cosas) y las restricciones que nadie negocia.
 7. Permisos de la IA en tres líneas: puede (lo que hace sola), pregunta antes (lo que necesita un sí de una persona) y nunca (lo que no hace aunque se lo pidan). Revisa que ningún permiso contradiga una restricción.
 8. La decisión: go, investigar, todavía no o no-go; qué autoriza, quién es dueño del siguiente paso y cuándo se vuelve a revisar. Después entrega, en este orden: el Framing Brief v2, la revisión final con la lista de huecos y el bloque POS.
 
@@ -43,7 +43,7 @@ Si falta algo, escribe [POR CONFIRMAR: qué falta y quién lo sabe]. No lo inven
 - [ ] Hay examen intermedio y guardrail
 - [ ] Los tres dueños tienen nombre o rol
 - [ ] Decide una sola persona o rol, y cada veto dice sobre qué
-- [ ] Hay al menos tres cosas fuera
+- [ ] El alcance dice al menos tres cosas que no incluye
 - [ ] Los supuestos abiertos tienen dueño y fecha de prueba, incluidos los tres del pre-mortem
 - [ ] Ningún permiso de la IA contradice una restricción, y hay al menos una tarea en "nunca"
 - [ ] La decisión dice qué autoriza, quién sigue y cuándo se revisa
@@ -52,7 +52,7 @@ Si falta algo, escribe [POR CONFIRMAR: qué falta y quién lo sabe]. No lo inven
 Lista los huecos encontrados, del más grave al menos grave.
 
 ## Formato de salida: Framing Brief v2
-Encabezado (versión, fecha, dueño) · Todo lo del v1 (solicitud, A → B, encuadre, opciones, opción recomendada, supuesto que cambia la decisión) · Bloque de éxito (seis campos) · Patrocinio: quién decide y quién veta qué · Stakeholders: quién gana, quién pierde, quién se ve afectado · Límites: dentro, fuera, restricciones · Supuestos abiertos con dueño y fecha · Permisos de la IA en tres líneas · La decisión, lo que autoriza y la siguiente revisión · Huecos
+Encabezado (versión, fecha, dueño) · Todo lo del v1 (solicitud, A → B, encuadre, opciones, opción recomendada, supuesto que cambia la decisión) · Bloque de éxito (seis campos) · Sponsor: quién decide y quién veta qué · Stakeholders: quién gana, quién pierde, quién se ve afectado · Alcance: incluye, no incluye, restricciones · Supuestos abiertos con dueño y fecha · Permisos de la IA en tres líneas · La decisión, lo que autoriza y la siguiente revisión · Huecos
 
 ## Bloque POS
 Después del Brief v2 y de los huecos, entrega el bloque POS: todo el contenido del Brief (lo del v0, lo del v1 y lo del v2) en el formato de abajo, dentro de un solo bloque de código, para que el equipo lo copie y lo pegue en la página del POS.
