@@ -14,7 +14,7 @@ La primera capa del POS es el acta de constitución del proyecto, y para verla n
   Cada punto se puede tocar. Al lado, la **decisión** y el medidor **Lista para firma**.
 - Debajo, el **acta de constitución** en módulos, con los nombres que usa la disciplina: propósito,
   objetivos y criterios de éxito, alcance, supuestos y restricciones, riesgos, presupuesto, hitos,
-  interesados, patrocinador y autoridad. Cada módulo abre su detalle.
+  stakeholders, sponsor y autoridad. Cada módulo abre su detalle.
 - Más abajo, **cómo llegamos aquí**: la solicitud, el problema, la evidencia y las opciones. Es el caso
   de negocio que sostiene el acta, y por eso va en segundo nivel.
 - En el ejemplo, **«Ver lo que viene»** simula doce semanas para mostrar lo que agregan el plan, el
