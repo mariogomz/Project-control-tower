@@ -343,21 +343,6 @@
       "TI (presupuesto)"
     ]
   },
-  "permisos": {
-    "puede": [
-      "Analizar datos agregados de contactos",
-      "Redactar borradores internos"
-    ],
-    "pregunta": [
-      "Cualquier texto para clientes",
-      "Cualquier compromiso de gasto",
-      "Cualquier cosa que toque la autenticación"
-    ],
-    "nunca": [
-      "Proponer un canal de siniestros sin autenticación",
-      "Citar el «−70%» del proveedor o el 6% de abandono como evidencia"
-    ]
-  },
   "decision": {
     "resultado": "go",
     "texto": "Pasa a planeación con un presupuesto límite de 400 mil MXN. El chatbot: todavía no, cuando existan datos de los avisos.",

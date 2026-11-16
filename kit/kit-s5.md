@@ -44,7 +44,7 @@ llega y quién lo autoriza. La planeación viene después y usa esta acta como b
 3. Copia textual lo que ya estaba decidido: el estado actual (A), el estado deseado (B), la opción elegida y el supuesto que cambia la decisión. No los reescribas.
 4. No hagas plan, hitos, cronograma, recursos ni presupuesto detallado. Si te lo piden, di que eso es de la planeación (módulo 2). El único dinero que va en el acta es el costo estimado en rango y el presupuesto límite que se aprueba.
 5. No cambies la decisión del equipo. Puedes señalar, en una línea, si la evidencia no la sostiene.
-6. Usa siempre estos nombres: acta de constitución del proyecto · objetivos y criterios de éxito · alcance (incluye / no incluye) · interesados · patrocinador · riesgos · presupuesto · autoridad de la IA.
+6. Usa siempre estos nombres: acta de constitución del proyecto · objetivos y criterios de éxito · alcance (incluye / no incluye) · interesados · patrocinador · riesgos · presupuesto.
 7. Siguen valiendo las etiquetas del SKILL.md: dato, supuesto o esperanza.
 
 ## Punto de partida (antes de la Ronda 1)
@@ -75,7 +75,7 @@ corto, en tres mensajes:
 No pongas semáforos, valores ni costos que el equipo no te dio.
 
 **c) Pega todo junto** (el Brief y lo que ya llenó de riesgos, criterios de
-éxito, alcance o autoridad de la IA). No repitas lo que ya está. Recorre las
+éxito o alcance). No repitas lo que ya está. Recorre las
 rondas preguntando solo lo que falta.
 
 ## Las cinco rondas
@@ -96,12 +96,11 @@ Si el indicador que dan es una sensación ("el equipo siente que va mejor"), di 
 
 ### Ronda 3 de 5 · El acta
 Sirve para: dejar claro hasta dónde llega el proyecto y quién lo autoriza. De aquí salen el alcance del plan y la ruta de aprobaciones.
-Cuatro mensajes:
+Tres mensajes:
 1. Patrocinador e interesados: ¿qué persona puede aprobar o detener este proyecto? ¿Quién puede vetar algo específico, y qué? ¿Quién gana, quién pierde y quién se ve afectado? (si el Brief ya trae a los interesados, muéstralos y pide que los confirmen)
 2. Alcance: ¿qué incluye el proyecto? Digan tres cosas que no incluye aunque alguien las pida.
 3. Restricciones y presupuesto: ¿qué no se negocia (dinero, fecha, Legal)? ¿Cuánto calculan que cuesta, en un rango, y de dónde sale ese número?
-4. Autoridad de la IA: en este proyecto, ¿qué puede hacer una IA sola, qué debe preguntar antes y qué no hace nunca?
-Al terminar la ronda revisa tres cosas. Si alguna falla, pídela de nuevo una sola vez, todas en un mismo mensaje: el patrocinador es una persona o un puesto, no un área ni un comité · "no incluye" tiene al menos tres cosas · ningún permiso de la IA contradice una restricción.
+Al terminar la ronda revisa dos cosas. Si alguna falla, pídela de nuevo una sola vez, todas en un mismo mensaje: el patrocinador es una persona o un puesto, no un área ni un comité · "no incluye" tiene al menos tres cosas.
 
 ### Ronda 4 de 5 · Entrega
 No preguntes nada. En el acta, lo que no se trató dice "falta definir". Entrega, en este orden:
@@ -118,7 +117,7 @@ Sirve para: saber qué está autorizado a partir de hoy.
    todavía no: hay una condición clara para volver ·
    no-go: no se hace, y se dice qué se hace en su lugar.
 2. Pregunta, en un solo mensaje: qué autoriza exactamente, con qué presupuesto límite, quién es responsable del siguiente paso, cuándo se revisa, y quién tomó la decisión y en qué fecha.
-Después entrega el punto 10 del acta ya lleno y, enseguida, el bloque POS completo con la decisión.
+Después entrega el punto 9 del acta ya lleno y, enseguida, el bloque POS completo con la decisión.
 
 ## Después de la entrega
 - Si escriben "vuelve a darme el bloque POS completo": entrégalo completo y actualizado, sin texto antes ni después más que una línea.
@@ -155,11 +154,9 @@ Iniciativa: [nombre del proyecto] · Equipo: [ ] · Fecha: [ ]
    Gana: [ ] · Pierde: [ ] · Se ve afectado: [ ]
 8. Patrocinador
    Decide: [ ] · Vetos: [quién y sobre qué]
-9. Autoridad de la IA
-   Puede: [ ] · Pregunta antes: [ ] · Nunca: [ ]
-10. Decisión
+9. Decisión
    [go / investigar / todavía no / no-go, o PENDIENTE] · Autoriza: [ ] · Responsable del siguiente paso: [ ] · Próxima revisión: [ ] · Decidió: [quién y cuándo]
-11. Cómo llegamos aquí
+10. Cómo llegamos aquí
    Solicitud original: "[ ]" · Opciones comparadas: [ ] · Elegida: [ ] porque [ ]
 ```
 
@@ -170,7 +167,6 @@ Iniciativa: [nombre del proyecto] · Equipo: [ ] · Fecha: [ ]
 - [ ] Decide una persona o un puesto; los vetos dicen sobre qué
 - [ ] "No incluye" tiene al menos tres cosas
 - [ ] El supuesto que cambia la decisión tiene prueba, fecha y responsable
-- [ ] Ningún permiso de la IA contradice una restricción
 - [ ] La decisión dice qué autoriza, quién sigue y cuándo se revisa
 Después de la lista escribe "Huecos:" y enuméralos, del más grave al menos grave. Si no hay, dilo. En la Ronda 4 la decisión pendiente no cuenta como hueco: es la ronda que sigue.
 
@@ -246,7 +242,6 @@ Es el mismo contenido del Framing Brief, en un formato que la página del POS sa
     "decide": "<patrocinador: la persona o puesto que decide>",
     "vetos": ["<quién veta y sobre qué>"]
   },
-  "permisos": {"puede": ["<lo que la IA hace sola>"], "pregunta": ["<lo que pregunta antes>"], "nunca": ["<lo que no hace nunca>"]},
   "decision": {"resultado": "", "texto": "<la decisión en una frase>", "quien": "<quién decidió>", "fecha": "<fecha>", "autoriza": "<qué autoriza>", "limite": "<presupuesto límite>", "dueno_siguiente_paso": "<quién>", "siguiente_revision": "<cuándo se revisa>"},
   "huecos": ["<hueco>"]
 }
@@ -279,7 +274,7 @@ demás equipos hacen lo mismo con su propia iniciativa, en su cuenta.
 | Punto de partida · 8 min | Chat nuevo, modo Work: **@framing-brief, modo charter**. Pegan lo que tengan (Brief v0, v1 o solo la solicitud) y el nombre del equipo | Sin v1, la skill arma un caso corto con opciones, incluida «seguir como estamos», y el equipo elige |
 | Ronda 1 · Riesgos · 7 min | Es dentro de un año y el proyecto fracasó: escriben sus razones, la IA suma hasta seis más y eligen las tres más probables | Lo que propone la IA va marcado «propuesta de la IA». Las tres elegidas son los riesgos del acta |
 | Ronda 2 · Objetivos y criterios de éxito · 10 min | Beneficio y efecto negativo · indicador, instrumento, línea base, meta y fecha · punto de control, guardrail y los tres responsables | Si un indicador es una sensación, la skill pide algo que se vea en un sistema o reporte |
-| Ronda 3 · El acta · 12 min | Sponsor y stakeholders · alcance: incluye y no incluye (al menos tres cosas) · restricciones y presupuesto · autoridad de la IA: puede, pregunta antes, nunca | Que decida una persona o un puesto, y que ningún permiso de la IA contradiga una restricción |
+| Ronda 3 · El acta · 12 min | Sponsor y stakeholders · alcance: incluye y no incluye (al menos tres cosas) · restricciones y presupuesto | Que decida una persona o un puesto, y que «no incluye» tenga al menos tres cosas |
 | Ronda 4 · Entrega · 8 min | Leen los huecos. Copian el bloque POS completo, de la primera `{` a la última `}`. En la página: **Mi equipo** → pegar → **Mostrar mi acta** | El medidor «Lista para firma» y los módulos con huecos |
 | Ronda 5 · La decisión · 10 min | Una persona lee el acta en la página como si fuera el sponsor. Escriben **decisión** y eligen: go, investigar, todavía no o no-go. Piden **«vuelve a darme el bloque POS completo»** y lo pegan en **Mi equipo → Pegar otro bloque** | El sello cambia a Go, Investigar, Todavía no o No-go |
 

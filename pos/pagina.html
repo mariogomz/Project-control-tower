@@ -7,16 +7,17 @@
 <title>POS · Acta de constitución</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Concepto: sala de control. Una pantalla de ruta (siempre oscura, como un instrumento) y, alrededor,
-   módulos compactos del acta. Colores de cabina: magenta = lo planeado, cian = la meta, verde/ámbar/rojo = estado. */
+/* Concepto: sala de control. Una pantalla de ruta, como un instrumento, y alrededor módulos compactos del acta.
+   Hay modo claro y modo noche; la pantalla de ruta cambia con ellos (variables --p-*). Colores de cabina: magenta = lo planeado, cian = la meta, verde/ámbar/rojo = estado. */
 :root {
   --fondo: #f3f2ee; --panel: #ffffff; --panel-2: #f0efea; --linea: rgba(22, 24, 29, .10); --linea-2: rgba(22, 24, 29, .24);
   --tinta: #16181d; --tinta-2: #4b505b; --tinta-3: #7c818c;
   --acento: #0e6a72; --acento-f: rgba(14, 106, 114, .08); --plan: #b0257d; --violeta: #6a4fcf;
   --ok: #14805a; --aviso: #b47800; --critico: #c8372d;
   --ok-f: rgba(20, 128, 90, .11); --aviso-f: rgba(214, 150, 0, .16); --critico-f: rgba(200, 55, 45, .09);
-  --p-fondo: #0c0f14; --p-fondo-2: #141922; --p-linea: #2b323e; --p-tinta: #eef0f4; --p-tinta-2: #a4acba; --p-tinta-3: #717a8a;
-  --p-plan: #e868bb; --p-meta: #63d2da; --p-ok: #3ddc97; --p-aviso: #f5b83d; --p-critico: #f26d68;
+  --p-fondo: #e6e5df; --p-fondo-2: #fbfaf7; --p-linea: #d5d3cb; --p-malla: #a9a79e; --p-tinta: #16181d; --p-tinta-2: #4b505b; --p-tinta-3: #7c818c;
+  --p-plan: #b0257d; --p-meta: #0e6a72; --p-ok: #14805a; --p-aviso: #b47800; --p-critico: #c8372d;
+  --p-velo: rgba(255, 255, 255, .82); --p-franja: rgba(22, 24, 29, .035); --p-chip: rgba(255, 255, 255, .7);
   --f-texto: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-dato: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --radio: 14px;
@@ -29,6 +30,9 @@
     --acento: #63d2da; --acento-f: rgba(99, 210, 218, .10); --plan: #e868bb; --violeta: #a996f0;
     --ok: #3ddc97; --aviso: #f5b83d; --critico: #f26d68;
     --ok-f: rgba(61, 220, 151, .12); --aviso-f: rgba(245, 184, 61, .13); --critico-f: rgba(242, 109, 104, .13);
+    --p-fondo: #0c0f14; --p-fondo-2: #141922; --p-linea: #2b323e; --p-malla: #2b323e; --p-tinta: #eef0f4; --p-tinta-2: #a4acba; --p-tinta-3: #717a8a;
+    --p-plan: #e868bb; --p-meta: #63d2da; --p-ok: #3ddc97; --p-aviso: #f5b83d; --p-critico: #f26d68;
+    --p-velo: rgba(12, 15, 20, .72); --p-franja: rgba(12, 15, 20, .5); --p-chip: rgba(255, 255, 255, .04);
   }
 }
 :root[data-theme="dark"] {
@@ -38,6 +42,9 @@
   --acento: #63d2da; --acento-f: rgba(99, 210, 218, .10); --plan: #e868bb; --violeta: #a996f0;
   --ok: #3ddc97; --aviso: #f5b83d; --critico: #f26d68;
   --ok-f: rgba(61, 220, 151, .12); --aviso-f: rgba(245, 184, 61, .13); --critico-f: rgba(242, 109, 104, .13);
+  --p-fondo: #0c0f14; --p-fondo-2: #141922; --p-linea: #2b323e; --p-malla: #2b323e; --p-tinta: #eef0f4; --p-tinta-2: #a4acba; --p-tinta-3: #717a8a;
+  --p-plan: #e868bb; --p-meta: #63d2da; --p-ok: #3ddc97; --p-aviso: #f5b83d; --p-critico: #f26d68;
+  --p-velo: rgba(12, 15, 20, .72); --p-franja: rgba(12, 15, 20, .5); --p-chip: rgba(255, 255, 255, .04);
 }
 *, *::before, *::after { box-sizing: border-box; }
 body { margin: 0; background: var(--fondo); color: var(--tinta); font-family: var(--f-texto); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
@@ -67,6 +74,9 @@ mark.pc { background: var(--aviso-f); color: inherit; border-radius: 6px; paddin
 .pestanas a { color: var(--tinta-2); text-decoration: none; font-size: 13.5px; font-weight: 500; padding: 6px 14px; border-radius: 999px; }
 .pestanas a:hover { color: var(--tinta); }
 .pestanas a[aria-current="page"] { background: var(--tinta); color: var(--panel); }
+.nav-der { display: flex; align-items: center; gap: 8px; }
+.tema { width: 36px; height: 36px; flex: none; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--linea-2); background: var(--panel); color: var(--tinta-2); padding: 0; }
+.tema:hover { color: var(--tinta); border-color: var(--acento); }
 
 /* ---------- encabezado del proyecto */
 .cab { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; padding-block: 22px 16px; }
@@ -98,14 +108,14 @@ mark.pc { background: var(--aviso-f); color: inherit; border-radius: 6px; paddin
 .pantalla .lienzo:active { cursor: grabbing; }
 .pantalla canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
 .rotulos { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-.rot { position: absolute; left: 0; top: 0; pointer-events: auto; background: rgba(12, 15, 20, .72); border: 1px solid var(--p-linea); color: var(--p-tinta-2); border-radius: 999px; padding: 2px 9px; font-size: 11.5px; white-space: nowrap; max-width: 190px; overflow: hidden; text-overflow: ellipsis; }
+.rot { position: absolute; left: 0; top: 0; pointer-events: auto; background: var(--p-velo); border: 1px solid var(--p-linea); color: var(--p-tinta-2); border-radius: 999px; padding: 2px 9px; font-size: 11.5px; white-space: nowrap; max-width: 190px; overflow: hidden; text-overflow: ellipsis; }
 .rot:hover, .rot.sel { color: var(--p-tinta); border-color: var(--p-meta); }
 .rot.menor:not(.sel) { opacity: 0; pointer-events: none; }
 .rot.fijo { background: none; border: 0; font-family: var(--f-dato); font-size: 10px; color: var(--p-tinta-3); pointer-events: none; padding: 0; }
 .p-cab { position: absolute; left: 14px; top: 12px; right: 14px; display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; pointer-events: none; }
 .p-cab .eti { color: var(--p-tinta-3); }
 .p-cab strong { display: block; font-size: 15px; font-weight: 600; }
-.p-cab button { pointer-events: auto; background: rgba(12, 15, 20, .7); border: 1px solid var(--p-linea); color: var(--p-tinta-2); border-radius: 999px; padding: 4px 11px; font-size: 12px; }
+.p-cab button { pointer-events: auto; background: var(--p-velo); border: 1px solid var(--p-linea); color: var(--p-tinta-2); border-radius: 999px; padding: 4px 11px; font-size: 12px; }
 .p-cab button:hover { color: var(--p-tinta); border-color: var(--p-meta); }
 .p-ley { position: absolute; left: 14px; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 11px; color: var(--p-tinta-3); pointer-events: none; }
 .p-ley span { display: flex; align-items: center; gap: 6px; }
@@ -115,11 +125,11 @@ mark.pc { background: var(--aviso-f); color: inherit; border-radius: 6px; paddin
 .p-ley i.pt.sen { background: var(--p-aviso); } .p-ley i.pt.dec { background: var(--p-tinta); border-radius: 0; transform: rotate(45deg); }
 .lienzo-caja { position: relative; flex: 1; display: flex; }
 .lienzo-caja .p-ley { bottom: 10px; }
-.anun { border-top: 1px solid var(--p-linea); padding: 10px 14px 12px; display: grid; gap: 10px; grid-template-columns: minmax(0, 1fr); background: rgba(12, 15, 20, .45); }
+.anun { border-top: 1px solid var(--p-linea); padding: 10px 14px 12px; display: grid; gap: 10px; grid-template-columns: minmax(0, 1fr); background: var(--p-franja); }
 @media (min-width: 760px) { .anun { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); } }
 .anun .eti { color: var(--p-tinta-3); display: block; margin-bottom: 6px; }
 .anun .luces { display: flex; flex-wrap: wrap; gap: 6px; }
-.lz { display: inline-flex; align-items: center; gap: 7px; max-width: 100%; background: rgba(255, 255, 255, .04); border: 1px solid var(--p-linea); color: var(--p-tinta-2); border-radius: 8px; padding: 5px 10px; font-size: 12px; text-align: left; }
+.lz { display: inline-flex; align-items: center; gap: 7px; max-width: 100%; background: var(--p-chip); border: 1px solid var(--p-linea); color: var(--p-tinta-2); border-radius: 8px; padding: 5px 10px; font-size: 12px; text-align: left; }
 .lz span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .lz i { width: 9px; height: 9px; flex: none; border-radius: 50%; border: 1.5px solid var(--p-tinta-3); }
 .lz.ok i { background: var(--p-ok); border-color: var(--p-ok); box-shadow: 0 0 8px var(--p-ok); }
@@ -130,7 +140,7 @@ mark.pc { background: var(--aviso-f); color: inherit; border-radius: 6px; paddin
 .lz.clave { font-weight: 600; color: var(--p-tinta); }
 .lz:hover, .lz[aria-pressed="true"] { border-color: var(--p-meta); color: var(--p-tinta); }
 .sin3d { padding: 60px 20px; text-align: center; color: var(--p-tinta-3); font-size: 13px; }
-.simbar { border-top: 1px solid var(--p-linea); padding: 10px 14px; display: grid; gap: 8px; background: rgba(12, 15, 20, .6); }
+.simbar { border-top: 1px solid var(--p-linea); padding: 10px 14px; display: grid; gap: 8px; background: var(--p-franja); }
 .simbar .fila { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .simbar button.jugar { background: var(--p-tinta); color: var(--p-fondo); border: 0; border-radius: 999px; padding: 7px 16px; font-size: 13.5px; font-weight: 600; display: inline-flex; gap: 8px; align-items: center; }
 .simbar button.jugar svg { width: 11px; height: 11px; fill: currentColor; }
@@ -287,13 +297,14 @@ mark.pc { background: var(--aviso-f); color: inherit; border-radius: 6px; paddin
 </head>
 <body>
 <!--CUERPO-->
+<script>try { var tm = localStorage.getItem("pos-tema"); if (tm === "dark" || tm === "light") document.documentElement.dataset.theme = tm; } catch (e) {}</script>
 <nav class="nav"><div class="ancho">
   <div class="marca"><i></i>POS <small>Project Operating System</small></div>
-  <div class="pestanas" id="pestanas">
+  <div class="nav-der"><div class="pestanas" id="pestanas">
     <a href="#como-funciona" data-vista="como-funciona">Cómo funciona</a>
     <a href="#ejemplo" data-vista="ejemplo">Ejemplo</a>
     <a href="#mi-equipo" data-vista="mi-equipo">Mi equipo</a>
-  </div>
+  </div><button type="button" class="tema" id="tema"></button></div>
 </div></nav>
 <div id="vista"></div>
 <div id="capa-cajon"></div>
@@ -330,6 +341,8 @@ const I = {
   hitos: "M5 21V4 M5 4h11l-2 4l2 4H5",
   interesados: "M9 11a3 3 0 1 0 0-6a3 3 0 0 0 0 6z M3.5 19a5.5 5.5 0 0 1 11 0 M16 11.5a2.5 2.5 0 1 0 0-5 M17 14.2a4.5 4.5 0 0 1 3.5 4.8",
   autoridad: "M12 3l7 3v5.5c0 4.2-2.8 7.6-7 9.5c-4.2-1.9-7-5.3-7-9.5V6z M9 12l2.2 2.2L15.2 10",
+  luna: "M20 14.6A8 8 0 0 1 9.4 4a8 8 0 1 0 10.6 10.6z",
+  sol: "M12 8a4 4 0 1 0 0 8a4 4 0 0 0 0-8z M12 2.5v2 M12 19.5v2 M5.3 5.3l1.4 1.4 M17.3 17.3l1.4 1.4 M2.5 12h2 M19.5 12h2 M5.3 18.7l1.4-1.4 M17.3 6.7l1.4-1.4",
   solicitud: "M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-7l-4 4v-4H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z",
   problema: "M11 4a7 7 0 1 0 0 14a7 7 0 0 0 0-14z M20 20l-4-4",
   evidencia: "M12 4l8 4l-8 4l-8-4z M4 12l8 4l8-4 M4 16l8 4l8-4",
@@ -344,7 +357,7 @@ const est = (cls, txt) => `<span class="est ${cls}"><i></i>${h(txt)}</span>`;
 
 /* ------------------------------------------------------------ leer el bloque */
 const ARR = ["angulos", "encuadres", "evidencia", "preguntas_abiertas", "ideas_estacionadas", "objetivos", "obligatorio", "opciones", "supuestos", "premortem", "huecos"];
-const OBJ = ["solicitud", "afectados", "proyecto", "supuesto_clave", "exito", "interesados", "acta", "permisos", "decision"];
+const OBJ = ["solicitud", "afectados", "proyecto", "supuesto_clave", "exito", "interesados", "acta", "decision"];
 const arr = x => Array.isArray(x) ? x : vacio(x) ? [] : [x];
 function normalizar(d) {
   const n = { ...d };
@@ -353,7 +366,6 @@ function normalizar(d) {
   n.proyecto.valor = arr(n.proyecto.valor); n.proyecto.costo = arr(n.proyecto.costo);
   n.exito.indicadores = arr(n.exito.indicadores); n.exito.duenos = (n.exito.duenos && typeof n.exito.duenos === "object") ? n.exito.duenos : {};
   ["dentro", "fuera", "restricciones", "vetos"].forEach(k => n.acta[k] = arr(n.acta[k]));
-  ["puede", "pregunta", "nunca"].forEach(k => n.permisos[k] = arr(n.permisos[k]));
   return n;
 }
 function leerBloque(texto) {
@@ -395,7 +407,6 @@ const PARTES = [
   ["Presupuesto: costo estimado con fuente y límite aprobado", "presupuesto", d => [...cada(d.proyecto.costo, "rango", "fuente"), d.decision.limite]],
   ["Stakeholders: quién gana, quién pierde y quién se ve afectado", "interesados", d => [d.interesados.ganan, d.interesados.pierden, d.interesados.afectados]],
   ["Sponsor: quién decide", "autoridad", d => [d.acta.decide]],
-  ["Autoridad de la IA: puede, pregunta antes, nunca", "autoridad", d => ["puede", "pregunta", "nunca"].every(k => d.permisos[k].length) ? ["ok"] : [""]],
   ["La decisión: qué autoriza, quién sigue y cuándo se revisa", "decision", d => [d.decision.resultado, d.decision.autoriza, d.decision.dueno_siguiente_paso, d.decision.siguiente_revision]],
   ["Caso de negocio: la solicitud original, con quién y cuándo", "solicitud", d => [d.solicitud.texto, d.solicitud.quien, d.solicitud.cuando]],
   ["Caso de negocio: evidencia con fuente", "evidencia", d => cada(d.evidencia, "afirmacion", "fuente")],
@@ -476,13 +487,10 @@ const MOD = [
     cuerpo: d => `<ul class="lista-c"><li>${ico("si", "si")}<span><span class="eti">Gana</span><span class="corta">${t(d.interesados.ganan)}</span></span></li><li>${ico("no", "no")}<span><span class="eti">Pierde</span><span class="corta">${t(d.interesados.pierden)}</span></span></li><li>${ico("punto", "neutro")}<span><span class="eti">Afectado</span><span class="corta">${t(d.interesados.afectados)}</span></span></li></ul>`,
     detalle: d => `<div class="bloque">${campo("Quién gana", d.interesados.ganan)}${campo("Quién pierde", d.interesados.pierden)}${campo("Quién se ve afectado", d.interesados.afectados)}</div>
       <div class="proceso"><span class="eti">Cómo llegamos aquí</span><div class="campos">${campo("Quién vive el problema", d.afectados.viven_el_problema)}${campo("Quién lo pide", d.afectados.lo_pide)}${campo("Nuestro papel", d.afectados.nuestro_papel)}</div></div>` },
-  { id: "autoridad", t: "Sponsor y autoridad", pmi: "Quién autoriza el proyecto, quién lo dirige y con qué nivel de autoridad. Hoy eso incluye a la IA.", despues: "Al sponsor le llega el brief cuando algo necesita decisión. La autoridad de la IA fija las reglas del agente.",
-    cuerpo: d => { const p = d.permisos;
-      return `<div><span class="eti">Sponsor · decide</span><p class="clave corta">${t(d.acta.decide)}</p></div>
-        <div><span class="eti">Autoridad de la IA</span><div class="seg"><i style="flex:${p.puede.length};background:var(--ok)"></i><i style="flex:${p.pregunta.length};background:var(--aviso)"></i><i style="flex:${p.nunca.length};background:var(--critico)"></i></div>
-        <p class="sub" style="margin-top:4px">puede ${p.puede.length} · pregunta antes ${p.pregunta.length} · nunca ${p.nunca.length}</p></div>`; },
-    detalle: d => `<div class="campos">${campo("Sponsor: decide", d.acta.decide)}${campo("Responsable del siguiente paso", d.decision.dueno_siguiente_paso)}</div><div class="bloque"><h4>Pueden vetar</h4>${lista(d.acta.vetos)}</div>
-      <div class="bloque"><h4>Autoridad de la IA</h4><div class="tres"><div>${est("ok", "Puede")}${lista(d.permisos.puede)}</div><div>${est("aviso", "Pregunta antes")}${lista(d.permisos.pregunta)}</div><div>${est("critico", "Nunca")}${lista(d.permisos.nunca)}</div></div></div>` },
+  { id: "autoridad", t: "Sponsor", pmi: "Quién autoriza el proyecto y quién puede detener una parte de él.", despues: "Al sponsor le llega el brief cuando algo necesita decisión. Si la alerta toca un veto, también le llega a quien lo tiene.",
+    cuerpo: d => `<div><span class="eti">Decide</span><p class="clave corta">${t(d.acta.decide)}</p></div>
+        <div><span class="eti">Pueden vetar</span>${d.acta.vetos.length ? `<ul class="lista-c">${d.acta.vetos.slice(0, 2).map(x => `<li>${ico("autoridad", "neutro")}<span class="corta">${t(x)}</span></li>`).join("")}</ul>` : `<p class="sub">Sin vetos registrados.</p>`}</div>`,
+    detalle: d => `<div class="campos">${campo("Sponsor: decide", d.acta.decide)}${campo("Responsable del siguiente paso", d.decision.dueno_siguiente_paso)}</div><div class="bloque"><h4>Pueden vetar</h4>${lista(d.acta.vetos)}</div>` },
 ];
 /* ------------------------------------------------------------ cómo llegamos aquí (segundo nivel) */
 let filtroEv = "";
@@ -571,12 +579,13 @@ const Escena = (() => {
     el.innerHTML = ""; el.append(canvas, capa);
     renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
     const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim(), col = n => new T.Color(css(n));
-    const C = { tinta: col("--p-tinta"), t2: col("--p-tinta-2"), t3: col("--p-tinta-3"), linea: col("--p-linea"), plan: col("--p-plan"), meta: col("--p-meta"), ok: col("--p-ok"), aviso: col("--p-aviso"), critico: col("--p-critico"), fondo: col("--p-fondo") };
+    const C = { tinta: col("--p-tinta"), t2: col("--p-tinta-2"), t3: col("--p-tinta-3"), linea: col("--p-malla"), plan: col("--p-plan"), meta: col("--p-meta"), ok: col("--p-ok"), aviso: col("--p-aviso"), critico: col("--p-critico"), fondo: col("--p-fondo") };
+    const claro = C.fondo.getHSL({}).l > .5;   /* en modo claro la luz no se suma: los halos van más tenues y sin mezcla aditiva */
     const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const scene = new T.Scene(), cam = new T.PerspectiveCamera(36, 2, .1, 400); scene.fog = new T.Fog(C.fondo, 48, 125);
     const N = 12, LX = 26, LY = 8, X = w => (w / N - .5) * LX, Y = p => p / 100 * LY, V = (x, y, z) => new T.Vector3(x, y, z);
     const brillo = (() => { const k = document.createElement("canvas"); k.width = k.height = 64; const g = k.getContext("2d"), r = g.createRadialGradient(32, 32, 0, 32, 32, 32); r.addColorStop(0, "rgba(255,255,255,1)"); r.addColorStop(.3, "rgba(255,255,255,.45)"); r.addColorStop(1, "rgba(255,255,255,0)"); g.fillStyle = r; g.fillRect(0, 0, 64, 64); return new T.CanvasTexture(k); })();
-    const halo = (c, s, o = .85) => { const sp = new T.Sprite(new T.SpriteMaterial({ map: brillo, color: c, transparent: true, depthWrite: false, opacity: o, blending: T.AdditiveBlending })); sp.scale.set(s, s, 1); return sp; };
+    const halo = (c, s, o = .85) => { const sp = new T.Sprite(new T.SpriteMaterial({ map: brillo, color: c, transparent: true, depthWrite: false, opacity: claro ? o * .42 : o, blending: claro ? T.NormalBlending : T.AdditiveBlending })); sp.scale.set(s, s, 1); return sp; };
     const mat = (c, o = 1, x = {}) => new T.MeshBasicMaterial({ color: c, transparent: o < 1, opacity: o, depthWrite: o >= 1, ...x });
     const linea = (pts, c, o = 1, dash) => { const g = new T.BufferGeometry().setFromPoints(pts), m = dash ? new T.LineDashedMaterial({ color: c, transparent: true, opacity: o, dashSize: dash, gapSize: dash * .8 }) : new T.LineBasicMaterial({ color: c, transparent: o < 1, opacity: o }); const l = new T.Line(g, m); if (dash) l.computeLineDistances(); return l; };
     const gBase = new T.Group(), gGuia = new T.Group(), gSim = new T.Group(); scene.add(gBase, gGuia, gSim); gSim.visible = false;
@@ -622,7 +631,7 @@ const Escena = (() => {
         const q = []; for (let k = 0; k < 8; k++) { const a = sub[k], b = sub[k + 1], pa = cPlan.getPoint((i + k / 8) / N), pb = cPlan.getPoint((i + (k + 1) / 8) / N); q.push(a.x, a.y, a.z, pa.x, pa.y, pa.z, b.x, b.y, b.z, b.x, b.y, b.z, pa.x, pa.y, pa.z, pb.x, pb.y, pb.z); }
         const cg = new T.BufferGeometry(); cg.setAttribute("position", new T.Float32BufferAttribute(q, 3)); const ci = new T.Mesh(cg, mat(c, .15, { side: T.DoubleSide })); gSim.add(ci); cintas.push(ci); }
       huella = linea(cReal.getPoints(N * 8).map(p => V(p.x, .03, p.z)), C.t2, .6); gSim.add(huella);
-      avion = new T.Group(); const cono = new T.Mesh(new T.ConeGeometry(.2, .72, 14), mat(C.tinta)); cono.rotation.z = -Math.PI / 2; cono.userData.id = "ruta"; picks.push(cono); avion.add(cono, halo(C.tinta, 2.6)); gSim.add(avion);
+      avion = new T.Group(); const cono = new T.Mesh(new T.ConeGeometry(.2, .72, 14), mat(C.tinta)); cono.rotation.z = -Math.PI / 2; cono.userData.id = "ruta"; picks.push(cono); avion.add(cono, halo(claro ? C.meta : C.tinta, 2.6)); gSim.add(avion);
       sombra = new T.Mesh(new T.RingGeometry(.2, .28, 24), mat(C.t2, .8, { side: T.DoubleSide })); sombra.rotation.x = -Math.PI / 2; gSim.add(sombra);
       fantasma = new T.Mesh(new T.TorusGeometry(.26, .03, 8, 24), mat(C.plan)); fantasma.rotation.y = Math.PI / 2; gSim.add(fantasma);
       // señales, alertas y decisiones: sobre la ruta real, en la semana en que ocurrieron
@@ -739,7 +748,7 @@ function pagina(d, esEjemplo, extra = "") {
     <section class="seccion">${rail(sim.on ? 4 : 1)}</section>
     <p class="pie-pag">Esta página muestra lo que el equipo escribió en su Framing Brief. No completa ni inventa nada: lo que falta se ve como «falta definir».${esEjemplo ? " Aseguradora Faro es un caso ficticio." : ""}</p></div>`;
 }
-const SKILL = [["Punto de partida", "Pegas lo que tengas: tu Framing Brief v1, el v0 o solo la solicitud. Si todavía no hay caso de negocio, la skill arma uno corto con opciones, incluida «seguir como estamos», y tu equipo elige."], ["Riesgos", "Es dentro de un año y el proyecto fracasó: ¿por qué? Tu equipo escribe sus razones, la IA suma hasta seis más y eligen las tres más probables. Esos son los riesgos del acta."], ["Objetivos y criterios de éxito", "Seis campos: beneficio y efecto negativo; indicador, instrumento, línea base y meta; punto de control, guardrail y los tres responsables."], ["El acta", "Sponsor y stakeholders; alcance, con lo que incluye y al menos tres cosas que no incluye; restricciones y presupuesto; y la autoridad de la IA: puede, pregunta antes, nunca."], ["Entrega", "Ya no pregunta. Entrega tu Framing Brief v2, la lista de huecos y el bloque POS, que pegas en «Mi equipo»."], ["La decisión", "Go, investigar, todavía no o no-go: qué autoriza, con qué presupuesto límite, quién sigue y cuándo se revisa. Después te da otra vez el bloque POS, ya con la decisión."]];
+const SKILL = [["Punto de partida", "Pegas lo que tengas: tu Framing Brief v1, el v0 o solo la solicitud. Si todavía no hay caso de negocio, la skill arma uno corto con opciones, incluida «seguir como estamos», y tu equipo elige."], ["Riesgos", "Es dentro de un año y el proyecto fracasó: ¿por qué? Tu equipo escribe sus razones, la IA suma hasta seis más y eligen las tres más probables. Esos son los riesgos del acta."], ["Objetivos y criterios de éxito", "Seis campos: beneficio y efecto negativo; indicador, instrumento, línea base y meta; punto de control, guardrail y los tres responsables."], ["El acta", "Sponsor y stakeholders; alcance, con lo que incluye y al menos tres cosas que no incluye; restricciones y presupuesto."], ["Entrega", "Ya no pregunta. Entrega tu Framing Brief v2, la lista de huecos y el bloque POS, que pegas en «Mi equipo»."], ["La decisión", "Go, investigar, todavía no o no-go: qué autoriza, con qué presupuesto límite, quién sigue y cuándo se revisa. Después te da otra vez el bloque POS, ya con la decisión."]];
 function comoFunciona() {
   return `<div class="ancho"><div class="texto"><p class="eti">Project Operating System</p><h1>Una sala de control para tu proyecto, que empieza por el acta</h1>
       <p>El POS reúne lo que tu equipo sabe, decidió y vigila. Crece una capa por módulo. Hoy construyes la primera: el acta de constitución, que es lo que después usan tu plan, tus reportes y tus agentes de IA para saber qué importa.</p>
@@ -779,6 +788,15 @@ function jugar() { if (sim.w >= SIM.semanas) sim.w = 0; sim.reloj = setInterval(
 function ir(v) { const antes = vista; vista = ["ejemplo", "mi-equipo"].includes(v) ? v : "como-funciona"; pintar(); if (antes !== vista) scrollTo(0, 0); }
 addEventListener("hashchange", () => ir(location.hash.slice(1)));
 
+/* ------------------------------------------------------------ modo claro y modo noche */
+const esNoche = () => { const a = document.documentElement.dataset.theme; return a ? a === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
+function pintaTema() { const n = esNoche(), b = $("#tema"), txt = n ? "Cambiar a modo claro" : "Cambiar a modo noche"; b.innerHTML = ico(n ? "sol" : "luna"); b.setAttribute("aria-label", txt); b.title = txt; }
+function reEscena() {   /* la escena lee sus colores al montarse: al cambiar de modo se vuelve a montar donde estaba */
+  if (actual && $("#lienzo")) { Escena.montar($("#lienzo"), actual, vista === "ejemplo", elegirObjeto); Escena.simular(sim.on); Escena.semana(sim.w); if (sel) Escena.elegir(sel.id); } }
+function cambiaTema() { const v = esNoche() ? "light" : "dark"; document.documentElement.dataset.theme = v; try { localStorage.setItem("pos-tema", v); } catch (_) {} pintaTema(); reEscena(); }
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { if (!document.documentElement.dataset.theme) { pintaTema(); reEscena(); } });
+pintaTema();
+
 /* ------------------------------------------------------------ recorrido guiado */
 const PASOS = [{ id: "lienzo", t: "La ruta del proyecto", x: "De izquierda a derecha, el tiempo; hacia arriba, el avance. Debajo, una luz por cada supuesto y cada riesgo del acta: se encienden cuando algo cambia. Toca cualquiera para ver qué es." }, { id: "m-decision", t: "La decisión", x: EXTRA.decision.pmi }, { id: "m-firma", t: "Lista para firma", x: "Cuántas partes del acta están completas. Lo que falta se ve, no se esconde." },
   ...MOD.map(m => ({ id: "m-" + m.id, t: m.t, x: m.pmi + " " + m.despues })), ...PRO.map(m => ({ id: "m-" + m.id, t: m.t, x: m.pmi }))];
@@ -798,6 +816,7 @@ document.addEventListener("click", e => {
   if (e.target.closest("[data-cerrar]")) return cerrar();
   const b = e.target.closest("button"); if (!b) return;
   if (b.dataset.abrir) abrir(b.dataset.abrir);
+  else if (b.id === "tema") cambiaTema();
   else if (b.dataset.ficha) elegirObjeto(b.dataset.ficha);
   else if (b.dataset.filtro != null) { filtroEv = b.dataset.filtro; $("#c-evidencia").innerHTML = listaEvidencia(actual); }
   else if (b.dataset.paso != null) { pasoSkill = +b.dataset.paso; document.querySelectorAll("#pasos-skill button").forEach((x, i) => x.setAttribute("aria-pressed", i === pasoSkill)); $("#paso-texto").textContent = SKILL[pasoSkill][1]; }
